@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{623B98A9-3DE7-431F-A582-D102F4F2CD3D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>KountRisSdk</AssemblyName>
+    <RootNamespace>KountRisSdk</RootNamespace>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>bin\Debug\KountRisSdk.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="kount.rsa.public.key" />
+    <None Include="api\index.md" />
+    <None Include="articles\code_examples.md" />
+    <None Include="articles\intro.md" />
+    <None Include="articles\testHelper_class.md" />
+    <None Include="articles\testing.md" />
+    <None Include="articles\toc.md" />
+    <None Include="docfx.json" />
+    <None Include="index.md" />
+    <None Include="Kount\Log\App.config" />
+    <None Include="packages.config" />
+    <None Include="toc.yml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Kount\Log\Binding\Logger.cs" />
+    <Compile Include="Kount\Log\Binding\NopLogger.cs" />
+    <Compile Include="Kount\Log\Binding\SimpleLogger.cs" />
+    <Compile Include="Kount\Log\ExampleClient.cs" />
+    <Compile Include="Kount\Log\Factory\LogFactory.cs" />
+    <Compile Include="Kount\Log\Factory\LoggerFactory.cs" />
+    <Compile Include="Kount\Log\Factory\NopLoggerFactory.cs" />
+    <Compile Include="Kount\Log\Factory\SimpleLoggerFactory.cs" />
+    <Compile Include="Kount\Ris\CartItem.cs" />
+    <Compile Include="Kount\Ris\IllegalArgumentException.cs" />
+    <Compile Include="Kount\Ris\Inquiry.cs" />
+    <Compile Include="Kount\Ris\InquiryType.cs" />
+    <Compile Include="Kount\Ris\KcEvent.cs" />
+    <Compile Include="Kount\Ris\Request.cs" />
+    <Compile Include="Kount\Ris\RequestException.cs" />
+    <Compile Include="Kount\Ris\Response.cs" />
+    <Compile Include="Kount\Ris\RSA.cs" />
+    <Compile Include="Kount\Ris\Update.cs" />
+    <Compile Include="Kount\Ris\UpdateType.cs" />
+    <Compile Include="Kount\Ris\ValidationError.cs" />
+    <Compile Include="Kount\Ris\ValidationException.cs" />
+    <Compile Include="Kount\SimpleLogger\File.cs" />
+    <Compile Include="Kount\Util\Khash.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="validate.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="images\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
+  <ProjectExtensions>
+    <VisualStudio AllowExistingFolder="true" />
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\docfx.console.2.16.8\build\docfx.console.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\docfx.console.2.16.8\build\docfx.console.targets'))" />
+  </Target>
+  <Import Project="..\packages\docfx.console.2.16.8\build\docfx.console.targets" Condition="Exists('..\packages\docfx.console.2.16.8\build\docfx.console.targets')" />
+</Project>
