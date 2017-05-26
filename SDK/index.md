@@ -1,5 +1,5 @@
 
-![Kount](https://github.com/Kount/Kount.github.io/blob/master/img/logo.png)
+Beat Fraud and boost Sales
 ==========================================
 
 We have the resources **developers** need to add enterprise-level fraud protection to your ecommerce site. 
