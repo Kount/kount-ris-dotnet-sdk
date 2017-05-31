@@ -229,6 +229,12 @@ namespace Kount.Ris
             webReq.Method = "POST";
             webReq.ContentType = "application/x-www-form-urlencoded";
             webReq.ContentLength = buffer.Length;
+            string mercId = this.GetParam("MÅRC");
+            if (null != mercId)
+            {
+                this.logger.Debug("setting Merchent ID header");
+                webReq.Headers["X-Kount-Merc-Id"] = mercId;
+            }
             if (null != this.apiKey)
             {
                 this.logger.Debug("setting API key header");
@@ -251,12 +257,32 @@ namespace Kount.Ris
                 webReq.ClientCertificates.Add(cert);
             }
 
-            // Call the RIS server and pass in the payload
-            Stream postData = webReq.GetRequestStream();
-            postData.Write(buffer, 0, buffer.Length);
-            postData.Close();
 
-            string risString;
+            string risString=String.Empty;
+
+            try
+            {
+                // Call the RIS server and pass in the payload
+                using (Stream postData = webReq.GetRequestStream())
+                {
+                    postData.Write(buffer, 0, buffer.Length);
+                }
+            }
+            catch (WebException ex)
+            {
+                string error = String.Empty;
+                if (ex.Response == null)
+                {
+                    error = $"Unable to contact server {this.url}.";
+                }
+                else
+                {
+                    error = this.GetWebError(ex.Response);
+                }
+                this.logger.Debug("ERROR - The following web error occurred: " + error);
+                throw new Kount.Ris.RequestException(error);
+            }
+
             using (HttpWebResponse webResp = (HttpWebResponse)webReq.GetResponse())
             {
                 // Read the RIS response string
@@ -492,6 +518,14 @@ namespace Kount.Ris
             }
 
             string res = this.Data[param] as string;
+            if (res==null)
+            {
+                var val = this.Data[param] as int?;
+                if (val.HasValue)
+                {
+                    res = val.Value.ToString(); 
+                }
+            }
             return res ?? String.Empty;
         }
 
@@ -729,6 +763,47 @@ namespace Kount.Ris
             }
 
             return errors;
+        }
+
+        /// <summary>
+        /// Get error description from webException
+        /// </summary>
+        /// <param name="exResponse">Response from web exception</param>
+        /// <returns></returns>
+        private string GetWebError(WebResponse exResponse)
+        {
+            string error = String.Empty;
+            using (HttpWebResponse resp = exResponse as HttpWebResponse)
+            {
+                error = String.Concat(((int)resp.StatusCode).ToString(), ": ", resp.StatusDescription);
+                switch (resp.StatusCode)
+                {
+                    case HttpStatusCode.Unauthorized://401 
+                        error = "Unable to log in. Unauthorized request.(401)";
+                        break;
+
+                    case HttpStatusCode.InternalServerError://500
+                        error = "Unable to log in. There was an error logging in.(500)";
+                        break;
+
+                    case HttpStatusCode.NotFound://404
+                        error = "Unable to connect. The service was not available.(404)";
+                        break;
+
+                    case HttpStatusCode.ServiceUnavailable://503 
+                        error = "Unable to connect. The service was not available.(503)";
+                        break;
+
+                    case HttpStatusCode.GatewayTimeout://504 
+                        error = "Unable to connect. Timeout request.(504)";
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+            return error;
         }
 
         /// <summary>
