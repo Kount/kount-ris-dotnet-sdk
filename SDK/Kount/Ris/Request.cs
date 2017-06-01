@@ -232,12 +232,10 @@ namespace Kount.Ris
             webReq.Method = "POST";
             webReq.ContentType = "application/x-www-form-urlencoded";
             webReq.ContentLength = buffer.Length;
-            string mercId = this.GetParam("MERC");
-            if (!String.IsNullOrEmpty(mercId))
-            {
-                this.logger.Debug("Setting merchant ID header.");
-                webReq.Headers[CUSTOM_HEADER_MERCHANT_ID] = mercId;
-            }
+
+            this.logger.Debug("Setting merchant ID header.");
+            webReq.Headers[CUSTOM_HEADER_MERCHANT_ID] = this.GetParam("MERC");
+
             if (null != this.apiKey)
             {
                 this.logger.Debug("Setting API key header.");
