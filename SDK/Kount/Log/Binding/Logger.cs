@@ -79,5 +79,14 @@ namespace Kount.Log.Binding
         /// <param name="message">Message to log</param>
         /// <param name="e">Exception to log</param>
         void Fatal(string message, Exception e);
+
+        /// <summary>
+        /// Configurable flag. In `app.config` set setting `LOG.SIMPLE.ELAPSED` to <b>ON/OFF</b><br/>
+        /// example: 
+        /// <example>`<add key="LOG.SIMPLE.ELAPSED" value="ON" />`</example><br/>
+        /// When is `true` - measure overall client request time in milliseconds and log result.<br/>
+        /// By default is `false`(OFF)
+        /// </summary>
+        bool MeasureElapsed { get; }
     }
 }

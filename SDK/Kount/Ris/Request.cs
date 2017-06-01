@@ -11,6 +11,7 @@ namespace Kount.Ris
     using System;
     using System.Collections;
     using System.Configuration;
+    using System.Diagnostics;
     using System.IO;
     using System.Net;
     using System.Reflection;
@@ -27,6 +28,9 @@ namespace Kount.Ris
     /// </summary>
     public abstract class Request
     {
+        private const string CUSTOM_HEADER_MERCHANT_ID = "X-Kount-Merc-Id"; 
+        private const string CUSTOM_HEADER_API_KEY = "X-Kount-Api-Key";     
+
         /// <summary>
         /// Paypal type
         /// </summary>
@@ -179,8 +183,7 @@ namespace Kount.Ris
         /// <returns>Kount.Ris.Response populated object.</returns>
         public Kount.Ris.Response GetResponse(bool validate = true)
         {
-            this.logger.Debug("Kount.Ris.Request.GetResponse() - RIS " +
-                "endpoint URL: " + this.url);
+            this.logger.Debug($"Kount.Ris.Request.GetResponse() - RIS endpoint URL: {this.url}");
             this.logger.Debug($"PTOK [{this.SafeGet("PTOK")}]");
             string ptok = this.Data.ContainsKey("PTOK") ? (string)this.Data["PTOK"] : "";
 
@@ -229,16 +232,16 @@ namespace Kount.Ris
             webReq.Method = "POST";
             webReq.ContentType = "application/x-www-form-urlencoded";
             webReq.ContentLength = buffer.Length;
-            string mercId = this.GetParam("MÅRC");
-            if (null != mercId)
+            string mercId = this.GetParam("MERC");
+            if (!String.IsNullOrEmpty(mercId))
             {
-                this.logger.Debug("setting Merchent ID header");
-                webReq.Headers["X-Kount-Merc-Id"] = mercId;
+                this.logger.Debug("Setting merchant ID header.");
+                webReq.Headers[CUSTOM_HEADER_MERCHANT_ID] = mercId;
             }
             if (null != this.apiKey)
             {
-                this.logger.Debug("setting API key header");
-                webReq.Headers["X-Kount-Api-Key"] = this.apiKey;
+                this.logger.Debug("Setting API key header.");
+                webReq.Headers[CUSTOM_HEADER_API_KEY] = this.apiKey;
             }
             else
             {
@@ -259,7 +262,10 @@ namespace Kount.Ris
 
 
             string risString=String.Empty;
+            var stopwatch = new Stopwatch();
 
+            // start measure elapsed time between request and response
+            stopwatch.Start();
             try
             {
                 // Call the RIS server and pass in the payload
@@ -283,6 +289,9 @@ namespace Kount.Ris
                 throw new Kount.Ris.RequestException(error);
             }
 
+            // stop measure request time 
+            stopwatch.Stop();
+
             using (HttpWebResponse webResp = (HttpWebResponse)webReq.GetResponse())
             {
                 // Read the RIS response string
@@ -293,6 +302,17 @@ namespace Kount.Ris
                         risString = risResponse.ReadToEnd();
                     }
                 }
+            }
+
+            var elapsed = stopwatch.ElapsedMilliseconds;
+            if (this.logger.MeasureElapsed)
+            {
+                var builder = new StringBuilder();
+                builder.Append("MERC = ").Append(GetParam("MERC"));
+                builder.Append(" SESS = ").Append(GetParam("SESS"));
+                builder.Append(" SDK_ELAPSED = ").Append(elapsed).Append(" ms.");
+
+                this.logger.Debug(builder.ToString());
             }
 
             this.logger.Debug("End GetResponse()");
