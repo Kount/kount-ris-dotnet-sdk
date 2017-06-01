@@ -227,6 +227,7 @@ namespace Kount.SimpleLogger
             Exception e)
         {
             DateTime date = DateTime.Now;
+            string format = "yyyy-MM-ddTHH:mm:ss.fffzzz";
             string output = date.ToString(format) + " [" + level + "] " +
                 this.loggerName + " - " + message + "\r\n";
 
