@@ -22,10 +22,10 @@ namespace Kount.Log.Binding
         private File logger;
 
         /// <summary>
-        /// Configurable flag. In `app.config` set setting `LOG.SIMPLE.ELAPSED` to <b>ON/OFF</b><br/>
+        /// Configurable property. In `app.config` set setting `LOG.SIMPLE.ELAPSED` to <b>ON/OFF</b><br/>
         /// example: 
         /// <example>`<add key="LOG.SIMPLE.ELAPSED" value="ON" />`</example><br/>
-        /// When is `true` - measure overall client request time in milliseconds and log result.<br/>
+        /// When is `true` - measure overall client request time in milliseconds and logging result.<br/>
         /// By default is `false`(OFF)
         /// </summary>
         public bool MeasureElapsed { get; }

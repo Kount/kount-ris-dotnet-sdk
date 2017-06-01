@@ -66,7 +66,6 @@ namespace Kount.SimpleLogger
 
         /// <summary>
         /// Configurable property. In `app.config` set setting `LOG.SIMPLE.ELAPSED` to <b>ON/OFF</b><br/>
-        /// When is `ON` - measure overall client request time in milliseconds and log result.<br/>
         /// example: 
         /// <example>`<add key="LOG.SIMPLE.ELAPSED" value="ON" />`</example><br/>
         /// In case is not set is `OFF`.
