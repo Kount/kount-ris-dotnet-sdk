@@ -22,12 +22,24 @@ namespace Kount.Log.Binding
         private File logger;
 
         /// <summary>
+        /// Configurable property. In `app.config` set setting `LOG.SIMPLE.ELAPSED` to <b>ON/OFF</b><br/>
+        /// example: 
+        /// <example>`<add key="LOG.SIMPLE.ELAPSED" value="ON" />`</example><br/>
+        /// When is `true` - measure overall client request time in milliseconds and logging result.<br/>
+        /// By default is `false`(OFF)
+        /// </summary>
+        public bool MeasureElapsed { get; }
+
+        /// <summary>
         /// The Constructor.
         /// </summary>
         /// <param name="name">Name of the logger</param>
         public SimpleLogger(string name)
         {
             this.logger = new File(name);
+            this.MeasureElapsed = (String.IsNullOrEmpty(this.logger.SdkElapsed))
+                                ? false
+                                : this.logger.SdkElapsed.Trim().ToLower().Equals("on");
         }
 
         /// <summary>

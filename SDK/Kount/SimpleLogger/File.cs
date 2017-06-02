@@ -65,6 +65,14 @@ namespace Kount.SimpleLogger
         private string logFilePath;
 
         /// <summary>
+        /// Configurable property. In `app.config` set setting `LOG.SIMPLE.ELAPSED` to <b>ON/OFF</b><br/>
+        /// example: 
+        /// <example>`<add key="LOG.SIMPLE.ELAPSED" value="ON" />`</example><br/>
+        /// In case is not set is `OFF`.
+        /// </summary>
+        public string SdkElapsed { get; private set; }
+
+        /// <summary>
         /// Constructor for file logger.
         /// </summary>
         /// <param name="name">Name of the logger</param>
@@ -78,12 +86,10 @@ namespace Kount.SimpleLogger
 
             this.loggerName = name;
 
-            this.configLogLevel =
-                ConfigurationManager.AppSettings["LOG.SIMPLE.LEVEL"];
-            string logFile =
-                ConfigurationManager.AppSettings["LOG.SIMPLE.FILE"];
-            string logPath =
-                ConfigurationManager.AppSettings["LOG.SIMPLE.PATH"];
+            this.SdkElapsed = ConfigurationManager.AppSettings["LOG.SIMPLE.ELAPSED"];
+            this.configLogLevel = ConfigurationManager.AppSettings["LOG.SIMPLE.LEVEL"];
+            string logFile = ConfigurationManager.AppSettings["LOG.SIMPLE.FILE"];
+            string logPath = ConfigurationManager.AppSettings["LOG.SIMPLE.PATH"];
             this.logFilePath = logPath + "\\" + logFile;
 
             if (!Directory.Exists(logPath))
@@ -221,7 +227,7 @@ namespace Kount.SimpleLogger
             Exception e)
         {
             DateTime date = DateTime.Now;
-            string format = "yyyy-MM-ddTHH:mm:sszzz";
+            string format = "yyyy-MM-ddTHH:mm:ss.fffzzz";
             string output = date.ToString(format) + " [" + level + "] " +
                 this.loggerName + " - " + message + "\r\n";
 

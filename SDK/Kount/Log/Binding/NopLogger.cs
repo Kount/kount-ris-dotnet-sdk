@@ -15,6 +15,14 @@ namespace Kount.Log.Binding
     /// </summary>
     public class NopLogger : ILogger
     {
+        public bool MeasureElapsed
+        {
+            get
+            {
+                return false;
+            }
+        }
+
         /// <summary>
         /// Constructor for NOP logger.
         /// </summary>

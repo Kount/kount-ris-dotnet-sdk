@@ -11,6 +11,7 @@ namespace Kount.Ris
     using System;
     using System.Collections;
     using System.Configuration;
+    using System.Diagnostics;
     using System.IO;
     using System.Net;
     using System.Reflection;
@@ -27,6 +28,9 @@ namespace Kount.Ris
     /// </summary>
     public abstract class Request
     {
+        private const string CUSTOM_HEADER_MERCHANT_ID = "X-Kount-Merc-Id"; 
+        private const string CUSTOM_HEADER_API_KEY = "X-Kount-Api-Key";     
+
         /// <summary>
         /// Paypal type
         /// </summary>
@@ -179,8 +183,7 @@ namespace Kount.Ris
         /// <returns>Kount.Ris.Response populated object.</returns>
         public Kount.Ris.Response GetResponse(bool validate = true)
         {
-            this.logger.Debug("Kount.Ris.Request.GetResponse() - RIS " +
-                "endpoint URL: " + this.url);
+            this.logger.Debug($"Kount.Ris.Request.GetResponse() - RIS endpoint URL: {this.url}");
             this.logger.Debug($"PTOK [{this.SafeGet("PTOK")}]");
             string ptok = this.Data.ContainsKey("PTOK") ? (string)this.Data["PTOK"] : "";
 
@@ -229,10 +232,14 @@ namespace Kount.Ris
             webReq.Method = "POST";
             webReq.ContentType = "application/x-www-form-urlencoded";
             webReq.ContentLength = buffer.Length;
+
+            this.logger.Debug("Setting merchant ID header.");
+            webReq.Headers[CUSTOM_HEADER_MERCHANT_ID] = this.GetParam("MERC");
+
             if (null != this.apiKey)
             {
-                this.logger.Debug("setting API key header");
-                webReq.Headers["X-Kount-Api-Key"] = this.apiKey;
+                this.logger.Debug("Setting API key header.");
+                webReq.Headers[CUSTOM_HEADER_API_KEY] = this.apiKey;
             }
             else
             {
@@ -251,12 +258,38 @@ namespace Kount.Ris
                 webReq.ClientCertificates.Add(cert);
             }
 
-            // Call the RIS server and pass in the payload
-            Stream postData = webReq.GetRequestStream();
-            postData.Write(buffer, 0, buffer.Length);
-            postData.Close();
 
-            string risString;
+            string risString=String.Empty;
+            var stopwatch = new Stopwatch();
+
+            // start measure elapsed time between request and response
+            stopwatch.Start();
+            try
+            {
+                // Call the RIS server and pass in the payload
+                using (Stream postData = webReq.GetRequestStream())
+                {
+                    postData.Write(buffer, 0, buffer.Length);
+                }
+            }
+            catch (WebException ex)
+            {
+                string error = String.Empty;
+                if (ex.Response == null)
+                {
+                    error = $"Unable to contact server {this.url}.";
+                }
+                else
+                {
+                    error = this.GetWebError(ex.Response);
+                }
+                this.logger.Debug("ERROR - The following web error occurred: " + error);
+                throw new Kount.Ris.RequestException(error);
+            }
+
+            // stop measure request time 
+            stopwatch.Stop();
+
             using (HttpWebResponse webResp = (HttpWebResponse)webReq.GetResponse())
             {
                 // Read the RIS response string
@@ -267,6 +300,17 @@ namespace Kount.Ris
                         risString = risResponse.ReadToEnd();
                     }
                 }
+            }
+
+            var elapsed = stopwatch.ElapsedMilliseconds;
+            if (this.logger.MeasureElapsed)
+            {
+                var builder = new StringBuilder();
+                builder.Append("MERC = ").Append(GetParam("MERC"));
+                builder.Append(" SESS = ").Append(GetParam("SESS"));
+                builder.Append(" SDK_ELAPSED = ").Append(elapsed).Append(" ms.");
+
+                this.logger.Debug(builder.ToString());
             }
 
             this.logger.Debug("End GetResponse()");
@@ -492,6 +536,14 @@ namespace Kount.Ris
             }
 
             string res = this.Data[param] as string;
+            if (res==null)
+            {
+                var val = this.Data[param] as int?;
+                if (val.HasValue)
+                {
+                    res = val.Value.ToString(); 
+                }
+            }
             return res ?? String.Empty;
         }
 
@@ -729,6 +781,47 @@ namespace Kount.Ris
             }
 
             return errors;
+        }
+
+        /// <summary>
+        /// Get error description from webException
+        /// </summary>
+        /// <param name="exResponse">Response from web exception</param>
+        /// <returns></returns>
+        private string GetWebError(WebResponse exResponse)
+        {
+            string error = String.Empty;
+            using (HttpWebResponse resp = exResponse as HttpWebResponse)
+            {
+                error = String.Concat(((int)resp.StatusCode).ToString(), ": ", resp.StatusDescription);
+                switch (resp.StatusCode)
+                {
+                    case HttpStatusCode.Unauthorized://401 
+                        error = "Unable to log in. Unauthorized request.(401)";
+                        break;
+
+                    case HttpStatusCode.InternalServerError://500
+                        error = "Unable to log in. There was an error logging in.(500)";
+                        break;
+
+                    case HttpStatusCode.NotFound://404
+                        error = "Unable to connect. The service was not available.(404)";
+                        break;
+
+                    case HttpStatusCode.ServiceUnavailable://503 
+                        error = "Unable to connect. The service was not available.(503)";
+                        break;
+
+                    case HttpStatusCode.GatewayTimeout://504 
+                        error = "Unable to connect. Timeout request.(504)";
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+            return error;
         }
 
         /// <summary>
