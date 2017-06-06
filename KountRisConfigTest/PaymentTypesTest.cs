@@ -20,9 +20,9 @@
 
             Inquiry inquiry = TestHelper.CreateInquiry(TOKEN_ID_1, out _sid, out _orderNum);
 
-            inquiry.SetTokenPayment(TOKEN_ID_1);
+            inquiry.SetPayment(Kount.Enums.PaymentTypes.Token, TOKEN_ID_1);
 
-            Assert.IsTrue(PaymentTypes.TokenType.Equals(inquiry.GetParam("PTYP")), "Test failed! Payment type is wrong.");
+            Assert.IsTrue("TOKEN".Equals(inquiry.GetParam("PTYP")), "Test failed! Payment type is wrong.");
             Assert.IsTrue("601147IF86FKXJTM5K8Z".Equals(inquiry.GetParam("PTOK")), "Test failed! Hash token is wrong.");
             Assert.IsTrue("KHASH".Equals(inquiry.GetParam("PENC")), "Test failed! PENC param is wrong.");
         }
@@ -36,9 +36,9 @@
 
             Inquiry inquiry = TestHelper.CreateInquiry(TOKEN_ID_2, out _sid, out _orderNum);
 
-            inquiry.SetTokenPayment(TOKEN_ID_2);
+            inquiry.SetPayment(Kount.Enums.PaymentTypes.Token, TOKEN_ID_2);
 
-            Assert.IsTrue(PaymentTypes.TokenType.Equals(inquiry.GetParam("PTYP")), "Test failed! Payment type is wrong.");
+            Assert.IsTrue("TOKEN".Equals(inquiry.GetParam("PTYP")), "Test failed! Payment type is wrong.");
             Assert.IsTrue("1A2B3C6SYWXNDI5GN77V".Equals(inquiry.GetParam("PTOK")), "Test failed! Hash token is wrong.");
             Assert.IsTrue("KHASH".Equals(inquiry.GetParam("PENC")), "Test failed! PENC param is wrong.");
         }
@@ -52,9 +52,9 @@
 
             Inquiry inquiry = TestHelper.CreateInquiry(CARTE_BLEU, out _sid, out _orderNum);
 
-            inquiry.SetCarteBleuePayment(CARTE_BLEU);
+            inquiry.SetPayment(Kount.Enums.PaymentTypes.CarteBleue, CARTE_BLEU);
 
-            Assert.IsTrue(PaymentTypes.CarteBleueType.Equals(inquiry.GetParam("PTYP")), "Test failed! Payment type is wrong.");
+            Assert.IsTrue("CARTE_BLEUE".Equals(inquiry.GetParam("PTYP")), "Test failed! Payment type is wrong.");
             Assert.IsTrue("AABBCCG297U47WC6J0BC".Equals(inquiry.GetParam("PTOK")), "Test failed! Hash token is wrong.");
             Assert.IsTrue("KHASH".Equals(inquiry.GetParam("PENC")), "Test failed! PENC param is wrong.");
         }
@@ -68,9 +68,9 @@
 
             Inquiry inquiry = TestHelper.CreateInquiry(SKRILL_ID, out _sid, out _orderNum);
 
-            inquiry.SetSkrillPayment(SKRILL_ID);
+            inquiry.SetPayment(Kount.Enums.PaymentTypes.Skrill, SKRILL_ID);
 
-            Assert.IsTrue(PaymentTypes.SkrillType.Equals(inquiry.GetParam("PTYP")), "Test failed! Payment type is wrong.");
+            Assert.IsTrue("SKRILL".Equals(inquiry.GetParam("PTYP")), "Test failed! Payment type is wrong.");
             Assert.IsTrue("XYZ1230L2VYV3P815Q2I".Equals(inquiry.GetParam("PTOK")), "Test failed! Hash token is wrong.");
             Assert.IsTrue("KHASH".Equals(inquiry.GetParam("PENC")), "Test failed! PENC param is wrong.");
         }

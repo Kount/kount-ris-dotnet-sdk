@@ -89,7 +89,7 @@ namespace KountRisTest
             }
 
             inquiry.SetEmail(EMAL);
-            inquiry.SetMode(InquiryType.ModeQ);
+            inquiry.SetMode((char)Kount.Enums.InquiryTypes.ModeQ);
 
             inquiry.SetNoPayment();
 

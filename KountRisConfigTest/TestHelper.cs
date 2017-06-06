@@ -191,7 +191,7 @@ namespace KountRisConfigTest
             // create inquiry with default settings
             Inquiry inquiry = DefaultInquiry(out sid, out orderNum);
 
-            inquiry.SetCardPayment(cardNumber);
+            inquiry.SetPayment(Kount.Enums.PaymentTypes.Card, cardNumber);
 
             return inquiry;
         }

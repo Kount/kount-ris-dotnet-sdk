@@ -31,7 +31,7 @@
         {
             Inquiry request = new Inquiry(false);
 
-            request.SetCardPayment("000738XXXXXX2514");
+            request.SetPayment(Kount.Enums.PaymentTypes.Card, "000738XXXXXX2514");
 
             var ptok = request.GetParam("PTOK");
             Assert.IsFalse("000738XXXXXX2514".Equals(ptok), "Test failed! Masked token is wrong.");
