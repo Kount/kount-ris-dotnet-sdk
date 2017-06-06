@@ -470,7 +470,7 @@ namespace Kount.Ris
         /// <param name="sepaId">Sepa payer ID</param>
         private void SetSepaPayment(string sepaId)
         {
-            this.Data["PTYP"] = Enums.PaymentTypes.Sepa.GetValueAsString();
+            this.Data["PTYP"] = Enums.PaymentTypes.SingleEuroPaymentsArea.GetValueAsString();
             this.SetPaymentToken(this.SafeGet(sepaId));
         }
 
@@ -510,7 +510,7 @@ namespace Kount.Ris
         /// <param name="paypalId">Paypal payer ID</param>
         private void SetPaypalPayment(string paypalId)
         {
-            this.Data["PTYP"] = Enums.PaymentTypes.Pypl.GetValueAsString();
+            this.Data["PTYP"] = Enums.PaymentTypes.Paypal.GetValueAsString();
             this.SetPaymentToken(this.SafeGet(paypalId));
         }
 
@@ -520,7 +520,7 @@ namespace Kount.Ris
         /// <param name="googleId">Google pay id</param>
         private void SetGooglePayment(string googleId)
         {
-            this.Data["PTYP"] = Enums.PaymentTypes.Goog.GetValueAsString();
+            this.Data["PTYP"] = Enums.PaymentTypes.Google.GetValueAsString();
             this.SetPaymentToken(this.SafeGet(googleId));
         }
 
@@ -633,7 +633,7 @@ namespace Kount.Ris
                 case Enums.PaymentTypes.Elv:
                     this.SetElvPayment(payerId);
                     break;
-                case Enums.PaymentTypes.Gdmp:
+                case Enums.PaymentTypes.GreenDotMoneyPak:
                     this.SetGreenDotMoneyPakPayment(payerId);
                     break;
                 case Enums.PaymentTypes.GiftCard:
@@ -642,7 +642,7 @@ namespace Kount.Ris
                 case Enums.PaymentTypes.GiroPay:
                     this.SetGiroPayPayment(payerId);
                     break;
-                case Enums.PaymentTypes.Goog:
+                case Enums.PaymentTypes.Google:
                     this.SetGooglePayment(payerId);
                     break;
                 case Enums.PaymentTypes.Interac:
@@ -660,10 +660,10 @@ namespace Kount.Ris
                 case Enums.PaymentTypes.Poli:
                     this.SetPoliPayment(payerId);
                     break;
-                case Enums.PaymentTypes.Pypl:
+                case Enums.PaymentTypes.Paypal:
                     this.SetPaypalPayment(payerId);
                     break;
-                case Enums.PaymentTypes.Sepa:
+                case Enums.PaymentTypes.SingleEuroPaymentsArea:
                     this.SetSepaPayment(payerId);
                     break;
                 case Enums.PaymentTypes.Skrill:
@@ -686,7 +686,7 @@ namespace Kount.Ris
         /// <param name="id">Green Dot MoneyPak payment ID number</param>
         public void SetGreenDotMoneyPakPayment(string id)
         {
-            this.Data["PTYP"] = Enums.PaymentTypes.Gdmp.GetValueAsString();
+            this.Data["PTYP"] = Enums.PaymentTypes.GreenDotMoneyPak.GetValueAsString();
             this.SetPaymentToken(this.SafeGet(id));
         }
 

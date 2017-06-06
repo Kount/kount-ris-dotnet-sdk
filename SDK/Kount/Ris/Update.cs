@@ -111,7 +111,7 @@ namespace Kount.Ris
                 "Kount.Ris.Update.SetPaypalId() is obsolete. " +
                 "Use Kount.Ris.Update.SetPaypalPayment(bool) instead.";
             this.logger.Info(message);
-            this.SetPayment(Enums.PaymentTypes.Pypl, paypalId);
+            this.SetPayment(Enums.PaymentTypes.Paypal, paypalId);
         }
     }
 }

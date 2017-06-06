@@ -61,7 +61,7 @@ namespace Kount.Enums
         /// Green Dot MoneyPak payment type
         /// </summary>
         [Description("GDMP")]
-        Gdmp,
+        GreenDotMoneyPak,
 
         /// <summary>
         /// Gift card payment type
@@ -79,7 +79,7 @@ namespace Kount.Enums
         /// Google payment type
         /// </summary>
         [Description("GOOG")]
-        Goog,
+        Google,
 
         /// <summary>
         /// Interac payment type
@@ -115,13 +115,13 @@ namespace Kount.Enums
         /// Paypal payment type
         /// </summary>
         [Description("PYPL")]
-        Pypl,
+        Paypal,
 
         /// <summary>
         /// Single Euro Payments Area type
         /// </summary>
         [Description("SEPA")]
-        Sepa,
+        SingleEuroPaymentsArea,
 
         /// <summary>
         /// Skrill/Moneybookers payment type
