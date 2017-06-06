@@ -32,46 +32,6 @@ namespace Kount.Ris
         private const string CUSTOM_HEADER_API_KEY = "X-Kount-Api-Key";     
 
         /// <summary>
-        /// Paypal type
-        /// </summary>
-        private const string PyplType = "PYPL";
-
-        /// <summary>
-        /// Google payment type
-        /// </summary>
-        private const string GoogType = "GOOG";
-
-        /// <summary>
-        /// Gift card payment type
-        /// </summary>
-        private const string GiftCardType = "GIFT";
-
-        /// <summary>
-        /// Credit card type
-        /// </summary>
-        private const string CardType = "CARD";
-
-        /// <summary>
-        /// The check type
-        /// </summary>
-        private const string ChekType = "CHEK";
-
-        /// <summary>
-        /// Bill me later type
-        /// </summary>
-        private const string BlmlType = "BLML";
-
-        /// <summary>
-        /// No payment type
-        /// </summary>
-        private const string NoneType = "NONE";
-
-        /// <summary>
-        /// Green Dot MoneyPak payment type
-        /// </summary>
-        private const string GdmpType = "GDMP";
-
-        /// <summary>
         /// The RIS version
         /// </summary>
         private const string RisVersion = "0695";
@@ -415,12 +375,142 @@ namespace Kount.Ris
         }
 
         /// <summary>
+        /// Set a Apple payment.
+        /// </summary>
+        /// <param name="appleId">Apple payer ID</param>
+        public void SetApplePayment(string appleId)
+        {
+            this.Data["PTYP"] = PaymentTypes.AppleType;
+            this.SetPaymentToken(this.SafeGet(appleId));
+        }
+
+        /// <summary>
+        /// Set a Bpay payment.
+        /// </summary>
+        /// <param name="bpayId">Bpay payer ID</param>
+        public void SetBpayPayment(string bpayId)
+        {
+            this.Data["PTYP"] = PaymentTypes.BpayType;
+            this.SetPaymentToken(this.SafeGet(bpayId));
+        }
+
+        /// <summary>
+        /// Set a CarteBleue payment.
+        /// </summary>
+        /// <param name="carteBleueId">CarteBleue payer ID</param>
+        public void SetCarteBleuePayment(string carteBleueId)
+        {
+            this.Data["PTYP"] = PaymentTypes.CarteBleueType;
+            this.SetPaymentToken(this.SafeGet(carteBleueId));
+        }
+
+        /// <summary>
+        /// Set a Elv payment.
+        /// </summary>
+        /// <param name="elvId">Elv payer ID</param>
+        public void SetElvPayment(string elvId)
+        {
+            this.Data["PTYP"] = PaymentTypes.ElvType;
+            this.SetPaymentToken(this.SafeGet(elvId));
+        }
+
+        /// <summary>
+        /// Set a GiroPay payment.
+        /// </summary>
+        /// <param name="giroPayId">GiroPay payer ID</param>
+        public void SetGiroPayPayment(string giroPayId)
+        {
+            this.Data["PTYP"] = PaymentTypes.GiroPayType;
+            this.SetPaymentToken(this.SafeGet(giroPayId));
+        }
+
+        /// <summary>
+        /// Set a Interac payment.
+        /// </summary>
+        /// <param name="interacId">Interac payer ID</param>
+        public void SetInteracPayment(string interacId)
+        {
+            this.Data["PTYP"] = PaymentTypes.InteracType;
+            this.SetPaymentToken(this.SafeGet(interacId));
+        }
+
+        /// <summary>
+        /// Set a MercadePago payment.
+        /// </summary>
+        /// <param name="mercadePagoId">MercadePago payer ID</param>
+        public void SetMercadePagoPayment(string mercadePagoId)
+        {
+            this.Data["PTYP"] = PaymentTypes.MercadePagoType;
+            this.SetPaymentToken(this.SafeGet(mercadePagoId));
+        }
+
+        /// <summary>
+        /// Set a Neteller payment.
+        /// </summary>
+        /// <param name="netellerId">Neteller payer ID</param>
+        public void SetNetellerPayment(string netellerId)
+        {
+            this.Data["PTYP"] = PaymentTypes.NetellerType;
+            this.SetPaymentToken(this.SafeGet(netellerId));
+        }
+
+        /// <summary>
+        /// Set a Poli payment.
+        /// </summary>
+        /// <param name="poliId">Poli payer ID</param>
+        public void SetPoliPayment(string poliId)
+        {
+            this.Data["PTYP"] = PaymentTypes.PoliType;
+            this.SetPaymentToken(this.SafeGet(poliId));
+        }
+
+        /// <summary>
+        /// Set a Sepa payment.
+        /// </summary>
+        /// <param name="sepaId">Sepa payer ID</param>
+        public void SetSepaPayment(string sepaId)
+        {
+            this.Data["PTYP"] = PaymentTypes.SepaType;
+            this.SetPaymentToken(this.SafeGet(sepaId));
+        }
+
+        /// <summary>
+        /// Set a Skrill payment.
+        /// </summary>
+        /// <param name="skrillId">Skrill payer ID</param>
+        public void SetSkrillPayment(string skrillId)
+        {
+            this.Data["PTYP"] = PaymentTypes.SkrillType;
+            this.SetPaymentToken(this.SafeGet(skrillId));
+        }
+
+        /// <summary>
+        /// Set a Sofort payment.
+        /// </summary>
+        /// <param name="sofortId">Sofort payer ID</param>
+        public void SetSofortPayment(string sofortId)
+        {
+            this.Data["PTYP"] = PaymentTypes.SofortType;
+            this.SetPaymentToken(this.SafeGet(sofortId));
+        }
+
+        /// <summary>
+        /// Set a Token payment.
+        /// </summary>
+        /// <param name="tokenId">Token payer ID</param>
+        public void SetTokenPayment(string tokenId)
+        {
+            this.Data["PTYP"] = PaymentTypes.TokenType;
+            this.SetPaymentToken(this.SafeGet(tokenId));
+        }
+
+        /// <summary>
         /// Set a Paypal payment.
         /// </summary>
         /// <param name="paypalId">Paypal payer ID</param>
         public void SetPaypalPayment(string paypalId)
         {
-            this.Data["PTYP"] = PyplType;
+            this.Data["PTYP"] = PaymentTypes.PyplType;
             this.SetPaymentToken(this.SafeGet(paypalId));
         }
 
@@ -430,7 +520,7 @@ namespace Kount.Ris
         /// <param name="googleId">Google pay id</param>
         public void SetGooglePayment(string googleId)
         {
-            this.Data["PTYP"] = GoogType;
+            this.Data["PTYP"] = PaymentTypes.GoogType;
             this.SetPaymentToken(this.SafeGet(googleId));
         }
 
@@ -440,7 +530,7 @@ namespace Kount.Ris
         /// <param name="cardNumber">Raw credit card number</param>
         public void SetCardPayment(string cardNumber)
         {
-            this.Data["PTYP"] = CardType;
+            this.Data["PTYP"] = PaymentTypes.CardType;
             this.SetPaymentToken(this.SafeGet(cardNumber));
         }
 
@@ -455,7 +545,7 @@ namespace Kount.Ris
         /// <param name="cardNumber">Raw credit card number</param>
         public void SetCardPaymentMasked(string cardNumber)
         {
-            this.Data["PTYP"] = CardType;
+            this.Data["PTYP"] = PaymentTypes.CardType;
             this.Data["PENC"] = "MASK";
 
             string ptok = MaskToken(cardNumber);
@@ -468,7 +558,7 @@ namespace Kount.Ris
         /// <param name="micr">Micro number on the check.</param>
         public void SetCheckPayment(string micr)
         {
-            this.Data["PTYP"] = ChekType;
+            this.Data["PTYP"] = PaymentTypes.ChekType;
             this.SetPaymentToken(this.SafeGet(micr));
         }
 
@@ -478,7 +568,7 @@ namespace Kount.Ris
         /// <param name="blmlId">bill me later id</param>
         public void SetBillMeLaterPayment(string blmlId)
         {
-            this.Data["PTYP"] = BlmlType;
+            this.Data["PTYP"] = PaymentTypes.BlmlType;
             this.SetPaymentToken(this.SafeGet(blmlId));
         }
 
@@ -487,7 +577,7 @@ namespace Kount.Ris
         /// </summary>
         public void SetNoPayment()
         {
-            this.Data["PTYP"] = NoneType;
+            this.Data["PTYP"] = PaymentTypes.NoneType;
             this.Data["PTOK"] = "";
         }
 
@@ -497,7 +587,7 @@ namespace Kount.Ris
         /// <param name="giftCardNum">Gift card number</param>
         public void SetGiftCardPayment(string giftCardNum)
         {
-            this.Data["PTYP"] = GiftCardType;
+            this.Data["PTYP"] = PaymentTypes.GiftCardType;
             this.SetPaymentToken(this.SafeGet(giftCardNum));
         }
 
@@ -519,7 +609,7 @@ namespace Kount.Ris
         /// <param name="id">Green Dot MoneyPak payment ID number</param>
         public void SetGreenDotMoneyPakPayment(string id)
         {
-            this.Data["PTYP"] = GdmpType;
+            this.Data["PTYP"] = PaymentTypes.GdmpType;
             this.SetPaymentToken(this.SafeGet(id));
         }
 
@@ -683,7 +773,7 @@ namespace Kount.Ris
 
             if (this.IsSetKhashPaymentEncoding())
             {
-                token = (GiftCardType.Equals(this.Data["PTYP"])) ?
+                token = (PaymentTypes.GiftCardType.Equals(this.Data["PTYP"])) ?
                     Khash.HashGiftCard((int)this.Data["MERC"], token) :
                     Khash.HashPaymentToken(token);
             }

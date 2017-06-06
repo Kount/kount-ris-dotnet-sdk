@@ -69,6 +69,7 @@
     <Compile Include="Kount\Ris\Inquiry.cs" />
     <Compile Include="Kount\Ris\InquiryType.cs" />
     <Compile Include="Kount\Ris\KcEvent.cs" />
+    <Compile Include="Kount\Ris\PaymentTypes.cs" />
     <Compile Include="Kount\Ris\Request.cs" />
     <Compile Include="Kount\Ris\RequestException.cs" />
     <Compile Include="Kount\Ris\Response.cs" />
