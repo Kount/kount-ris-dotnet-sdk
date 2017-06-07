@@ -1,4 +1,6 @@
 rem -----------------------------------------------------------------------
+rem <copyright file="create_nuGet_package.bat" company="Kount Inc">
+rem     Copyright Kount Inc. All rights reserved.
 rem </copyright>
 rem -----------------------------------------------------------------------
 

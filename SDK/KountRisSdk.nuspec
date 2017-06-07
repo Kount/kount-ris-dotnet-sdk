@@ -1,8 +1,18 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
+    <id>Kount.Net.RisSDK</id>
+    <version>6.5.0</version>
     <title>$title$</title>
     <authors>$author$</authors>
+    <owners>Kount Inc.</owners>
+    <licenseUrl>https://github.com/Kount/kount-ris-dotnet-sdk/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Kount/kount-ris-dotnet-sdk</projectUrl>
+    <iconUrl>https://github.com/Kount/Kount.github.io/blob/master/img/logo.png</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>$description$</description>
+    <releaseNotes>https://github.com/Kount/kount-ris-dotnet-sdk/releases</releaseNotes>
+    <copyright>Copyright Kount Inc. 2017</copyright>
+    <tags>Kount KountRisSDK RisSDK</tags>
   </metadata>
 </package>
