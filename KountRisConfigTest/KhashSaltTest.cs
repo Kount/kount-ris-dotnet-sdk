@@ -88,7 +88,7 @@
 
             inquiry.SetMerchantId(MERCHANT_ID);
 
-            inquiry.SetGiftCardPayment(CARD_NUM_1);
+            inquiry.SetPayment(Kount.Enums.PaymentTypes.GiftCard, CARD_NUM_1);
 
             var hashCardNum = inquiry.GetParam("PTOK");
 
@@ -110,7 +110,7 @@
 
             inquiry.SetMerchantId(MERCHANT_ID);
 
-            inquiry.SetGiftCardPayment(CARD_NUM_2);
+            inquiry.SetPayment(Kount.Enums.PaymentTypes.GiftCard, CARD_NUM_2);
 
             var hashCardNum = inquiry.GetParam("PTOK");
 
@@ -132,7 +132,7 @@
 
             inquiry.SetMerchantId(MERCHANT_ID);
 
-            inquiry.SetGiftCardPayment(CARD_NUM_3);
+            inquiry.SetPayment(Kount.Enums.PaymentTypes.GiftCard, CARD_NUM_3);
 
             var hashCardNum = inquiry.GetParam("PTOK");
 

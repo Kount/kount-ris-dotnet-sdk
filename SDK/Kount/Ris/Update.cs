@@ -41,7 +41,7 @@ namespace Kount.Ris
         {
             ILoggerFactory factory = LogFactory.GetLoggerFactory();
             this.logger = factory.GetLogger(typeof(Update).ToString());
-            this.SetMode(UpdateType.ModeU);
+            this.SetMode(Enums.UpdateTypes.ModeU);
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Kount.Ris
         {
             ILoggerFactory factory = LogFactory.GetLoggerFactory();
             this.logger = factory.GetLogger(typeof(Update).ToString());
-            this.SetMode(UpdateType.ModeU);
+            this.SetMode(Enums.UpdateTypes.ModeU);
         }
 
         /// <summary>
@@ -65,9 +65,10 @@ namespace Kount.Ris
         /// <param name="mode">Set U or X</param>
         /// <exception cref="Kount.Ris.IllegalArgumentException">Thrown if
         /// parameter is an invalid mode.</exception>
-        public override void SetMode(char mode)
+        protected override void SetMode(char mode)
         {
-            if ((UpdateType.ModeU != mode) && (UpdateType.ModeX != mode))
+            if (((char)Enums.UpdateTypes.ModeU != mode) 
+                && ((char)Enums.UpdateTypes.ModeX != mode))
             {
                 throw new Kount.Ris.IllegalArgumentException(
                     "Invalid RIS update mode " + mode);
@@ -111,7 +112,7 @@ namespace Kount.Ris
                 "Kount.Ris.Update.SetPaypalId() is obsolete. " +
                 "Use Kount.Ris.Update.SetPaypalPayment(bool) instead.";
             this.logger.Info(message);
-            this.SetPaypalPayment(paypalId);
+            this.SetPayment(Enums.PaymentTypes.Paypal, paypalId);
         }
     }
 }

@@ -6,6 +6,7 @@
 namespace KountRisConfigTest
 {
     using Kount.Ris;
+    using Kount.Enums;
     using System;
 
     public class TestHelper
@@ -191,7 +192,7 @@ namespace KountRisConfigTest
             // create inquiry with default settings
             Inquiry inquiry = DefaultInquiry(out sid, out orderNum);
 
-            inquiry.SetCardPayment(cardNumber);
+            inquiry.SetPayment(Kount.Enums.PaymentTypes.Card, cardNumber);
 
             return inquiry;
         }
@@ -227,7 +228,7 @@ namespace KountRisConfigTest
             inquiry.SetShippingAddress(S2A1, S2A2, S2CI, S2ST, S2PC, S2CC);
             inquiry.SetShippingPhoneNumber(S2PN);
 
-            inquiry.SetMode(MODE);
+            inquiry.SetMode(InquiryTypes.ModeQ);
 
             inquiry.SetTotal(TOTL);
             inquiry.SetCash(CASH);

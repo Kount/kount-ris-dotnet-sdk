@@ -56,6 +56,10 @@
     <None Include="toc.yml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Kount\Enums\EnumHelper.cs" />
+    <Compile Include="Kount\Enums\InquiryTypes.cs" />
+    <Compile Include="Kount\Enums\PaymentTypes.cs" />
+    <Compile Include="Kount\Enums\UpdateTypes.cs" />
     <Compile Include="Kount\Log\Binding\Logger.cs" />
     <Compile Include="Kount\Log\Binding\NopLogger.cs" />
     <Compile Include="Kount\Log\Binding\SimpleLogger.cs" />
@@ -67,14 +71,12 @@
     <Compile Include="Kount\Ris\CartItem.cs" />
     <Compile Include="Kount\Ris\IllegalArgumentException.cs" />
     <Compile Include="Kount\Ris\Inquiry.cs" />
-    <Compile Include="Kount\Ris\InquiryType.cs" />
     <Compile Include="Kount\Ris\KcEvent.cs" />
     <Compile Include="Kount\Ris\Request.cs" />
     <Compile Include="Kount\Ris\RequestException.cs" />
     <Compile Include="Kount\Ris\Response.cs" />
     <Compile Include="Kount\Ris\RSA.cs" />
     <Compile Include="Kount\Ris\Update.cs" />
-    <Compile Include="Kount\Ris\UpdateType.cs" />
     <Compile Include="Kount\Ris\ValidationError.cs" />
     <Compile Include="Kount\Ris\ValidationException.cs" />
     <Compile Include="Kount\SimpleLogger\File.cs" />
