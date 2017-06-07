@@ -1,9 +1,9 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="UpdateType.cs" company="Keynetics Inc">
+// <copyright file="InquiryTypes.cs" company="Keynetics Inc">
 //     Copyright Kount. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace Kount.Ris
+namespace Kount.Enums
 {
     /// <summary>
     /// Update type should be used whenever there are changes to a given order and the merchant 
@@ -12,16 +12,16 @@ namespace Kount.Ris
     /// <b>Version:</b> 6.5.0. <br/>
     /// <b>Copyright:</b> 2017 Kount Inc <br/>
     /// </summary>
-    public static class UpdateType
+    public enum UpdateTypes
     {
         /// <summary>
         /// Default update mode, only sends the update event
         /// </summary>
-        public const char ModeU = 'U';
+        ModeU = 'U',
 
         /// <summary>
         /// Sends the update event and RIS service returns a status response
         /// </summary>
-        public const char ModeX = 'X';
+        ModeX = 'X'
     }
 }

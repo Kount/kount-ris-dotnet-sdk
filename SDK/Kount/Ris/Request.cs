@@ -292,7 +292,25 @@ namespace Kount.Ris
         /// Set the mode of the transaction.
         /// </summary>
         /// <param name="mode">Depends on the request type.</param>
-        public abstract void SetMode(char mode);
+        protected abstract void SetMode(char mode);
+
+        /// <summary>
+        /// Set the mode of the transaction.
+        /// </summary>
+        /// <param name="inquiryType">Depends on the inquiry type.</param>
+        public void SetMode(InquiryTypes inquiryType)
+        {
+            this.SetMode((char)inquiryType);
+        }
+
+        /// <summary>
+        /// Set the mode of the transaction.
+        /// </summary>
+        /// <param name="updateType">Depends on the update type.</param>
+        public void SetMode(UpdateTypes updateType)
+        {
+            this.SetMode((char)updateType);
+        }
 
         /// <summary>
         /// Set the merchant Id.

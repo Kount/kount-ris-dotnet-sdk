@@ -6,6 +6,7 @@
 namespace KountRisTest
 {
     using Kount.Ris;
+    using Kount.Enums;
     using Kount.Util;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
@@ -275,7 +276,7 @@ namespace KountRisTest
         {
             Inquiry inquiry = TestHelper.CreateInquiry(KHASH_PTOK, out _sid, out _orderNum);
 
-            inquiry.SetMode('W');
+            inquiry.SetMode(InquiryTypes.ModeW);
             inquiry.SetTotal(10001);
             inquiry.SetKountCentralCustomerId("KCentralCustomerOne");
 
@@ -344,7 +345,7 @@ namespace KountRisTest
         {
             Inquiry inquiry = TestHelper.CreateInquiry(KHASH_PTOK, out _sid, out _orderNum);
 
-            inquiry.SetMode('J');
+            inquiry.SetMode(InquiryTypes.ModeJ);
             inquiry.SetTotal(1000);
             inquiry.SetKountCentralCustomerId("KCentralCustomerDeclineMe");
 
@@ -420,7 +421,7 @@ namespace KountRisTest
 
             // create Update
             Update update = new Update(false);
-            update.SetMode('U');
+            update.SetMode(UpdateTypes.ModeU);
             update.SetVersion("0695");
             update.SetMerchantId(TestHelper.TEST_MERCHANT_ID);
             update.SetApiKey(TestHelper.TEST_API_KEY);
@@ -489,7 +490,7 @@ namespace KountRisTest
             var ordNum = response.GetOrderNumber();
             // create update without check in config
             Update update = new Update(false);
-            update.SetMode('X');
+            update.SetMode(UpdateTypes.ModeX);
             update.SetVersion("0695");
 
             update.SetMerchantId(TestHelper.TEST_MERCHANT_ID);
@@ -541,7 +542,7 @@ namespace KountRisTest
             Inquiry inquiry = TestHelper.CreateInquiry(KHASH_PTOK, out _sid, out _orderNum);
 
             inquiry.SetAnid("2085551212");
-            inquiry.SetMode('P');
+            inquiry.SetMode(InquiryTypes.ModeP);
             inquiry.SetTotal(1000);
             // set CART with one item
             var cart = new ArrayList();

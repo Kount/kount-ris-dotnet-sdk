@@ -22,7 +22,7 @@ namespace Kount.Ris
         /// </summary>
         public Inquiry() : base()
         {
-            this.SetMode((char)Enums.InquiryTypes.ModeQ);
+            this.SetMode(Enums.InquiryTypes.ModeQ);
             this.SetCurrency("USD");
             this.Data["SDK"] = ".NET";
             this.SetSdkVersion("Sdk-Ris-Dotnet-0650-201705051458");
@@ -39,7 +39,7 @@ namespace Kount.Ris
         /// `Ris.Khash.Salt` and `Ris.Connect.Timeout` are set.</param>
         public Inquiry(bool checkConfiguration) : base(checkConfiguration)
         {
-            this.SetMode((char)Enums.InquiryTypes.ModeQ);
+            this.SetMode(Enums.InquiryTypes.ModeQ);
             this.SetCurrency("USD");
             this.Data["SDK"] = ".NET";
             this.SetSdkVersion("Sdk-Ris-Dotnet-0650-201705051458");
@@ -49,7 +49,7 @@ namespace Kount.Ris
         /// Set the mode of the inquiry.
         /// </summary>
         /// <param name="mode">Set mode Q or P</param>
-        public override void SetMode(char mode)
+        protected override void SetMode(char mode)
         {
             this.Data["MODE"] = mode;
         }

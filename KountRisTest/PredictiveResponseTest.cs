@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace KountRisTest
 {
+    using Kount.Enums;
     using Kount.Ris;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
@@ -89,7 +90,7 @@ namespace KountRisTest
             }
 
             inquiry.SetEmail(EMAL);
-            inquiry.SetMode((char)Kount.Enums.InquiryTypes.ModeQ);
+            inquiry.SetMode(InquiryTypes.ModeQ);
 
             inquiry.SetNoPayment();
 
