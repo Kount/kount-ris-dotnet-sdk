@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <description>$description$</description>
+  </metadata>
+</package>
