@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Kount.Ris
 {
+    using Kount.Enums;
     using Kount.Log.Binding;
     using Kount.Log.Factory;
     using Kount.Util;
@@ -375,166 +376,6 @@ namespace Kount.Ris
         }
 
         /// <summary>
-        /// Set a Apple payment.
-        /// </summary>
-        /// <param name="appleId">Apple payer ID</param>
-        private void SetApplePayment(string appleId)
-        {
-            this.Data["PTYP"] = Enums.PaymentTypes.Apple.GetValueAsString();
-            this.SetPaymentToken(this.SafeGet(appleId));
-        }
-
-        /// <summary>
-        /// Set a Bpay payment.
-        /// </summary>
-        /// <param name="bpayId">Bpay payer ID</param>
-        private void SetBpayPayment(string bpayId)
-        {
-            this.Data["PTYP"] = Enums.PaymentTypes.Bpay.GetValueAsString();
-            this.SetPaymentToken(this.SafeGet(bpayId));
-        }
-
-        /// <summary>
-        /// Set a CarteBleue payment.
-        /// </summary>
-        /// <param name="carteBleueId">CarteBleue payer ID</param>
-        private void SetCarteBleuePayment(string carteBleueId)
-        {
-            this.Data["PTYP"] = Enums.PaymentTypes.CarteBleue.GetValueAsString();
-            this.SetPaymentToken(this.SafeGet(carteBleueId));
-        }
-
-        /// <summary>
-        /// Set a Elv payment.
-        /// </summary>
-        /// <param name="elvId">Elv payer ID</param>
-        private void SetElvPayment(string elvId)
-        {
-            this.Data["PTYP"] = Enums.PaymentTypes.Elv.GetValueAsString();
-            this.SetPaymentToken(this.SafeGet(elvId));
-        }
-
-        /// <summary>
-        /// Set a GiroPay payment.
-        /// </summary>
-        /// <param name="giroPayId">GiroPay payer ID</param>
-        private void SetGiroPayPayment(string giroPayId)
-        {
-            this.Data["PTYP"] = Enums.PaymentTypes.GiroPay.GetValueAsString();
-            this.SetPaymentToken(this.SafeGet(giroPayId));
-        }
-
-        /// <summary>
-        /// Set a Interac payment.
-        /// </summary>
-        /// <param name="interacId">Interac payer ID</param>
-        private void SetInteracPayment(string interacId)
-        {
-            this.Data["PTYP"] = Enums.PaymentTypes.Interac.GetValueAsString();
-            this.SetPaymentToken(this.SafeGet(interacId));
-        }
-
-        /// <summary>
-        /// Set a MercadePago payment.
-        /// </summary>
-        /// <param name="mercadePagoId">MercadePago payer ID</param>
-        private void SetMercadePagoPayment(string mercadePagoId)
-        {
-            this.Data["PTYP"] = Enums.PaymentTypes.MercadePago.GetValueAsString();
-            this.SetPaymentToken(this.SafeGet(mercadePagoId));
-        }
-
-        /// <summary>
-        /// Set a Neteller payment.
-        /// </summary>
-        /// <param name="netellerId">Neteller payer ID</param>
-        private void SetNetellerPayment(string netellerId)
-        {
-            this.Data["PTYP"] = Enums.PaymentTypes.Neteller.GetValueAsString();
-            this.SetPaymentToken(this.SafeGet(netellerId));
-        }
-
-        /// <summary>
-        /// Set a Poli payment.
-        /// </summary>
-        /// <param name="poliId">Poli payer ID</param>
-        private void SetPoliPayment(string poliId)
-        {
-            this.Data["PTYP"] = Enums.PaymentTypes.Poli.GetValueAsString();
-            this.SetPaymentToken(this.SafeGet(poliId));
-        }
-
-        /// <summary>
-        /// Set a Sepa payment.
-        /// </summary>
-        /// <param name="sepaId">Sepa payer ID</param>
-        private void SetSepaPayment(string sepaId)
-        {
-            this.Data["PTYP"] = Enums.PaymentTypes.SingleEuroPaymentsArea.GetValueAsString();
-            this.SetPaymentToken(this.SafeGet(sepaId));
-        }
-
-        /// <summary>
-        /// Set a Skrill payment.
-        /// </summary>
-        /// <param name="skrillId">Skrill payer ID</param>
-        private void SetSkrillPayment(string skrillId)
-        {
-            this.Data["PTYP"] = Enums.PaymentTypes.Skrill.GetValueAsString();
-            this.SetPaymentToken(this.SafeGet(skrillId));
-        }
-
-        /// <summary>
-        /// Set a Sofort payment.
-        /// </summary>
-        /// <param name="sofortId">Sofort payer ID</param>
-        private void SetSofortPayment(string sofortId)
-        {
-            this.Data["PTYP"] = Enums.PaymentTypes.Sofort.GetValueAsString();
-            this.SetPaymentToken(this.SafeGet(sofortId));
-        }
-
-        /// <summary>
-        /// Set a Token payment.
-        /// </summary>
-        /// <param name="tokenId">Token payer ID</param>
-        private void SetTokenPayment(string tokenId)
-        {
-            this.Data["PTYP"] = Enums.PaymentTypes.Token.GetValueAsString();
-            this.SetPaymentToken(this.SafeGet(tokenId));
-        }
-
-        /// <summary>
-        /// Set a Paypal payment.
-        /// </summary>
-        /// <param name="paypalId">Paypal payer ID</param>
-        private void SetPaypalPayment(string paypalId)
-        {
-            this.Data["PTYP"] = Enums.PaymentTypes.Paypal.GetValueAsString();
-            this.SetPaymentToken(this.SafeGet(paypalId));
-        }
-
-        /// <summary>
-        /// Set a google payment
-        /// </summary>
-        /// <param name="googleId">Google pay id</param>
-        private void SetGooglePayment(string googleId)
-        {
-            this.Data["PTYP"] = Enums.PaymentTypes.Google.GetValueAsString();
-            this.SetPaymentToken(this.SafeGet(googleId));
-        }
-
-        /// <summary>
-        /// Set a credit card payment
-        /// </summary>
-        /// <param name="cardNumber">Raw credit card number</param>
-        private void SetCardPayment(string cardNumber)
-        {
-            this.Data["PTYP"] = Enums.PaymentTypes.Card.GetValueAsString();
-            this.SetPaymentToken(this.SafeGet(cardNumber));
-        }
-
-        /// <summary>
         /// Sets a card payment and masks the card number in the following way: <br/>
 	    /// First 6 characters remain as they are, following characters up to the last 4 are
 	    /// replaced with the 'X' character, last 4 characters remain as they are.
@@ -553,26 +394,6 @@ namespace Kount.Ris
         }
 
         /// <summary>
-        /// Set a check payment.
-        /// </summary>
-        /// <param name="micr">Micro number on the check.</param>
-        private void SetCheckPayment(string micr)
-        {
-            this.Data["PTYP"] = Enums.PaymentTypes.Check.GetValueAsString();
-            this.SetPaymentToken(this.SafeGet(micr));
-        }
-
-        /// <summary>
-        /// Set a Bill Me Later payment.
-        /// </summary>
-        /// <param name="blmlId">bill me later id</param>
-        private void SetBillMeLaterPayment(string blmlId)
-        {
-            this.Data["PTYP"] = Enums.PaymentTypes.Blml.GetValueAsString();
-            this.SetPaymentToken(this.SafeGet(blmlId));
-        }
-
-        /// <summary>
         /// Set No Payment.
         /// </summary>
         public void SetNoPayment()
@@ -582,20 +403,11 @@ namespace Kount.Ris
         }
 
         /// <summary>
-        /// Set a gift card payment
-        /// </summary>
-        /// <param name="giftCardNum">Gift card number</param>
-        private void SetGiftCardPayment(string giftCardNum)
-        {
-            this.Data["PTYP"] = Enums.PaymentTypes.GiftCard.GetValueAsString();
-            this.SetPaymentToken(this.SafeGet(giftCardNum));
-        }
-
-        /// <summary>
-        /// Set a payment type and payment token. This method is depreciated.
+        /// Set a payment type and payment token. This method is Obsoleted.
         /// </summary>
         /// <param name="ptyp">Payment Type</param>
         /// <param name="ptok">Payment Token</param>
+        [Obsolete("Version 6.5.0 Use Kount.Ris.Request.SetPayment(Enums.PaymentTypes paymentType, string payerId) : void")]
         public void SetPayment(string ptyp, string ptok)
         {
             this.logger.Debug("Kount.Ris.Request.SetPayment()");
@@ -883,6 +695,196 @@ namespace Kount.Ris
         protected string SafeGet(string var)
         {
             return (null == var) ? "" : var;
+        }
+
+        /// <summary>
+        /// Set a Apple payment.
+        /// </summary>
+        /// <param name="appleId">Apple payer ID</param>
+        private void SetApplePayment(string appleId)
+        {
+            this.Data["PTYP"] = Enums.PaymentTypes.Apple.GetValueAsString();
+            this.SetPaymentToken(this.SafeGet(appleId));
+        }
+
+        /// <summary>
+        /// Set a Bpay payment.
+        /// </summary>
+        /// <param name="bpayId">Bpay payer ID</param>
+        private void SetBpayPayment(string bpayId)
+        {
+            this.Data["PTYP"] = Enums.PaymentTypes.Bpay.GetValueAsString();
+            this.SetPaymentToken(this.SafeGet(bpayId));
+        }
+
+        /// <summary>
+        /// Set a CarteBleue payment.
+        /// </summary>
+        /// <param name="carteBleueId">CarteBleue payer ID</param>
+        private void SetCarteBleuePayment(string carteBleueId)
+        {
+            this.Data["PTYP"] = Enums.PaymentTypes.CarteBleue.GetValueAsString();
+            this.SetPaymentToken(this.SafeGet(carteBleueId));
+        }
+
+        /// <summary>
+        /// Set a Elv payment.
+        /// </summary>
+        /// <param name="elvId">Elv payer ID</param>
+        private void SetElvPayment(string elvId)
+        {
+            this.Data["PTYP"] = Enums.PaymentTypes.Elv.GetValueAsString();
+            this.SetPaymentToken(this.SafeGet(elvId));
+        }
+
+        /// <summary>
+        /// Set a GiroPay payment.
+        /// </summary>
+        /// <param name="giroPayId">GiroPay payer ID</param>
+        private void SetGiroPayPayment(string giroPayId)
+        {
+            this.Data["PTYP"] = Enums.PaymentTypes.GiroPay.GetValueAsString();
+            this.SetPaymentToken(this.SafeGet(giroPayId));
+        }
+
+        /// <summary>
+        /// Set a Interac payment.
+        /// </summary>
+        /// <param name="interacId">Interac payer ID</param>
+        private void SetInteracPayment(string interacId)
+        {
+            this.Data["PTYP"] = Enums.PaymentTypes.Interac.GetValueAsString();
+            this.SetPaymentToken(this.SafeGet(interacId));
+        }
+
+        /// <summary>
+        /// Set a MercadePago payment.
+        /// </summary>
+        /// <param name="mercadePagoId">MercadePago payer ID</param>
+        private void SetMercadePagoPayment(string mercadePagoId)
+        {
+            this.Data["PTYP"] = Enums.PaymentTypes.MercadePago.GetValueAsString();
+            this.SetPaymentToken(this.SafeGet(mercadePagoId));
+        }
+
+        /// <summary>
+        /// Set a Neteller payment.
+        /// </summary>
+        /// <param name="netellerId">Neteller payer ID</param>
+        private void SetNetellerPayment(string netellerId)
+        {
+            this.Data["PTYP"] = Enums.PaymentTypes.Neteller.GetValueAsString();
+            this.SetPaymentToken(this.SafeGet(netellerId));
+        }
+
+        /// <summary>
+        /// Set a Poli payment.
+        /// </summary>
+        /// <param name="poliId">Poli payer ID</param>
+        private void SetPoliPayment(string poliId)
+        {
+            this.Data["PTYP"] = Enums.PaymentTypes.Poli.GetValueAsString();
+            this.SetPaymentToken(this.SafeGet(poliId));
+        }
+
+        /// <summary>
+        /// Set a Sepa payment.
+        /// </summary>
+        /// <param name="sepaId">Sepa payer ID</param>
+        private void SetSepaPayment(string sepaId)
+        {
+            this.Data["PTYP"] = Enums.PaymentTypes.SingleEuroPaymentsArea.GetValueAsString();
+            this.SetPaymentToken(this.SafeGet(sepaId));
+        }
+
+        /// <summary>
+        /// Set a Skrill payment.
+        /// </summary>
+        /// <param name="skrillId">Skrill payer ID</param>
+        private void SetSkrillPayment(string skrillId)
+        {
+            this.Data["PTYP"] = Enums.PaymentTypes.Skrill.GetValueAsString();
+            this.SetPaymentToken(this.SafeGet(skrillId));
+        }
+
+        /// <summary>
+        /// Set a Sofort payment.
+        /// </summary>
+        /// <param name="sofortId">Sofort payer ID</param>
+        private void SetSofortPayment(string sofortId)
+        {
+            this.Data["PTYP"] = Enums.PaymentTypes.Sofort.GetValueAsString();
+            this.SetPaymentToken(this.SafeGet(sofortId));
+        }
+
+        /// <summary>
+        /// Set a Token payment.
+        /// </summary>
+        /// <param name="tokenId">Token payer ID</param>
+        private void SetTokenPayment(string tokenId)
+        {
+            this.Data["PTYP"] = Enums.PaymentTypes.Token.GetValueAsString();
+            this.SetPaymentToken(this.SafeGet(tokenId));
+        }
+
+        /// <summary>
+        /// Set a Paypal payment.
+        /// </summary>
+        /// <param name="paypalId">Paypal payer ID</param>
+        private void SetPaypalPayment(string paypalId)
+        {
+            this.Data["PTYP"] = Enums.PaymentTypes.Paypal.GetValueAsString();
+            this.SetPaymentToken(this.SafeGet(paypalId));
+        }
+
+        /// <summary>
+        /// Set a google payment
+        /// </summary>
+        /// <param name="googleId">Google pay id</param>
+        private void SetGooglePayment(string googleId)
+        {
+            this.Data["PTYP"] = Enums.PaymentTypes.Google.GetValueAsString();
+            this.SetPaymentToken(this.SafeGet(googleId));
+        }
+
+        /// <summary>
+        /// Set a check payment.
+        /// </summary>
+        /// <param name="micr">Micro number on the check.</param>
+        private void SetCheckPayment(string micr)
+        {
+            this.Data["PTYP"] = Enums.PaymentTypes.Check.GetValueAsString();
+            this.SetPaymentToken(this.SafeGet(micr));
+        }
+
+        /// <summary>
+        /// Set a Bill Me Later payment.
+        /// </summary>
+        /// <param name="blmlId">bill me later id</param>
+        private void SetBillMeLaterPayment(string blmlId)
+        {
+            this.Data["PTYP"] = Enums.PaymentTypes.Blml.GetValueAsString();
+            this.SetPaymentToken(this.SafeGet(blmlId));
+        }
+
+        /// <summary>
+        /// Set a credit card payment
+        /// </summary>
+        /// <param name="cardNumber">Raw credit card number</param>
+        private void SetCardPayment(string cardNumber)
+        {
+            this.Data["PTYP"] = Enums.PaymentTypes.Card.GetValueAsString();
+            this.SetPaymentToken(this.SafeGet(cardNumber));
+        }
+
+        /// <summary>
+        /// Set a gift card payment
+        /// </summary>
+        /// <param name="giftCardNum">Gift card number</param>
+        private void SetGiftCardPayment(string giftCardNum)
+        {
+            this.Data["PTYP"] = Enums.PaymentTypes.GiftCard.GetValueAsString();
+            this.SetPaymentToken(this.SafeGet(giftCardNum));
         }
 
         /// <summary>

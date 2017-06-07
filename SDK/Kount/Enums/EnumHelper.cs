@@ -3,7 +3,7 @@
 //     Copyright Kount. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace Kount
+namespace Kount.Enums
 {
     using System.ComponentModel;
 
