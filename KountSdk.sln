@@ -16,6 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "builds", "builds", "{33A324
 	ProjectSection(SolutionItems) = preProject
 		builds\build_sdk.bat = builds\build_sdk.bat
 		builds\buildSdk.ps1 = builds\buildSdk.ps1
+		builds\create_nuGet_package.bat = builds\create_nuGet_package.bat
 		builds\docFX_run.bat = builds\docFX_run.bat
 		builds\Get-DotNet-Version.ps1 = builds\Get-DotNet-Version.ps1
 		builds\nuget.exe = builds\nuget.exe

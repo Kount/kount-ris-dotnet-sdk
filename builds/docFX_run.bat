@@ -1,5 +1,5 @@
 rem -----------------------------------------------------------------------
-rem <copyright file="build_sdk.bat" company="Keynetics Inc">
+rem <copyright file="docFX_run.bat" company="Keynetics Inc">
 rem     Copyright Keynetics. All rights reserved.
 rem </copyright>
 rem -----------------------------------------------------------------------
