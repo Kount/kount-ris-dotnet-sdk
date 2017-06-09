@@ -16,6 +16,19 @@ Param(
 	[String]$SdkVersion = '0650'
      )
 
+# Path for VS 2017
+# $VSPath = "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community" 
+# $MSBuildPath = "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin"
+
+# Path for VS 2015
+$VSPath = "C:\Program Files (x86)\Microsoft Visual Studio 14.0" 
+$MSBuildPath = "C:\Program Files (x86)\MSBuild\14.0\Bin"
+
+# Path for VS 2013
+# $VSPath = "C:\Program Files (x86)\Microsoft Visual Studio 12.0" 
+# $MSBuildPath = "C:\Program Files (x86)\MSBuild\12.0\Bin"
+
+
 #
 # Checks if Ris.MerchantId, Ris.Url, Ris.Khash.Salt are setted in App.config 
 #
@@ -43,20 +56,8 @@ Function Read-TestConfig {
 	}
 
     $return = ($nodeMerchantId.Count -eq 1) -and ($nodeSalt.Count -eq 1) -and ($nodeUrl.Count -eq 1)
-    return $return
+    return 
 }
-
-# Path for VS 2017
-# $VSPath = "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community" 
-# $MSBuildPath = "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin"
-
-# Path for VS 2015
-$VSPath = "C:\Program Files (x86)\Microsoft Visual Studio 14.0" 
-$MSBuildPath = "C:\Program Files (x86)\MSBuild\14.0\Bin"
-
-# Path for VS 2013
-# $VSPath = "C:\Program Files (x86)\Microsoft Visual Studio 12.0" 
-# $MSBuildPath = "C:\Program Files (x86)\MSBuild\12.0\Bin"
 
 $TestConfig = Read-TestConfig
 Write-Output $TestConfig
@@ -152,7 +153,7 @@ $SdkTestResDir = Echo $SdkPathName\TestResults
 #
 & $VsTestPath\vstest.console.exe $TestDLL /Logger:trx 
 
-if ($TestConfig -eq 'True')
+if ([string]::IsNullOrEmpty($TestConfig))
 {
 	& $VsTestPath\vstest.console.exe $ConfigTestDLL /Logger:trx 
 }
