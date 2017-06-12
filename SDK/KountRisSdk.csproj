@@ -44,6 +44,7 @@
   <ItemGroup>
     <EmbeddedResource Include="kount.rsa.public.key" />
     <None Include="api\index.md" />
+    <None Include="App.config" />
     <None Include="articles\code_examples.md" />
     <None Include="articles\intro.md" />
     <None Include="articles\testHelper_class.md" />
