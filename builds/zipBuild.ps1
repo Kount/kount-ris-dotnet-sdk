@@ -158,7 +158,9 @@ if ([string]::IsNullOrEmpty($TestConfig))
 	& $VsTestPath\vstest.console.exe $ConfigTestDLL /Logger:trx 
 }
 else{
+	Write-Host "Config-dependent tests not passed successfully. Please, add required settings." -foregroundcolor "red"
 	$wshell = New-Object -ComObject Wscript.Shell
+    $wshell.Popup($TestConfig,0,"Config-dependent tests CHECK",0)
 }
 
 # Copy configuration-dependent test sorce project
