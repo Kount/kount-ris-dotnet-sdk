@@ -44,15 +44,15 @@ Function Read-TestConfig {
     $nodeUrl = Select-Xml "//appSettings[add/@key='Ris.Url']" $xml
 
 	if ($nodeMerchantId.Count -eq 0){
-		Write-Output "Ris.MerchantId is NOT set in App.Config to run confing-dependent tests. "
+		Write-Output "Ris.MerchantId is NOT set in App.Config to run config-dependent tests. "
 	}
 
 	if ($nodeSalt.Count -eq 0){
-		Write-Output "Ris.Khash.Salt is NOT set in App.Config to run confing-dependent tests. "
+		Write-Output "Ris.Khash.Salt is NOT set in App.Config to run config-dependent tests. "
 	}
 
 	if ($nodeUrl.Count -eq 0){
-		Write-Output "Ris.Url is NOT set in App.Config to run confing-dependent tests. "
+		Write-Output "Ris.Url is NOT set in App.Config to run config-dependent tests. "
 	}
 
     $return = ($nodeMerchantId.Count -eq 1) -and ($nodeSalt.Count -eq 1) -and ($nodeUrl.Count -eq 1)
