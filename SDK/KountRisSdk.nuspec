@@ -2,9 +2,9 @@
 <package >
   <metadata>
     <id>Kount.Net.RisSDK</id>
-    <version>6.5.0</version>
+    <version>6.5.1</version>
     <title>$title$</title>
-    <authors>$author$</authors>
+    <authors>Kount Inc.</authors>
     <owners>Kount Inc.</owners>
     <licenseUrl>https://github.com/Kount/kount-ris-dotnet-sdk/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/Kount/kount-ris-dotnet-sdk</projectUrl>

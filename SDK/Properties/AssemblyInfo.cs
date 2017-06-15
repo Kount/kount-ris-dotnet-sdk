@@ -12,9 +12,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Kount Ris SDK")]
 [assembly: AssemblyDescription(".NET version of the Kount RIS SDK")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Keynetics")]
+[assembly: AssemblyCompany("Kount Inc.")]
 [assembly: AssemblyProduct("Kount Ris SDK")]
-[assembly: AssemblyCopyright("Copyright © Keynetics 2008-2017")]
+[assembly: AssemblyCopyright("Copyright © Kount Inc. 2008-2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -35,5 +35,5 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("6.5.0.0")]
-[assembly: AssemblyFileVersion("6.5.0.0")]
+[assembly: AssemblyVersion("6.5.1.0")]
+[assembly: AssemblyFileVersion("6.5.1.0")]

@@ -44,15 +44,15 @@ Function Read-TestConfig {
     $nodeUrl = Select-Xml "//appSettings[add/@key='Ris.Url']" $xml
 
 	if ($nodeMerchantId.Count -eq 0){
-		Write-Output "Ris.MerchantId is NOT set in App.Config to run confing-dependent tests. "
+		Write-Output "Ris.MerchantId is NOT set in App.Config to run config-dependent tests. "
 	}
 
 	if ($nodeSalt.Count -eq 0){
-		Write-Output "Ris.Khash.Salt is NOT set in App.Config to run confing-dependent tests. "
+		Write-Output "Ris.Khash.Salt is NOT set in App.Config to run config-dependent tests. "
 	}
 
 	if ($nodeUrl.Count -eq 0){
-		Write-Output "Ris.Url is NOT set in App.Config to run confing-dependent tests. "
+		Write-Output "Ris.Url is NOT set in App.Config to run config-dependent tests. "
 	}
 
     $return = ($nodeMerchantId.Count -eq 1) -and ($nodeSalt.Count -eq 1) -and ($nodeUrl.Count -eq 1)
@@ -73,16 +73,16 @@ $parentProjectPath = Split-Path -parent $scriptPath
 # $VSPath = .\vswhere -legacy -latest -property installationPath
 
 if (!(Test-Path $MSBuildPath\msbuild.exe)) {
-	Write-Output "Cannot find MSBuild.exe"
-	Write-Output "Please set MSBuildPath with valid path to MSBuild."
+	Write-Host "Cannot find MSBuild.exe" -foregroundcolor "red"
+	Write-Host "Please, set MSBuildPath with valid path to MSBuild." -foregroundcolor "red"
 	$wshell = New-Object -ComObject Wscript.Shell
     $wshell.Popup("Please set MSBuildPath with valid path to MSBuild.",0,"MSBuild Path",0)
 	Exit
 }
 
 if (!(Test-Path $VsTestPath\vstest.console.exe)) {
-	Write-Output "Cannot find vstest.console.exe"
-	Write-Output "Please set VSPath with valid path to latest Visual Studio instalation."
+	Write-Host "Cannot find vstest.console.exe" -foregroundcolor "red"
+	Write-Host "Please, set VSPath with valid path to latest Visual Studio instalation." -foregroundcolor "red"
 	$wshell = New-Object -ComObject Wscript.Shell
     $wshell.Popup("Please set VSPath with valid path to latest Visual Studio instalation.",0,"Visual Studio instalation",0)
 	Exit
@@ -158,8 +158,9 @@ if ([string]::IsNullOrEmpty($TestConfig))
 	& $VsTestPath\vstest.console.exe $ConfigTestDLL /Logger:trx 
 }
 else{
+	Write-Host "Config-dependent tests not passed successfully. Please, add required settings." -foregroundcolor "red"
 	$wshell = New-Object -ComObject Wscript.Shell
-    $wshell.Popup($TestConfig,0,"Confing dependent tests CHECK",0)
+    $wshell.Popup($TestConfig,0,"Config-dependent tests CHECK",0)
 }
 
 # Copy configuration-dependent test sorce project
