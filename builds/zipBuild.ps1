@@ -39,23 +39,59 @@ Function Read-TestConfig {
 	$ConfigSourceTestPath = Echo $parentProjectPath\KountRisConfigTest
 	$ConfigFile = Echo $ConfigSourceTestPath\App.config
 	[xml]$xml = Get-Content $ConfigFile
-    $nodeMerchantId = Select-Xml "//appSettings[add/@key='Ris.MerchantId']" $xml
-    $nodeSalt = Select-Xml "//appSettings[add/@key='Ris.Khash.Salt']" $xml
-    $nodeUrl = Select-Xml "//appSettings[add/@key='Ris.Url']" $xml
-
-	if ($nodeMerchantId.Count -eq 0){
-		Write-Output "Ris.MerchantId is NOT set in App.Config to run config-dependent tests. "
+    #$nodeMerchantId = Select-Xml "//appSettings[add/@key='Ris.MerchantId']" $xml
+    #$nodeSalt = Select-Xml "//appSettings[add/@key='Ris.Khash.Salt']" $xml
+    #$nodeUrl = Select-Xml "//appSettings[add/@key='Ris.Url']" $xml
+    #$nodeApi = Select-Xml "//appSettings[add/@key='Ris.API.Key']" $xml
+	$midValue = ""
+	$saltValue = ""
+	$urlValue = ""
+	$apiValue = ""
+    
+	$addNodes = $xml.selectNodes("//appSettings/add")
+	foreach ($node in $addNodes) {
+		if ($node.key -eq 'Ris.MerchantId')
+		{
+			$midValue = Echo $node.value
+		}
+		if ($node.key -eq 'Ris.Khash.Salt')
+		{
+			$saltValue = Echo $node.value
+		}
+		if ($node.key -eq 'Ris.Url')
+		{
+			$urlValue = Echo $node.value
+		}
+		if ($node.key -eq 'Ris.API.Key')
+		{
+			$apiValue = Echo $node.value
+		}
 	}
 
-	if ($nodeSalt.Count -eq 0){
-		Write-Output "Ris.Khash.Salt is NOT set in App.Config to run config-dependent tests. "
+	if ([string]::IsNullOrEmpty($midValue)){
+		Write-Output "Ris.MerchantId is NOT set in App.Config to run config-dependent tests.`n"
+		Write-Host "Ris.MerchantId is NOT set in App.Config to run config-dependent tests. " -ForegroundColor Red
 	}
 
-	if ($nodeUrl.Count -eq 0){
-		Write-Output "Ris.Url is NOT set in App.Config to run config-dependent tests. "
+	if ([string]::IsNullOrEmpty($saltValue)){
+		Write-Output "Ris.Khash.Salt is NOT set in App.Config to run config-dependent tests.`n"
+		Write-Host "Ris.Khash.Salt is NOT set in App.Config to run config-dependent tests. " -ForegroundColor Red
 	}
 
-    $return = ($nodeMerchantId.Count -eq 1) -and ($nodeSalt.Count -eq 1) -and ($nodeUrl.Count -eq 1)
+	if ([string]::IsNullOrEmpty($urlValue)){
+		Write-Output "Ris.Url is NOT set in App.Config to run config-dependent tests.`n" 
+		Write-Host "Ris.Url is NOT set in App.Config to run config-dependent tests. " -ForegroundColor Red
+	}
+
+	if ([string]::IsNullOrEmpty($apiValue)){
+		Write-Output "Ris.API.Key is NOT set in App.Config to run config-dependent tests.`n" 
+		Write-Host "Ris.API.Key is NOT set in App.Config to run config-dependent tests. " -ForegroundColor Red
+	}
+
+    $return = (-not ([string]::IsNullOrEmpty($midValue))) `
+		 -and (-not ([string]::IsNullOrEmpty($saltValue))) `
+		 -and (-not ([string]::IsNullOrEmpty($urlValue))) `
+		 -and (-not ([string]::IsNullOrEmpty($apiValue)))
     return 
 }
 
@@ -73,8 +109,8 @@ $parentProjectPath = Split-Path -parent $scriptPath
 # $VSPath = .\vswhere -legacy -latest -property installationPath
 
 if (!(Test-Path $MSBuildPath\msbuild.exe)) {
-	Write-Host "Cannot find MSBuild.exe" -foregroundcolor "red"
-	Write-Host "Please, set MSBuildPath with valid path to MSBuild." -foregroundcolor "red"
+	Write-Host "Cannot find MSBuild.exe" -foregroundcolor Red
+	Write-Host "Please, set MSBuildPath with valid path to MSBuild." -Foregroundcolor Red
 	$wshell = New-Object -ComObject Wscript.Shell
     $wshell.Popup("Please set MSBuildPath with valid path to MSBuild.",0,"MSBuild Path",0)
 	Exit
