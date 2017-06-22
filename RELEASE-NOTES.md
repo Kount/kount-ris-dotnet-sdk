@@ -4,7 +4,7 @@ Version `6.5.1` changes
 
 1. More payment types are added: `Apple Pay, BPAY, Carte Bleue, ELV, Green Dot MoneyPak, GiroPay, Interac, Mercade Pago, Neteller, Single Euro Payments, Poli, Skrill/Moneybookers, Sofort, Token`. 
 2. Added new `enums` definitions: `InquiryTypes`, `UpdateTypes`
-3. [[Nuget package available for downloads.|https://www.nuget.org/packages/Kount.Net.RisSDK]]
+3. Nuget package available for downloads.
 4. Excluding development dependencies of `docfx.console` in `Nuget package`.
 
 Version `6.5.0` changes 
