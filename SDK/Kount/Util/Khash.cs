@@ -12,7 +12,7 @@ namespace Kount.Util
     /// <summary>
     /// Class for creating Kount RIS KHASH encoding payment tokens.<br/>
     /// <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-    /// <b>Version:</b> 6.5.0. <br/>
+    /// <b>Version:</b> 6.5.1. <br/>
     /// <b>Copyright:</b> 2011 Kount Inc. All Rights Reserved.<br/>
     /// </summary>
     public class Khash

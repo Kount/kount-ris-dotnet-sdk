@@ -15,7 +15,7 @@ namespace Kount.Ris
     /// <summary>
     /// Response immutable data object containing data from the RIS server.<br/>
     /// <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-    /// <b>Version:</b> 6.5.0. <br/>
+    /// <b>Version:</b> 6.5.1. <br/>
     /// <b>Copyright:</b> 2010 Keynetics Inc <br/>
     /// </summary>
     public class Response

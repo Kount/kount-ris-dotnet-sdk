@@ -13,7 +13,7 @@ namespace Kount.Ris
     /// Update class. A bunch of setters for sending transaction update <br/>
     /// data to a Kount RIS server.
     /// <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-    /// <b>Version:</b> 6.5.0. <br/>
+    /// <b>Version:</b> 6.5.1. <br/>
     /// <b>Copyright:</b> 2010 Keynetics Inc <br/>
     /// </summary>
     public class Update : Kount.Ris.Request

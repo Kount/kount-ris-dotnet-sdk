@@ -9,6 +9,9 @@ namespace Kount.Enums
 
     /// <summary>
     /// Extention Helper
+    /// <b>Author:</b> Kount <a>custserv@kount.com</a>,<br/>
+    /// <b>Version:</b> 6.5.1. <br/>
+    /// <b>Copyright:</b> 2017 Kount Inc <br/>
     /// </summary>
     public static class EnumHelper
     {

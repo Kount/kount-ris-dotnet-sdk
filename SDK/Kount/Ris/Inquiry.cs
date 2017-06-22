@@ -10,7 +10,7 @@ namespace Kount.Ris
     /// Inquiry class. A bunch of setters for sending initial transaction
     /// data to a Kount RIS server.<br/>
     /// <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-    /// <b>Version:</b> 6.5.0. <br/>
+    /// <b>Version:</b> 6.5.1. <br/>
     /// <b>Copyright:</b> 2010 Keynetics Inc <br/>
     /// </summary>
     public class Inquiry : Kount.Ris.Request
