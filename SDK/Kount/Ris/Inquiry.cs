@@ -25,7 +25,7 @@ namespace Kount.Ris
             this.SetMode(Enums.InquiryTypes.ModeQ);
             this.SetCurrency("USD");
             this.Data["SDK"] = ".NET";
-            this.SetSdkVersion("Sdk-Ris-Dotnet-0650-201705051458");
+            this.SetSdkVersion("Sdk-Ris-Dotnet-0651");
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Kount.Ris
             this.SetMode(Enums.InquiryTypes.ModeQ);
             this.SetCurrency("USD");
             this.Data["SDK"] = ".NET";
-            this.SetSdkVersion("Sdk-Ris-Dotnet-0650-201705051458");
+            this.SetSdkVersion("Sdk-Ris-Dotnet-0651");
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace Kount.Ris
 
         /// <summary>
         /// Set the current SDK version SDK_Type-RIS_VERSION-SDK_BUILD_DATETIMESTAMP.
-        /// e.g. Sdk-Ris-Dnet-0650-20170505T1458
+        /// e.g. Sdk-Ris-Dnet-0651-20170505T1458
         /// </summary>
         /// <param name="sdkVersion">Three character code e.g. USD.</param>
         public void SetSdkVersion(string sdkVersion)

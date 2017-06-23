@@ -7,4 +7,4 @@
 #>
 
 # call zipBuild with param version
-.\zipBuild.ps1 -SdkVersion 0650
+.\zipBuild.ps1 -SdkVersion 0651

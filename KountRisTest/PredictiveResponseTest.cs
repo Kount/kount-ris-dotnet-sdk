@@ -17,7 +17,7 @@ namespace KountRisTest
     /// but doesn't depend on a RuleSet being in a specific state.
     /// Developer can set credentials in <c>App.Config</c><br/>
     /// <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-    /// <b>Version:</b> 0650 <br/>
+    /// <b>Version:</b> 0651 <br/>
     /// <b>Copyright:</b> 2017 Kount Inc. All Rights Reserved.<br/>
     /// </summary>
     [TestClass]
