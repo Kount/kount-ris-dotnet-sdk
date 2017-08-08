@@ -1,3 +1,10 @@
+Version `6.5.2` 
+==========================
+ **08/08/2017**
+
+### Improvements
+* Remove parameters `CCYY`(*ExpirationYear*) and `CCMM`(*ExpirationMonth*) from the SDK.
+
 Version `6.5.1` 
 ==========================
  **06/12/2017**
