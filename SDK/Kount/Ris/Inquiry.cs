@@ -351,24 +351,6 @@ namespace Kount.Ris
         }
 
         /// <summary>
-        /// Optional expiration month on the credit card
-        /// </summary>
-        /// <param name="month">String MM signifying the month</param>
-        public void SetExpirationMonth(string month)
-        {
-            this.Data["CCMM"] = month;
-        }
-
-        /// <summary>
-        /// Optional expiration year on the credit card
-        /// </summary>
-        /// <param name="year">String YYYY signifying the year</param>
-        public void SetExpirationYear(string year)
-        {
-            this.Data["CCYY"] = year;
-        }
-
-        /// <summary>
         /// Set a shoppinng cart
         /// </summary>
         /// <param name="cart">ArrayList of Kount.Ris.CartItem objects</param>
@@ -384,5 +366,6 @@ namespace Kount.Ris
                 this.Data[$"PROD_PRICE[{i}]"] = item.ProductPrice;
             }
         }
+
     }
 }
