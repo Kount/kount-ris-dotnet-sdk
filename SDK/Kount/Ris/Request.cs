@@ -24,7 +24,7 @@ namespace Kount.Ris
     /// <summary>
     /// Abstract parent class for request objects.<br/>
     /// <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-    /// <b>Version:</b> 6.5.1. <br/>
+    /// <b>Version:</b> 7.0.0. <br/>
     /// <b>Copyright:</b> 2010 Keynetics Inc <br/>
     /// </summary>
     public abstract class Request
@@ -79,7 +79,7 @@ namespace Kount.Ris
         /// <param name="checkConfiguration">By default is true: will check config file if 
         /// `Ris.Url`, 
         /// `Ris.MerchantId`, 
-        /// `Ris.Khash.Salt` are set.</param>
+        /// `Ris.Config.Key` are set.</param>
         /// <exception cref="Kount.Ris.RequestException">Thrown when there is
         /// static data missing for a RIS request.</exception>
         protected Request(bool checkConfiguration = true)
@@ -91,7 +91,7 @@ namespace Kount.Ris
             {
                 this.CheckConfigurationParameter("Ris.MerchantId");
                 this.CheckConfigurationParameter("Ris.Url");
-                this.CheckConfigurationParameter("Ris.Khash.Salt");
+                this.CheckConfigurationParameter("Ris.Config.Key");
             }
             
             // timeout must be always defined
@@ -101,7 +101,7 @@ namespace Kount.Ris
             this.SetMerchantId(Int32.Parse(
                 ConfigurationManager.AppSettings["Ris.MerchantId"]));
 
-            Khash.Salt = ConfigurationManager.AppSettings["Ris.Khash.Salt"];
+            Khash.ConfigKey = ConfigurationManager.AppSettings["Ris.Config.Key"];
 
             var risVersion = String.IsNullOrEmpty(ConfigurationManager.AppSettings["Ris.Version"])
                         ? RisVersion

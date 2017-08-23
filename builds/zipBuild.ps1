@@ -30,7 +30,7 @@ $MSBuildPath = "C:\Program Files (x86)\MSBuild\14.0\Bin"
 
 
 #
-# Checks if Ris.MerchantId, Ris.Url, Ris.Khash.Salt are setted in App.config 
+# Checks if Ris.MerchantId, Ris.Url, Ris.Config.Key are setted in App.config 
 #
 Function Read-TestConfig {
 
@@ -40,7 +40,7 @@ Function Read-TestConfig {
 	$ConfigFile = Echo $ConfigSourceTestPath\App.config
 	[xml]$xml = Get-Content $ConfigFile
     #$nodeMerchantId = Select-Xml "//appSettings[add/@key='Ris.MerchantId']" $xml
-    #$nodeSalt = Select-Xml "//appSettings[add/@key='Ris.Khash.Salt']" $xml
+    #$nodeSalt = Select-Xml "//appSettings[add/@key='Ris.Config.Key']" $xml
     #$nodeUrl = Select-Xml "//appSettings[add/@key='Ris.Url']" $xml
     #$nodeApi = Select-Xml "//appSettings[add/@key='Ris.API.Key']" $xml
 	$midValue = ""
@@ -54,7 +54,7 @@ Function Read-TestConfig {
 		{
 			$midValue = Echo $node.value
 		}
-		if ($node.key -eq 'Ris.Khash.Salt')
+		if ($node.key -eq 'Ris.Config.Key')
 		{
 			$saltValue = Echo $node.value
 		}
@@ -74,8 +74,8 @@ Function Read-TestConfig {
 	}
 
 	if ([string]::IsNullOrEmpty($saltValue)){
-		Write-Output "Ris.Khash.Salt is NOT set in App.Config to run config-dependent tests.`n"
-		Write-Host "Ris.Khash.Salt is NOT set in App.Config to run config-dependent tests. " -ForegroundColor Red
+		Write-Output "Ris.Config.Key is NOT set in App.Config to run config-dependent tests.`n"
+		Write-Host "Ris.Config.Key is NOT set in App.Config to run config-dependent tests. " -ForegroundColor Red
 	}
 
 	if ([string]::IsNullOrEmpty($urlValue)){

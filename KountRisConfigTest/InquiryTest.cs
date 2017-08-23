@@ -18,7 +18,7 @@ namespace KountRisConfigTest
     /// Inquiry Test samples
     /// <b>MerchantId:</b> 999666
     /// <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-    /// <b>Version:</b> 0651 <br/>
+    /// <b>Version:</b> 0700 <br/>
     /// <b>Copyright:</b> 2017 Kount Inc. All Rights Reserved<br/>
     /// </summary>
     [TestClass]

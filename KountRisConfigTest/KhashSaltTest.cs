@@ -7,7 +7,7 @@
     /// Khash Salt Test samples
     /// <b>MerchantId:</b> 999666
     /// <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-    /// <b>Version:</b> 0651 <br/>
+    /// <b>Version:</b> 0700 <br/>
     /// <b>Copyright:</b> 2017 Kount Inc. All Rights Reserved<br/>
     /// </summary>
     [TestClass]
@@ -139,22 +139,5 @@
             Assert.IsTrue("666666FEXQI1QS6TH2O5".Equals(hashCardNum), $"Wrong result: {hashCardNum}. Expected KHASH 666666FEXQI1QS6TH2O5.");
         }
 
-        /// <summary>
-        /// <b>TEST 7</b>
-        /// raw input SALT,
-        /// expected NDA3N3RoIGhhd2tleWUgdHJhcHBlciByYWRhciBzZWN0aW9uLTg=
-        /// </summary>
-        [TestMethod]
-        public void TestSaltAgainstBase64()
-        {
-            string _sid = null;
-            string _orderNum = null;
-
-            Inquiry inquiry = TestHelper.CreateInquiry(CARD_NUM_1, out _sid, out _orderNum);
-
-            var salt64 = Kount.Util.Khash.GetBase64Salt();
-
-            Assert.IsTrue("NDA3N3RoIGhhd2tleWUgdHJhcHBlciByYWRhciBzZWN0aW9uLTg=".Equals(salt64), $"Wrong result: {salt64}. Expected NDA3N3RoIGhhd2tleWUgdHJhcHBlciByYWRhciBzZWN0aW9uLTg=.");
-        }
     }
 }

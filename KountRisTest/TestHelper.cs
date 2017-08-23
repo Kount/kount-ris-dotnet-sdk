@@ -221,7 +221,7 @@ namespace KountRisTest
         /// Create inquiry with default settings, without to check config file if 
         /// `Ris.Url`, 
         /// `Ris.MerchantId`, 
-        /// `Ris.Khash.Salt` are set.
+        /// `Ris.Config.Key` are set.
         /// </summary>
         /// <param name="sid">session id</param>
         /// <param name="orderNum">order number</param>

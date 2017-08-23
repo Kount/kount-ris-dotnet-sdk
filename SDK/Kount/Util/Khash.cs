@@ -12,15 +12,28 @@ namespace Kount.Util
     /// <summary>
     /// Class for creating Kount RIS KHASH encoding payment tokens.<br/>
     /// <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-    /// <b>Version:</b> 6.5.1. <br/>
+    /// <b>Version:</b> 7.0.0. <br/>
     /// <b>Copyright:</b> 2011 Kount Inc. All Rights Reserved.<br/>
     /// </summary>
     public class Khash
     {
+        private static string _configKey;
+        private static string _configKeyDecoded;
         /// <summary>
         /// Getting or Setting Secret Phrase used in hashing method
         /// </summary>
-        public static string Salt { get; set; }
+        public static string ConfigKey
+        {
+            get { return _configKey; }
+            set
+            {
+                _configKey = value;
+                if (!String.IsNullOrEmpty(_configKey))
+                {
+                    _configKeyDecoded = GetBase85ConfigKey();
+                }
+            }
+        }
 
         /// <summary>
         /// Create a Kount hash of a provided payment token. Payment tokens
@@ -66,7 +79,7 @@ namespace Kount.Util
             var enc = new UTF8Encoding();
             using (SHA1 sha = new SHA1CryptoServiceProvider())
             {
-                byte[] computeHash = sha.ComputeHash(enc.GetBytes(plainText + "." + Salt));
+                byte[] computeHash = sha.ComputeHash(enc.GetBytes(plainText + "." + _configKeyDecoded));
                 string r = BitConverter.ToString(computeHash).Replace("-", "");
 
                 for (int i = 0; i < loopMax; i += 2)
@@ -81,12 +94,17 @@ namespace Kount.Util
             return mashed;
         }
 
-        public static string GetBase64Salt()
+        /// <summary>
+        /// Get Base85 encoded ConfigKey
+        /// </summary>
+        /// <returns>encoded config key</returns>
+        public static string GetBase85ConfigKey()
         {
-            string str2 = Salt.Trim();
+            string str2 = _configKey.Trim();
             try
             {
-                str2 = Convert.ToBase64String(Encoding.UTF8.GetBytes(str2));
+                var ba = Encoding.UTF8.GetBytes(str2);
+                str2 = Base85.Encode(ba);
             }
             catch (Exception e)
             {

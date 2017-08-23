@@ -10,7 +10,7 @@ namespace Kount.Log.Factory
     /// <summary>
     /// A NOP logger binding class.<br/>
     /// <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-    /// <b>Version:</b> 6.5.1. <br/>
+    /// <b>Version:</b> 7.0.0. <br/>
     /// <b>Copyright:</b> 2010 Keynetics Inc <br/>
     /// </summary>
     public class NopLoggerFactory : ILoggerFactory
