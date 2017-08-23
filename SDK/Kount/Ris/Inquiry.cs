@@ -25,7 +25,7 @@ namespace Kount.Ris
             this.SetMode(Enums.InquiryTypes.ModeQ);
             this.SetCurrency("USD");
             this.Data["SDK"] = ".NET";
-            this.SetSdkVersion("Sdk-Ris-Dotnet-0651");
+            this.SetSdkVersion("Sdk-Ris-Dotnet-0700");
         }
 
         /// <summary>

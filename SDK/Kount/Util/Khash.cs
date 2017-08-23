@@ -17,23 +17,10 @@ namespace Kount.Util
     /// </summary>
     public class Khash
     {
-        private static string _configKey;
-        private static string _configKeyDecoded;
         /// <summary>
         /// Getting or Setting Secret Phrase used in hashing method
         /// </summary>
-        public static string ConfigKey
-        {
-            get { return _configKey; }
-            set
-            {
-                _configKey = value;
-                if (!String.IsNullOrEmpty(_configKey))
-                {
-                    _configKeyDecoded = GetBase85ConfigKey();
-                }
-            }
-        }
+        public static string ConfigKey { get; set; }
 
         /// <summary>
         /// Create a Kount hash of a provided payment token. Payment tokens
@@ -77,9 +64,10 @@ namespace Kount.Util
             string mashed = "";
 
             var enc = new UTF8Encoding();
+
             using (SHA1 sha = new SHA1CryptoServiceProvider())
             {
-                byte[] computeHash = sha.ComputeHash(enc.GetBytes(plainText + "." + _configKeyDecoded));
+                byte[] computeHash = sha.ComputeHash(enc.GetBytes(plainText + "." + ConfigKey));
                 string r = BitConverter.ToString(computeHash).Replace("-", "");
 
                 for (int i = 0; i < loopMax; i += 2)
@@ -98,9 +86,19 @@ namespace Kount.Util
         /// Get Base85 encoded ConfigKey
         /// </summary>
         /// <returns>encoded config key</returns>
-        public static string GetBase85ConfigKey()
+        public static string GetBase85ConfigKey(string key)
         {
-            string decoded = _configKey.Trim();
+            if (!String.IsNullOrEmpty(ConfigKey))
+            {
+                return ConfigKey;
+            }
+
+            if (String.IsNullOrEmpty(key))
+            {
+                return String.Empty;
+            }
+
+            string decoded = key;
             try
             {
                 decoded = Encoding.UTF8.GetString(Base85.Decode(decoded));
@@ -111,6 +109,5 @@ namespace Kount.Util
             }
             return decoded;
         }
-
     }
 }

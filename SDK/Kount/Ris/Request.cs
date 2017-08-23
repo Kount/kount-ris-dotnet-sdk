@@ -101,7 +101,7 @@ namespace Kount.Ris
             this.SetMerchantId(Int32.Parse(
                 ConfigurationManager.AppSettings["Ris.MerchantId"]));
 
-            Khash.ConfigKey = ConfigurationManager.AppSettings["Ris.Config.Key"];
+            Khash.ConfigKey = Khash.GetBase85ConfigKey(ConfigurationManager.AppSettings["Ris.Config.Key"]);
 
             var risVersion = String.IsNullOrEmpty(ConfigurationManager.AppSettings["Ris.Version"])
                         ? RisVersion
