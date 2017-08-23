@@ -100,17 +100,16 @@ namespace Kount.Util
         /// <returns>encoded config key</returns>
         public static string GetBase85ConfigKey()
         {
-            string str2 = _configKey.Trim();
+            string decoded = _configKey.Trim();
             try
             {
-                var ba = Encoding.UTF8.GetBytes(str2);
-                str2 = Base85.Encode(ba);
+                decoded = Encoding.UTF8.GetString(Base85.Decode(decoded));
             }
             catch (Exception e)
             {
                 throw new Ris.RequestException(e.Message);
             }
-            return str2;
+            return decoded;
         }
 
     }
