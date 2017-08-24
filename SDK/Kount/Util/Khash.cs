@@ -12,7 +12,7 @@ namespace Kount.Util
     /// <summary>
     /// Class for creating Kount RIS KHASH encoding payment tokens.<br/>
     /// <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-    /// <b>Version:</b> 6.5.1. <br/>
+    /// <b>Version:</b> 7.0.0. <br/>
     /// <b>Copyright:</b> 2011 Kount Inc. All Rights Reserved.<br/>
     /// </summary>
     public class Khash
@@ -20,7 +20,7 @@ namespace Kount.Util
         /// <summary>
         /// Getting or Setting Secret Phrase used in hashing method
         /// </summary>
-        public static string Salt { get; set; }
+        public static string ConfigKey { get; set; }
 
         /// <summary>
         /// Create a Kount hash of a provided payment token. Payment tokens
@@ -64,9 +64,10 @@ namespace Kount.Util
             string mashed = "";
 
             var enc = new UTF8Encoding();
+
             using (SHA1 sha = new SHA1CryptoServiceProvider())
             {
-                byte[] computeHash = sha.ComputeHash(enc.GetBytes(plainText + "." + Salt));
+                byte[] computeHash = sha.ComputeHash(enc.GetBytes(plainText + "." + ConfigKey));
                 string r = BitConverter.ToString(computeHash).Replace("-", "");
 
                 for (int i = 0; i < loopMax; i += 2)
@@ -81,19 +82,32 @@ namespace Kount.Util
             return mashed;
         }
 
-        public static string GetBase64Salt()
+        /// <summary>
+        /// Get Base85 encoded ConfigKey
+        /// </summary>
+        /// <returns>encoded config key</returns>
+        public static string GetBase85ConfigKey(string key)
         {
-            string str2 = Salt.Trim();
+            if (!String.IsNullOrEmpty(ConfigKey))
+            {
+                return ConfigKey;
+            }
+
+            if (String.IsNullOrEmpty(key))
+            {
+                return String.Empty;
+            }
+
+            string decoded = key;
             try
             {
-                str2 = Convert.ToBase64String(Encoding.UTF8.GetBytes(str2));
+                decoded = Encoding.UTF8.GetString(Base85.Decode(decoded));
             }
             catch (Exception e)
             {
                 throw new Ris.RequestException(e.Message);
             }
-            return str2;
+            return decoded;
         }
-
     }
 }

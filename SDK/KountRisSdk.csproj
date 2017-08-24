@@ -81,6 +81,7 @@
     <Compile Include="Kount\Ris\ValidationError.cs" />
     <Compile Include="Kount\Ris\ValidationException.cs" />
     <Compile Include="Kount\SimpleLogger\File.cs" />
+    <Compile Include="Kount\Util\Base85.cs" />
     <Compile Include="Kount\Util\Khash.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

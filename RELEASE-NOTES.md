@@ -1,3 +1,11 @@
+Version `7.0.0` 
+==========================
+ **mm/dd/2017**
+
+### Improvements
+* Introducing configuration key
+* Removed the SALT phrase
+
 Version `6.5.2` 
 ==========================
  **08/08/2017**

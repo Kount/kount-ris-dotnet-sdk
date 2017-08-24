@@ -8,7 +8,7 @@ namespace Kount.Enums
     /// <summary>
     /// Inquiry type should be used for initial registration of the purchase in the Kount system.<br/>
     /// <b>Author:</b> Kount <a>custserv@kount.com</a>,<br/>
-    /// <b>Version:</b> 6.5.1. <br/>
+    /// <b>Version:</b> 7.0.0. <br/>
     /// <b>Copyright:</b> 2017 Kount Inc <br/>
     /// </summary>
     public enum InquiryTypes  
