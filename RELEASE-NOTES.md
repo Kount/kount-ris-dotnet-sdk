@@ -1,6 +1,6 @@
 Version `7.0.0` 
 ==========================
- **mm/dd/2017**
+ **09/12/2017**
 
 ### Improvements
 * Introducing configuration key
