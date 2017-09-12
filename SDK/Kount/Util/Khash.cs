@@ -18,7 +18,7 @@ namespace Kount.Util
     public class Khash
     {
         /// <summary>
-        /// Getting or Setting Secret Phrase used in hashing method
+        /// Getting or Setting Config Key used in hashing method
         /// </summary>
         public static string ConfigKey { get; set; }
 
