@@ -179,7 +179,7 @@ namespace Kount.Ris
                 this.logger.Debug("[" + param.Key + "]=" + value);
             }
 
-            post.TrimEnd('&');
+            post = post.TrimEnd('&');
             byte[] buffer = Encoding.ASCII.GetBytes(post);
 
             // Set up the request object
