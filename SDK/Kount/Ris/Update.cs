@@ -60,6 +60,22 @@ namespace Kount.Ris
         }
 
         /// <summary>
+        /// Constructor. Sets the mode to 'U' by default.
+        /// Use setMode(char) to change it.
+        /// </summary>
+        /// <param name="checkConfiguration">If is true: will check config file if 
+        /// `Ris.Url`, 
+        /// `Ris.MerchantId`, 
+        /// `Ris.Config.Key` and `Ris.Connect.Timeout` are set.</param>
+        /// <param name="configuration">Configuration class with raw values</param>
+        public Update(bool checkConfiguration, Configuration configuration) : base(checkConfiguration, configuration)
+        {
+            ILoggerFactory factory = LogFactory.GetLoggerFactory();
+            this.logger = factory.GetLogger(typeof(Update).ToString());
+            this.SetMode(Enums.UpdateTypes.ModeU);
+        }
+
+        /// <summary>
         /// Set the mode of the update.
         /// </summary>
         /// <param name="mode">Set U or X</param>

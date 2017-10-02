@@ -82,11 +82,10 @@ namespace Kount.Ris
         /// `Ris.Config.Key` are set.</param>
         /// <exception cref="Kount.Ris.RequestException">Thrown when there is
         /// static data missing for a RIS request.</exception>
-        protected Request(bool checkConfiguration = true)
+        protected Request(bool checkConfiguration, Configuration configuration)
         {
             ILoggerFactory factory = LogFactory.GetLoggerFactory();
             this.logger = factory.GetLogger(typeof(Request).ToString());
-            Configuration configuration = Configuration.FromAppSettings();
 
             if (checkConfiguration)
             {
@@ -126,6 +125,19 @@ namespace Kount.Ris
 
             // KHASH payment encoding is set by default.
             this.SetKhashPaymentEncoding(true);
+        }
+
+        /// <summary>
+        /// Construct a request object. Set the static setting from the web.config file.
+        /// </summary>
+        /// <param name="checkConfiguration">By default is true: will check config file if 
+        /// `Ris.Url`, 
+        /// `Ris.MerchantId`, 
+        /// `Ris.Config.Key` are set.</param>
+        /// <exception cref="Kount.Ris.RequestException">Thrown when there is
+        /// static data missing for a RIS request.</exception>
+        protected Request(bool checkConfiguration = true) : this(checkConfiguration, Configuration.FromAppSettings())
+        {
         }
 
         /// <summary>
@@ -694,7 +706,7 @@ namespace Kount.Ris
         /// <param name="parameter">Parameter name</param>
         /// <exception cref="Kount.Ris.RequestException">Thrown when parameter
         /// is missing</exception>
-        protected void CheckConfigurationParameter(string parameter, string value)
+        protected void CheckConfigurationParameter(string value, string parameter)
         {
             if (null == value)
             {
