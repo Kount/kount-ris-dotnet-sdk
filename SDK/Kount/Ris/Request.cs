@@ -236,13 +236,20 @@ namespace Kount.Ris
             catch (WebException ex)
             {
                 string error = String.Empty;
-                if (ex.Response == null)
+                if (ex.Status == WebExceptionStatus.Timeout)
                 {
-                    error = $"Unable to contact server {this.url}.";
+                    error = $"TIMEOUT = {webReq.Timeout}.";
                 }
                 else
                 {
-                    error = this.GetWebError(ex.Response);
+                    if (ex.Response == null)
+                    {
+                        error = $"Unable to contact server {this.url}. WebEXCEPTION Status = {ex.Status}.";
+                    }
+                    else
+                    {
+                        error = this.GetWebError(ex.Response);
+                    }
                 }
                 this.logger.Debug("ERROR - The following web error occurred: " + error);
                 throw new Kount.Ris.RequestException(error);
@@ -989,6 +996,10 @@ namespace Kount.Ris
 
                     case HttpStatusCode.InternalServerError://500
                         error = "Unable to log in. There was an error logging in.(500)";
+                        break;
+
+                    case HttpStatusCode.NotImplemented://501 
+                        error = "Unable to log in. Unauthorized request(using certificate).(501)";
                         break;
 
                     case HttpStatusCode.NotFound://404
