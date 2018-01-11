@@ -172,10 +172,16 @@ namespace Kount.Ris
             string post = "";
             foreach (DictionaryEntry param in this.Data)
             {
+                string value = (param.Value != null) ? param.Value.ToString() : string.Empty;
+
                 post = post + HttpUtility.UrlEncode(param.Key.ToString()) +
-                    "=" + HttpUtility.UrlEncode(param.Value.ToString()) + "&";
-                string value = param.Key.ToString().Equals("PTOK") ?
-                    "payment token hidden" : param.Value.ToString();
+                    "=" + HttpUtility.UrlEncode(value) + "&";
+
+                if (param.Key.ToString().Equals("PTOK"))
+                {
+                    value = "payment token hidden";
+                };
+
                 this.logger.Debug("[" + param.Key + "]=" + value);
             }
 
