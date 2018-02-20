@@ -80,6 +80,7 @@ namespace Kount.Ris
         /// `Ris.Url`, 
         /// `Ris.MerchantId`, 
         /// `Ris.Config.Key` are set.</param>
+        /// <param name="configuration">Instance of configuration.</param>
         /// <exception cref="Kount.Ris.RequestException">Thrown when there is
         /// static data missing for a RIS request.</exception>
         protected Request(bool checkConfiguration, Configuration configuration)
