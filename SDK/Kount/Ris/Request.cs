@@ -82,51 +82,62 @@ namespace Kount.Ris
         /// `Ris.Config.Key` are set.</param>
         /// <exception cref="Kount.Ris.RequestException">Thrown when there is
         /// static data missing for a RIS request.</exception>
-        protected Request(bool checkConfiguration = true)
+        protected Request(bool checkConfiguration, Configuration configuration)
         {
             ILoggerFactory factory = LogFactory.GetLoggerFactory();
             this.logger = factory.GetLogger(typeof(Request).ToString());
 
             if (checkConfiguration)
             {
-                this.CheckConfigurationParameter("Ris.MerchantId");
-                this.CheckConfigurationParameter("Ris.Url");
-                this.CheckConfigurationParameter("Ris.Config.Key");
+                this.CheckConfigurationParameter(configuration.MerchantId, nameof(configuration.MerchantId));
+                this.CheckConfigurationParameter(configuration.URL, nameof(configuration.URL));
+                this.CheckConfigurationParameter(configuration.ConfigKey, nameof(configuration.ConfigKey));
             }
             
             // timeout must be always defined
-            this.CheckConfigurationParameter("Ris.Connect.Timeout");
+            this.CheckConfigurationParameter(configuration.ConnectTimeout, nameof(configuration.ConnectTimeout));
 
             this.data = new System.Collections.Hashtable();
-            this.SetMerchantId(Int32.Parse(
-                ConfigurationManager.AppSettings["Ris.MerchantId"]));
+            this.SetMerchantId(Int32.Parse(configuration.MerchantId));
 
-            Khash.ConfigKey = Khash.GetBase85ConfigKey(ConfigurationManager.AppSettings["Ris.Config.Key"]);
+            Khash.ConfigKey = Khash.GetBase85ConfigKey(configuration.ConfigKey);
 
-            var risVersion = String.IsNullOrEmpty(ConfigurationManager.AppSettings["Ris.Version"])
+            var risVersion = String.IsNullOrEmpty(configuration.Version)
                         ? RisVersion
-                        : ConfigurationManager.AppSettings["Ris.Version"];
+                        : configuration.Version;
 
             this.SetVersion(risVersion);
-            this.SetUrl(ConfigurationManager.AppSettings["Ris.Url"]);
-            this.connectTimeout = Int32.Parse(
-                ConfigurationManager.AppSettings["Ris.Connect.Timeout"]);
+            this.SetUrl(configuration.URL);
+            this.connectTimeout = Int32.Parse(configuration.ConnectTimeout);
 
-            if (!String.IsNullOrEmpty(ConfigurationManager.AppSettings["Ris.API.Key"]))
+            if (!String.IsNullOrEmpty(configuration.ApiKey))
             {
-                this.SetApiKey(ConfigurationManager.AppSettings["Ris.API.Key"]);
+                this.SetApiKey(configuration.ApiKey);
             }
             else
             {
-                this.CheckConfigurationParameter("Ris.CertificateFile");
-                this.CheckConfigurationParameter("Ris.PrivateKeyPassword");
+                this.CheckConfigurationParameter(configuration.CertificateFile, nameof(configuration.CertificateFile));
+                this.CheckConfigurationParameter(configuration.PrivateKeyPassword, nameof(configuration.PrivateKeyPassword));
                 this.SetCertificate(
-                    ConfigurationManager.AppSettings["Ris.CertificateFile"],
-                    ConfigurationManager.AppSettings["Ris.PrivateKeyPassword"]);
+                    configuration.CertificateFile,
+                    configuration.PrivateKeyPassword);
             }
 
             // KHASH payment encoding is set by default.
             this.SetKhashPaymentEncoding(true);
+        }
+
+        /// <summary>
+        /// Construct a request object. Set the static setting from the web.config file.
+        /// </summary>
+        /// <param name="checkConfiguration">By default is true: will check config file if 
+        /// `Ris.Url`, 
+        /// `Ris.MerchantId`, 
+        /// `Ris.Config.Key` are set.</param>
+        /// <exception cref="Kount.Ris.RequestException">Thrown when there is
+        /// static data missing for a RIS request.</exception>
+        protected Request(bool checkConfiguration = true) : this(checkConfiguration, Configuration.FromAppSettings())
+        {
         }
 
         /// <summary>
@@ -708,9 +719,9 @@ namespace Kount.Ris
         /// <param name="parameter">Parameter name</param>
         /// <exception cref="Kount.Ris.RequestException">Thrown when parameter
         /// is missing</exception>
-        protected void CheckConfigurationParameter(string parameter)
+        protected void CheckConfigurationParameter(string value, string parameter)
         {
-            if (null == ConfigurationManager.AppSettings[parameter])
+            if (null == value)
             {
                 this.logger.Error($"Configuration parameter [{parameter}] not defined.");
                 throw new Kount.Ris.RequestException(

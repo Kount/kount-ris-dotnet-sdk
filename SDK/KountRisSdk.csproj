@@ -70,6 +70,7 @@
     <Compile Include="Kount\Log\Factory\NopLoggerFactory.cs" />
     <Compile Include="Kount\Log\Factory\SimpleLoggerFactory.cs" />
     <Compile Include="Kount\Ris\CartItem.cs" />
+    <Compile Include="Kount\Ris\Configuration.cs" />
     <Compile Include="Kount\Ris\IllegalArgumentException.cs" />
     <Compile Include="Kount\Ris\Inquiry.cs" />
     <Compile Include="Kount\Ris\KcEvent.cs" />

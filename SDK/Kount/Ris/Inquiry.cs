@@ -46,6 +46,24 @@ namespace Kount.Ris
         }
 
         /// <summary>
+        /// Constructor. Sets the mode to 'Q', the currency to 'USD' and sets
+        /// the SDK identifier value. Use SetMode(char) and SetCurrency(string)
+        /// to change the RIS mode and currency respectively.
+        /// </summary>
+        /// <param name="checkConfiguration">If is true: will check config file if 
+        /// `Ris.Url`, 
+        /// `Ris.MerchantId`, 
+        /// `Ris.Config.Key` and `Ris.Connect.Timeout` are set.</param>
+        /// <param name="configuration">Configuration class with raw values</param>
+        public Inquiry(bool checkConfiguration, Configuration configuration) : base(checkConfiguration, configuration)
+        {
+            this.SetMode(Enums.InquiryTypes.ModeQ);
+            this.SetCurrency("USD");
+            this.Data["SDK"] = ".NET";
+            this.SetSdkVersion("Sdk-Ris-Dotnet-0700");
+        }
+
+        /// <summary>
         /// Set the mode of the inquiry.
         /// </summary>
         /// <param name="mode">Set mode Q or P</param>
