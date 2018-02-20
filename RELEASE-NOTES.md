@@ -1,3 +1,10 @@
+Version `7.0.2` 
+==========================
+ **02/20/2018**
+
+### Improvements
+* New feature, added configuration class. Allow setting of the Configuration when creating Inquiry and Update.
+
 Version `7.0.1` 
 ==========================
  **01/11/2018**
