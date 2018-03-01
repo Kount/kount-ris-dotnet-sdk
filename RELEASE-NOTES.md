@@ -79,8 +79,7 @@ Version `6.3.0`
 ### New Features
 * Added support for API key authentication. Client certificate validation is still supported,
     but is now deprecated. Set `Ris.API.Key` in your `app.config` file for this to work.
-* `EPTOK` new field gets auto-populated when setting a credit card payment. Kount only saves this
-    if the merchant has certain 3rd party call-outs enabled.
+* DEPRECATED: EPTOK IS NO LONGER AVAILABLE 
 
 Version `6.0.0` 
 ==========================
