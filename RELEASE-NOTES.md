@@ -1,3 +1,10 @@
+Version `7.0.3` 
+==========================
+ **06/29/2018**
+
+### Improvements
+* Added IPv6 support for validations..
+
 Version `7.0.2` 
 ==========================
  **02/20/2018**
