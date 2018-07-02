@@ -5,7 +5,7 @@ Kount .NET SDK
 ### What is this repository for? ###
 
 * Contains sources, tests, and resources for the Kount .NET SDK
-* SDK Version: `7.0.2` 
+* SDK Version: `7.1.0` 
    
 ### How do I get set up? ###
 
