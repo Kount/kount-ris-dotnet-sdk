@@ -652,6 +652,24 @@ public void ModeP()
 
 ```
 
+### 12. Create Inquiry object without need of app.config settings
+
+```cs
+public void CreateInquiryWithoutNeedOfAppConfigSettings()
+{
+    Configuration configuration = new Configuration();
+    configuration.MerchantId = "1234567";
+    configuration.ApiKey = "api_key_str";
+    configuration.URL = "url_str";
+    configuration.ConnectTimeout = "10000";
+    Inquiry inquiry = new Inquiry(false, configuration);
+            
+    Assert.IsTrue(inquiry.GetParam("MERC") == configuration.MerchantId, "MerchantId is not set correct.");
+    Assert.IsTrue(inquiry.GetUrl() == configuration.URL, "URL is not set correct.");
+}
+
+```
+
 Predictive Response Tests
 -------------------------
 
