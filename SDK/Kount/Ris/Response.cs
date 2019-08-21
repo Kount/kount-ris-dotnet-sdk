@@ -174,6 +174,17 @@ namespace Kount.Ris
         {
             return (string)this.response["SCOR"];
         }
+		
+		
+		/// <summary>
+        /// Get the Kount Omniscore.
+        /// </summary>
+        /// <returns>1 to 99.9. The highter the score, the less risk.</returns>
+        public String getOmniscore()
+        {
+            return (string)response["OMNISCORE"];
+        }
+		
 
         /// <summary>
         /// Get the geo location of the client
