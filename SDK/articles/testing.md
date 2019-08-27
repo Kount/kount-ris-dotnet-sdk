@@ -509,7 +509,7 @@ public void ModeUAfterModeQ()
     // create Update
     Update update = new Update();
     update.SetMode('U');
-    update.SetVersion("0695");
+    update.SetVersion("0700");
     update.SetSessionId(sessID);
     update.SetTransactionId(tranID);
     update.SetOrderNumber(ordNum);
@@ -579,7 +579,7 @@ public void ModeXAfterModeQ()
     // create update
     Update update = new Update();
     update.SetMode('X');
-    update.SetVersion("0695");
+    update.SetVersion("0700");
 
     update.SetSessionId(sessID);
     update.SetTransactionId(tranID);

@@ -35,7 +35,7 @@ namespace Kount.Ris
         /// <summary>
         /// The RIS version
         /// </summary>
-        private const string RisVersion = "0695";
+        private const string RisVersion = "0700";
 
         /// <summary>
         /// The Logger to use.

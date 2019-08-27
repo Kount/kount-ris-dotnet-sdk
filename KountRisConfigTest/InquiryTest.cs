@@ -418,7 +418,7 @@ namespace KountRisConfigTest
             // create Update
             Update update = new Update();
             update.SetMode(UpdateTypes.ModeU);
-            update.SetVersion("0695");
+            update.SetVersion("0700");
             update.SetSessionId(sessID);
             update.SetTransactionId(tranID);
             update.SetOrderNumber(ordNum);
@@ -485,7 +485,7 @@ namespace KountRisConfigTest
             // create update
             Update update = new Update();
             update.SetMode(UpdateTypes.ModeX);
-            update.SetVersion("0695");
+            update.SetVersion("0700");
 
             update.SetSessionId(sessID);
             update.SetTransactionId(tranID);
