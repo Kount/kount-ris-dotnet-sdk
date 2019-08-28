@@ -417,7 +417,7 @@ namespace KountRisTest
 
             Update update = new Update(false);
             update.SetMode(UpdateTypes.ModeU);
-            update.SetVersion("0695");
+            update.SetVersion("0700");
             update.SetMerchantId(TestHelper.TEST_MERCHANT_ID);
             update.SetApiKey(TestHelper.TEST_API_KEY);
             update.SetSessionId(sessID);
@@ -479,7 +479,7 @@ namespace KountRisTest
             var ordNum = response.GetOrderNumber();
             Update update = new Update(false);
             update.SetMode(UpdateTypes.ModeX);
-            update.SetVersion("0695");
+            update.SetVersion("0700");
 
             update.SetMerchantId(TestHelper.TEST_MERCHANT_ID);
             update.SetApiKey(TestHelper.TEST_API_KEY);

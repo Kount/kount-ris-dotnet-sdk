@@ -35,7 +35,7 @@ namespace KountRisTest
         [TestMethod]
         public void FromAppSettings_assigns_Version()
         {
-            Assert.AreEqual(SUT.Version, "0695");
+            Assert.AreEqual(SUT.Version, "0700");
         }
 
         [TestMethod]

@@ -422,7 +422,7 @@ namespace KountRisTest
             // create Update
             Update update = new Update(false);
             update.SetMode(UpdateTypes.ModeU);
-            update.SetVersion("0695");
+            update.SetVersion("0700");
             update.SetMerchantId(TestHelper.TEST_MERCHANT_ID);
             update.SetApiKey(TestHelper.TEST_API_KEY);
             update.SetSessionId(sessID);
@@ -491,7 +491,7 @@ namespace KountRisTest
             // create update without check in config
             Update update = new Update(false);
             update.SetMode(UpdateTypes.ModeX);
-            update.SetVersion("0695");
+            update.SetVersion("0700");
 
             update.SetMerchantId(TestHelper.TEST_MERCHANT_ID);
             update.SetApiKey(TestHelper.TEST_API_KEY);
