@@ -3,6 +3,8 @@
 //     Copyright Keynetics. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
+using System.Net;
+
 namespace Kount.Ris
 {
 
@@ -135,7 +137,16 @@ namespace Kount.Ris
         /// <param name="address">IP address of the client.</param>
         public void SetIpAddress(string address)
         {
-            this.Data["IPAD"] = this.SafeGet(address);
+            IPAddress IP;
+            bool flag = IPAddress.TryParse(address, out IP);
+            if (flag && IP.AddressFamily.ToString() == "InterNetworkV6")
+            {
+                this.Data["IPAD"] = "10.0.0.1";
+            }
+            else
+            {
+                this.Data["IPAD"] = this.SafeGet(address);
+            }
         }
 
         /// <summary>
