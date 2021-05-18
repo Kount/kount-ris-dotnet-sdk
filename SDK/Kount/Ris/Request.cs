@@ -588,6 +588,24 @@ namespace Kount.Ris
         {
             this.url = url;
         }
+        
+        /// <summary>
+        /// Get the Connect Timeout.
+        /// </summary>
+        /// <returns>Connect Timeout</returns>
+        public int GetConnectTimeOut()
+        {
+            return this.connectTimeout;
+        }
+
+        /// <summary>
+        /// Set the Connect Timeout .
+        /// </summary>
+        /// <param name="connectTimeout">Connect Timeout.</param>
+        public void SetConnectTimeOut(int connectTimeout)
+        {
+            this.connectTimeout = connectTimeout;
+        }
 
         /// <summary>
         /// Set the RIS certificate information.
