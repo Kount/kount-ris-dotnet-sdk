@@ -1,6 +1,6 @@
 # README #
 
-Kount .NET Standard SDK
+Kount .NET SDK
 
 ### What is this repository for? ###
 
@@ -9,13 +9,14 @@ Kount .NET Standard SDK
    
 ### How do I get set up? ###
 
-* [Configuration](https://github.com/Kount/kount-ris-dotnet-standard-sdk/wiki/Adding-Configuration)
-* [Dependencies](https://github.com/Kount/kount-ris-dotnet-standard-sdk/wiki/Installation#prerequisites)
-* [How to run tests](https://github.com/Kount/kount-ris-dotnet-standard-sdk/wiki/Installation#steps)
+* [Configuration](https://github.com/Kount/kount-ris-dotnet-sdk/wiki/Adding-Configuration)
+* [Dependencies](https://github.com/Kount/kount-ris-dotnet-sdk/wiki/Installation#prerequisites)
+* [How to run tests](https://github.com/Kount/kount-ris-dotnet-sdk/wiki/Installation#steps)
 
 ### Contribution guidelines ###
 
-* [Writing tests](https://msdn.microsoft.com/en-us/library/hh598960.aspx)
+* [Writing tests](https://msdn.microsoft.com/en-us/library/hh598960.aspx , 
+                 https://docs.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-dotnet-test)
 * New features development / bug fixes should be implemented in their own branch having a meaningful name. Create a pull request, assign a reviewer, and respond to comments.
 * Code review -- if you are the assigned reviewer, check for
     * correct usage of programming language tools
