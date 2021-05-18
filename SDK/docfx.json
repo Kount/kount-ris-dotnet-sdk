@@ -60,10 +60,6 @@
         ]
       }
     ],
-    "globalMetadata": {
-      "_appTitle": "Kount SDK .NET",
-      "_enableSearch": true
-    },
     "dest": "_site",
     "template": [
       "default"

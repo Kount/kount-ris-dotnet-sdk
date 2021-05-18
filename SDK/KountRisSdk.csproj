@@ -1,106 +1,48 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{623B98A9-3DE7-431F-A582-D102F4F2CD3D}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <NoStandardLibraries>false</NoStandardLibraries>
-    <AssemblyName>KountRisSdk</AssemblyName>
-    <RootNamespace>KountRisSdk</RootNamespace>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
-    <OldToolsVersion>2.0</OldToolsVersion>
-    <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	<PackageId>Kount.Net.RisSDK</PackageId>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Version>7.1.0</Version>
+	<Authors>Kount Inc.</Authors>
+  <Company>Kount</Company>
+  <PackageLicenseUrl>https://kount.com/</PackageLicenseUrl>
+  <Copyright>Kount Inc.</Copyright>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>.\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DocumentationFile>bin\Debug\KountRisSdk.XML</DocumentationFile>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>.\bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <ItemGroup>
+
+	<ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
+	<Reference Include="System.Configuration.ConfigurationManager" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="kount.rsa.public.key" />
-    <None Include="api\index.md" />
-    <None Include="App.config" />
-    <None Include="articles\code_examples.md" />
-    <None Include="articles\intro.md" />
-    <None Include="articles\testHelper_class.md" />
-    <None Include="articles\testing.md" />
-    <None Include="articles\toc.md" />
-    <None Include="docfx.json" />
-    <None Include="index.md" />
-    <None Include="Kount\Log\App.config" />
-    <None Include="packages.config" />
-    <None Include="toc.yml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Kount\Enums\EnumHelper.cs" />
-    <Compile Include="Kount\Enums\InquiryTypes.cs" />
-    <Compile Include="Kount\Enums\PaymentTypes.cs" />
-    <Compile Include="Kount\Enums\UpdateTypes.cs" />
-    <Compile Include="Kount\Log\Binding\Logger.cs" />
-    <Compile Include="Kount\Log\Binding\NopLogger.cs" />
-    <Compile Include="Kount\Log\Binding\SimpleLogger.cs" />
-    <Compile Include="Kount\Log\ExampleClient.cs" />
-    <Compile Include="Kount\Log\Factory\LogFactory.cs" />
-    <Compile Include="Kount\Log\Factory\LoggerFactory.cs" />
-    <Compile Include="Kount\Log\Factory\NopLoggerFactory.cs" />
-    <Compile Include="Kount\Log\Factory\SimpleLoggerFactory.cs" />
-    <Compile Include="Kount\Ris\CartItem.cs" />
-    <Compile Include="Kount\Ris\Configuration.cs" />
-    <Compile Include="Kount\Ris\IllegalArgumentException.cs" />
-    <Compile Include="Kount\Ris\Inquiry.cs" />
-    <Compile Include="Kount\Ris\KcEvent.cs" />
-    <Compile Include="Kount\Ris\Request.cs" />
-    <Compile Include="Kount\Ris\RequestException.cs" />
-    <Compile Include="Kount\Ris\Response.cs" />
-    <Compile Include="Kount\Ris\RSA.cs" />
-    <Compile Include="Kount\Ris\Update.cs" />
-    <Compile Include="Kount\Ris\ValidationError.cs" />
-    <Compile Include="Kount\Ris\ValidationException.cs" />
-    <Compile Include="Kount\SimpleLogger\File.cs" />
-    <Compile Include="Kount\Util\Base85.cs" />
-    <Compile Include="Kount\Util\Khash.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="validate.xml" />
-  </ItemGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\KountRisSdk.xml</DocumentationFile>
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <Folder Include="images\" />
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
-  <ProjectExtensions>
-    <VisualStudio AllowExistingFolder="true" />
-  </ProjectExtensions>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\docfx.console.2.16.8\build\docfx.console.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\docfx.console.2.16.8\build\docfx.console.targets'))" />
-  </Target>
-  <Import Project="..\packages\docfx.console.2.16.8\build\docfx.console.targets" Condition="Exists('..\packages\docfx.console.2.16.8\build\docfx.console.targets')" />
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.8" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="3.1.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="App.config">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

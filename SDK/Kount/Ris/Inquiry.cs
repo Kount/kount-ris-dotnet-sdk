@@ -11,7 +11,7 @@ namespace Kount.Ris
     /// data to a Kount RIS server.<br/>
     /// <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
     /// <b>Version:</b> 7.0.0. <br/>
-    /// <b>Copyright:</b> 2010 Keynetics Inc <br/>
+    /// <b>Copyright:</b> 2020 Kount Inc <br/>
     /// </summary>
     public class Inquiry : Kount.Ris.Request
     {
@@ -124,7 +124,7 @@ namespace Kount.Ris
         /// Set the total amount of the transaction.
         /// </summary>
         /// <param name="total">Total transaction amount in pennies.</param>
-        public void SetTotal(int total)
+        public void SetTotal(long total)
         {
             this.Data["TOTL"] = total;
         }
@@ -188,7 +188,7 @@ namespace Kount.Ris
         /// Set the cash value of any fencible goods.
         /// </summary>
         /// <param name="cash">Cash value in pennies.</param>
-        public void SetCash(int cash)
+        public void SetCash(long cash)
         {
             this.Data["CASH"] = cash;
         }

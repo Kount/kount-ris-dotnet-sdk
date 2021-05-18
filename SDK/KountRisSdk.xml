@@ -1,0 +1,2438 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>KountRisSdk</name>
+    </assembly>
+    <members>
+        <member name="T:Kount.Enums.EnumHelper">
+            <summary>
+            Extention Helper
+            <b>Author:</b> Kount <a>custserv@kount.com</a>,<br/>
+            <b>Version:</b> 7.0.0. <br/>
+            <b>Copyright:</b> 2017 Kount Inc <br/>
+            </summary>
+        </member>
+        <member name="M:Kount.Enums.EnumHelper.GetValueAsString(Kount.Enums.PaymentTypes)">
+            <summary>
+            Extend functionality of PaymentTypes enum
+            </summary>
+            <param name="paymentType">PaymentTypes enum</param>
+            <returns>Value definition in Description attribute</returns>
+        </member>
+        <member name="T:Kount.Enums.InquiryTypes">
+            <summary>
+            Inquiry type should be used for initial registration of the purchase in the Kount system.<br/>
+            <b>Author:</b> Kount <a>custserv@kount.com</a>,<br/>
+            <b>Version:</b> 7.0.0. <br/>
+            <b>Copyright:</b> 2017 Kount Inc <br/>
+            </summary>
+        </member>
+        <member name="F:Kount.Enums.InquiryTypes.ModeQ">
+            <summary>
+            Default inquiry mode, internet order type
+            </summary>
+        </member>
+        <member name="F:Kount.Enums.InquiryTypes.ModeP">
+            <summary>
+            Used to analyze a phone-received order
+            </summary>
+        </member>
+        <member name="F:Kount.Enums.InquiryTypes.ModeW">
+            <summary>
+            Kount Central full inquiry with returned thresholds
+            </summary>
+        </member>
+        <member name="F:Kount.Enums.InquiryTypes.ModeJ">
+            <summary>
+            Kount Central fast inquiry with just thresholds
+            </summary>
+        </member>
+        <member name="T:Kount.Enums.PaymentTypes">
+            <summary>
+            List of accepted payment types<br/>
+            <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
+            <b>Version:</b> 7.0.0. <br/>
+            <b>Copyright:</b> 2017 Kount Inc <br/>
+            </summary>
+        </member>
+        <member name="F:Kount.Enums.PaymentTypes.Apple">
+            <summary>
+            Apple payment type
+            </summary>
+        </member>
+        <member name="F:Kount.Enums.PaymentTypes.Blml">
+            <summary>
+            Bill me later type
+            </summary>
+        </member>
+        <member name="F:Kount.Enums.PaymentTypes.Bpay">
+            <summary>
+            BPay payment type
+            </summary>
+        </member>
+        <member name="F:Kount.Enums.PaymentTypes.Card">
+            <summary>
+            Credit card type
+            </summary>
+        </member>
+        <member name="F:Kount.Enums.PaymentTypes.CarteBleue">
+            <summary>
+            Carte Bleue payment type
+            </summary>
+        </member>
+        <member name="F:Kount.Enums.PaymentTypes.Check">
+            <summary>
+            The check type
+            </summary>
+        </member>
+        <member name="F:Kount.Enums.PaymentTypes.Elv">
+            <summary>
+            ELV payment type
+            </summary>
+        </member>
+        <member name="F:Kount.Enums.PaymentTypes.GreenDotMoneyPak">
+            <summary>
+            Green Dot MoneyPak payment type
+            </summary>
+        </member>
+        <member name="F:Kount.Enums.PaymentTypes.GiftCard">
+            <summary>
+            Gift card payment type
+            </summary>
+        </member>
+        <member name="F:Kount.Enums.PaymentTypes.GiroPay">
+            <summary>
+            GiroPay payment type
+            </summary>
+        </member>
+        <member name="F:Kount.Enums.PaymentTypes.Google">
+            <summary>
+            Google payment type
+            </summary>
+        </member>
+        <member name="F:Kount.Enums.PaymentTypes.Interac">
+            <summary>
+            Interac payment type
+            </summary>
+        </member>
+        <member name="F:Kount.Enums.PaymentTypes.MercadePago">
+            <summary>
+            Mercade Pago payment type
+            </summary>
+        </member>
+        <member name="F:Kount.Enums.PaymentTypes.Neteller">
+            <summary>
+            Neteller payment type
+            </summary>
+        </member>
+        <member name="F:Kount.Enums.PaymentTypes.None">
+            <summary>
+            No payment type
+            </summary>
+        </member>
+        <member name="F:Kount.Enums.PaymentTypes.Poli">
+            <summary>
+            Poli payment type
+            </summary>
+        </member>
+        <member name="F:Kount.Enums.PaymentTypes.Paypal">
+            <summary>
+            Paypal payment type
+            </summary>
+        </member>
+        <member name="F:Kount.Enums.PaymentTypes.SingleEuroPaymentsArea">
+            <summary>
+            Single Euro Payments Area type
+            </summary>
+        </member>
+        <member name="F:Kount.Enums.PaymentTypes.Skrill">
+            <summary>
+            Skrill/Moneybookers payment type
+            </summary>
+        </member>
+        <member name="F:Kount.Enums.PaymentTypes.Sofort">
+            <summary>
+            Sofort payment type
+            </summary>
+        </member>
+        <member name="F:Kount.Enums.PaymentTypes.Token">
+            <summary>
+            Token payment type
+            </summary>
+        </member>
+        <member name="T:Kount.Enums.UpdateTypes">
+            <summary>
+            Update type should be used whenever there are changes to a given order and the merchant 
+            wants them reflected into the Kount system.<br/>
+            <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
+            <b>Version:</b> 7.0.0. <br/>
+            <b>Copyright:</b> 2017 Kount Inc <br/>
+            </summary>
+        </member>
+        <member name="F:Kount.Enums.UpdateTypes.ModeU">
+            <summary>
+            Default update mode, only sends the update event
+            </summary>
+        </member>
+        <member name="F:Kount.Enums.UpdateTypes.ModeX">
+            <summary>
+            Sends the update event and RIS service returns a status response
+            </summary>
+        </member>
+        <member name="T:Kount.Log.Binding.ILogger">
+            <summary>
+            Logger interface.<br/>
+            <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
+            <b>Version:</b> 7.0.0. <br/>
+            <b>Copyright:</b> 2020 Kount Inc <br/>
+            </summary>
+        </member>
+        <member name="M:Kount.Log.Binding.ILogger.Debug(System.String)">
+            <summary>
+            Log a debug level message.
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Kount.Log.Binding.ILogger.Debug(System.String,System.Exception)">
+            <summary>
+            Log a debug level message and an exception.
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="e">Exception to log</param>
+        </member>
+        <member name="M:Kount.Log.Binding.ILogger.Info(System.String)">
+            <summary>
+            Log an info level message
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Kount.Log.Binding.ILogger.Info(System.String,System.Exception)">
+            <summary>
+            Log an info level message and an exception.
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="e">Exception to log</param>
+        </member>
+        <member name="M:Kount.Log.Binding.ILogger.Warn(System.String)">
+            <summary>
+            Log a warn level message
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Kount.Log.Binding.ILogger.Warn(System.String,System.Exception)">
+            <summary>
+            Log a warn level message and an exception.
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="e">Exception to log</param>
+        </member>
+        <member name="M:Kount.Log.Binding.ILogger.Error(System.String)">
+            <summary>
+            Log an error level message
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Kount.Log.Binding.ILogger.Error(System.String,System.Exception)">
+            <summary>
+            Log an error level message and an exception.
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="e">Exception to log</param>
+        </member>
+        <member name="M:Kount.Log.Binding.ILogger.Fatal(System.String)">
+            <summary>
+            Log a fatal level message
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Kount.Log.Binding.ILogger.Fatal(System.String,System.Exception)">
+            <summary>
+            Log a fatal level message and an exception.
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="e">Exception to log</param>
+        </member>
+        <member name="P:Kount.Log.Binding.ILogger.MeasureElapsed">
+            <summary>
+            Configurable flag. In `app.config` set setting `LOG.SIMPLE.ELAPSED` to <b>ON/OFF</b><br/>
+            example: 
+            <example>`<add key="LOG.SIMPLE.ELAPSED" value="ON" />`</example><br/>
+            When is `true` - measure overall client request time in milliseconds and logging result.<br/>
+            By default is `false`(OFF)
+            </summary>
+        </member>
+        <member name="T:Kount.Log.Binding.NopLogger">
+            <summary>
+            A logger that silently discards all logging.<br/>
+            <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
+            <b>Version:</b> 7.0.0. <br/>
+            <b>Copyright:</b> 2020 Kount Inc <br/>
+            </summary>
+        </member>
+        <member name="M:Kount.Log.Binding.NopLogger.#ctor(System.String)">
+            <summary>
+            Constructor for NOP logger.
+            </summary>
+            <param name="name">Name of the logger</param>
+        </member>
+        <member name="M:Kount.Log.Binding.NopLogger.Debug(System.String)">
+            <summary>
+            Discard a debug level message.
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Kount.Log.Binding.NopLogger.Debug(System.String,System.Exception)">
+            <summary>
+            Discard a debug level message and an exception.
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="e">Exception to log</param>
+        </member>
+        <member name="M:Kount.Log.Binding.NopLogger.Info(System.String)">
+            <summary>
+            Discard an info level message.
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Kount.Log.Binding.NopLogger.Info(System.String,System.Exception)">
+            <summary>
+            Discard an info level message and an exception.
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="e">Exception to log</param>
+        </member>
+        <member name="M:Kount.Log.Binding.NopLogger.Warn(System.String)">
+            <summary>
+            Discard a warn level message.
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Kount.Log.Binding.NopLogger.Warn(System.String,System.Exception)">
+            <summary>
+            Discard a warn level message and an exception.
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="e">Exception to log</param>
+        </member>
+        <member name="M:Kount.Log.Binding.NopLogger.Error(System.String)">
+            <summary>
+            Discard an error level message.
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Kount.Log.Binding.NopLogger.Error(System.String,System.Exception)">
+            <summary>
+            Discard an error level message and an exception.
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="e">Exception to log</param>
+        </member>
+        <member name="M:Kount.Log.Binding.NopLogger.Fatal(System.String)">
+            <summary>
+            Discard a fatal level message.
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Kount.Log.Binding.NopLogger.Fatal(System.String,System.Exception)">
+            <summary>
+            Discard a fatal level message and an exception.
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="e">Exception to log</param>
+        </member>
+        <member name="T:Kount.Log.Binding.SimpleLogger">
+            <summary>
+            Facade class to a simple file logger.<br/>
+            <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
+            <b>Version:</b> 7.0.0. <br/>
+            <b>Copyright:</b> 2020 Kount Inc <br/>
+            </summary>
+        </member>
+        <member name="F:Kount.Log.Binding.SimpleLogger.logger">
+            <summary>
+            File handle to use for logging
+            </summary>
+        </member>
+        <member name="P:Kount.Log.Binding.SimpleLogger.MeasureElapsed">
+            <summary>
+            Configurable property. In `app.config` set setting `LOG.SIMPLE.ELAPSED` to <b>ON/OFF</b><br/>
+            example: 
+            <example>`<add key="LOG.SIMPLE.ELAPSED" value="ON" />`</example><br/>
+            When is `true` - measure overall client request time in milliseconds and logging result.<br/>
+            By default is `false`(OFF)
+            </summary>
+        </member>
+        <member name="M:Kount.Log.Binding.SimpleLogger.#ctor(System.String)">
+            <summary>
+            The Constructor.
+            </summary>
+            <param name="name">Name of the logger</param>
+        </member>
+        <member name="M:Kount.Log.Binding.SimpleLogger.Debug(System.String)">
+            <summary>
+            Log a debug level message.
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Kount.Log.Binding.SimpleLogger.Debug(System.String,System.Exception)">
+            <summary>
+            Log a debug level message and exception.
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="e">Exception to log</param>
+        </member>
+        <member name="M:Kount.Log.Binding.SimpleLogger.Info(System.String)">
+            <summary>
+            Log an info level message.
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Kount.Log.Binding.SimpleLogger.Info(System.String,System.Exception)">
+            <summary>
+            Log an info level message and exception.
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="e">Exception to log</param>
+        </member>
+        <member name="M:Kount.Log.Binding.SimpleLogger.Warn(System.String)">
+            <summary>
+            Log a warn level message.
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Kount.Log.Binding.SimpleLogger.Warn(System.String,System.Exception)">
+            <summary>
+            Log a warn level message and exception.
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="e">Exception to log</param>
+        </member>
+        <member name="M:Kount.Log.Binding.SimpleLogger.Error(System.String)">
+            <summary>
+            Log an error level message.
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Kount.Log.Binding.SimpleLogger.Error(System.String,System.Exception)">
+            <summary>
+            Log an error level message and exception.
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="e">Exception to log</param>
+        </member>
+        <member name="M:Kount.Log.Binding.SimpleLogger.Fatal(System.String)">
+            <summary>
+            Log a fatal level message.
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Kount.Log.Binding.SimpleLogger.Fatal(System.String,System.Exception)">
+            <summary>
+            Log a fatal level message and exception.
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="e">Exception to log</param>
+        </member>
+        <member name="T:Kount.Log.ExampleClient">
+            <summary>
+            A class demonstrating how to use logging
+            </summary>
+        </member>
+        <member name="M:Kount.Log.ExampleClient.Main">
+            <summary>
+            The main entry point for the application.<br/>
+            <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
+            <b>Version:</b> 7.0.0. <br/>
+            <b>Copyright:</b> 2020 Kount Inc <br/>
+            </summary>
+        </member>
+        <member name="T:Kount.Log.Factory.LogFactory">
+            <summary>
+            A factory class for creating LoggerFactory objects.<br/>
+            <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
+            <b>Version:</b> 7.0.0. <br/>
+            <b>Copyright:</b> 2020 Kount Inc <br/>
+            </summary>
+        </member>
+        <member name="F:Kount.Log.Factory.LogFactory.NopLogger">
+            <summary>
+            NOP logger string
+            </summary>
+        </member>
+        <member name="F:Kount.Log.Factory.LogFactory.SimpleLogger">
+            <summary>
+            Simple logger string
+            </summary>
+        </member>
+        <member name="F:Kount.Log.Factory.LogFactory.factory">
+            <summary>
+            The logger factory
+            </summary>
+        </member>
+        <member name="M:Kount.Log.Factory.LogFactory.GetLoggerFactory">
+            <summary>
+            Get the logger factory to be used.
+            <b>NOP</b> is default logger factory if not defined in application configuration.
+            </summary>
+            <returns>A Kount.Log.Factory.LoggerFactory</returns>
+        </member>
+        <member name="M:Kount.Log.Factory.LogFactory.SetLoggerFactory(Kount.Log.Factory.ILoggerFactory)">
+            <summary>
+            Set the logger factory to be used.
+            </summary>
+            <param name="f">A Kount.Log.Factory.LoggerFactory</param>
+        </member>
+        <member name="T:Kount.Log.Factory.ILoggerFactory">
+            <summary>
+            Interface for a logger factory.<br/>
+            <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
+            <b>Version:</b> 7.0.0. <br/>
+            <b>Copyright:</b> 2020 Kount Inc <br/>
+            </summary>
+        </member>
+        <member name="M:Kount.Log.Factory.ILoggerFactory.GetLogger(System.String)">
+            <summary>
+            Get a logger binding.
+            </summary>
+            <param name="name">Name of the logger</param>
+            <returns>A Kount.Log.Binding.Logger</returns>
+        </member>
+        <member name="T:Kount.Log.Factory.NopLoggerFactory">
+            <summary>
+            A NOP logger binding class.<br/>
+            <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
+            <b>Version:</b> 7.0.0. <br/>
+            <b>Copyright:</b> 2020 Kount Inc <br/>
+            </summary>
+        </member>
+        <member name="M:Kount.Log.Factory.NopLoggerFactory.GetLogger(System.String)">
+            <summary>
+            Get a NOP logger binding.
+            </summary>
+            <param name="name">Name of the logger</param>
+            <returns>A Kount.Log.Binding.NopLogger</returns>
+        </member>
+        <member name="T:Kount.Log.Factory.SimpleLoggerFactory">
+            <summary>
+            A simple logger binding class.<br/>
+            <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
+            <b>Version:</b> 7.0.0. <br/>
+            <b>Copyright:</b> 2020 Kount Inc <br/>
+            </summary>
+        </member>
+        <member name="M:Kount.Log.Factory.SimpleLoggerFactory.GetLogger(System.String)">
+            <summary>
+            Get a simple logger binding.
+            </summary>
+            <param name="name">Name of the logger</param>
+            <returns>A Kount.Log.Binding.SimpleLogger</returns>
+        </member>
+        <member name="T:Kount.Ris.CartItem">
+            <summary>
+            Shopping cart item data object.<br/>
+            <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
+            <b>Version:</b> 7.0.0. <br/>
+            <b>Copyright:</b> 2020 Kount Inc <br/>
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.CartItem.type">
+            <summary>
+            Product type or category of the item
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.CartItem.item">
+            <summary>
+            Name or SKU of the item
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.CartItem.price">
+            <summary>
+            Price of the item
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.CartItem.description">
+            <summary>
+            Description of the item
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.CartItem.quantity">
+            <summary>
+            Quantity of the item
+            </summary>
+        </member>
+        <member name="M:Kount.Ris.CartItem.#ctor(System.String,System.String,System.String,System.Int64,System.Int64)">
+            <summary>
+            Cart item constructor
+            </summary>
+            <param name="productType">Product type as a 1 -255 char string</param>
+            <param name="productItem">Product item as a 1 - 255 char string</param>
+            <param name="productDescription">Product description as a 0 - 255 char string</param>
+            <param name="productQuantity">Product quantity</param>
+            <param name="productPrice">Product price</param>
+        </member>
+        <member name="P:Kount.Ris.CartItem.ProductType">
+            <summary>
+            Gets or sets product type
+            </summary>
+        </member>
+        <member name="P:Kount.Ris.CartItem.ProductItem">
+            <summary>
+            Gets or sets the product item
+            </summary>
+        </member>
+        <member name="P:Kount.Ris.CartItem.ProductDescription">
+            <summary>
+            Gets or sets the product description
+            </summary>
+        </member>
+        <member name="P:Kount.Ris.CartItem.ProductQuantity">
+            <summary>
+            Gets or sets the product quantity
+            </summary>
+        </member>
+        <member name="P:Kount.Ris.CartItem.ProductPrice">
+            <summary>
+            Gets or sets the product price
+            </summary>
+        </member>
+        <member name="T:Kount.Ris.Configuration">
+            <summary>
+            Containing configuration values
+            </summary>
+        </member>
+        <member name="M:Kount.Ris.Configuration.FromAppSettings">
+            <summary>
+            Gets configuration values from app settings.
+            </summary>
+            <returns>Configuration class with raw values.</returns>
+        </member>
+        <member name="P:Kount.Ris.Configuration.MerchantId">
+            <summary>
+            Six digit identifier issued by Kount.
+            </summary>
+        </member>
+        <member name="P:Kount.Ris.Configuration.URL">
+            <summary>
+            HTTPS URL path to the company's servers provided in boarding documentation from Kount.
+            </summary>
+        </member>
+        <member name="P:Kount.Ris.Configuration.ConfigKey">
+            <summary>
+            Config Key used in hashing method.
+            </summary>
+        </member>
+        <member name="P:Kount.Ris.Configuration.ConnectTimeout">
+            <summary>
+            RIS connect timeout value measured in milliseconds.
+            </summary>
+        </member>
+        <member name="P:Kount.Ris.Configuration.Version">
+            <summary>
+            RIS version
+            </summary>
+        </member>
+        <member name="P:Kount.Ris.Configuration.ApiKey">
+            <summary>
+            API Key value from API Key page within Agent Web Console.
+            </summary>
+        </member>
+        <member name="P:Kount.Ris.Configuration.CertificateFile">
+            <summary>
+            Full path of the certificate pk12 or pfx file.
+            </summary>
+        </member>
+        <member name="P:Kount.Ris.Configuration.PrivateKeyPassword">
+            <summary>
+            Password used to export the certificate
+            </summary>
+        </member>
+        <member name="T:Kount.Ris.IllegalArgumentException">
+            <summary>
+            Kount Ris Illegal argument exception.<br/>
+            <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
+            <b>Version:</b> 7.0.0. <br/>
+            <b>Copyright:</b> 2020 Kount Inc <br/>
+            </summary>
+        </member>
+        <member name="M:Kount.Ris.IllegalArgumentException.#ctor(System.String)">
+            <summary>
+            Create the exception with an error message
+            </summary>
+            <param name="errorMessage">Error message.</param>
+        </member>
+        <member name="M:Kount.Ris.IllegalArgumentException.#ctor(System.String,System.Exception)">
+            <summary>
+            Create the exception with an error message and another exception.
+            </summary>
+            <param name="errorMessage">Error message.</param>
+            <param name="innerEx">Inner exception.</param>
+        </member>
+        <member name="P:Kount.Ris.IllegalArgumentException.ErrorMessage">
+            <summary>
+            Gets the error message.
+            </summary>
+        </member>
+        <member name="T:Kount.Ris.Inquiry">
+            <summary>
+            Inquiry class. A bunch of setters for sending initial transaction
+            data to a Kount RIS server.<br/>
+            <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
+            <b>Version:</b> 7.0.0. <br/>
+            <b>Copyright:</b> 2020 Kount Inc <br/>
+            </summary>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.#ctor">
+            <summary>
+            Constructor. Sets the mode to 'Q', the currency to 'USD' and sets
+            the SDK identifier value. Use SetMode(char) and SetCurrency(string)
+            to change the RIS mode and currency respectively.
+            </summary>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.#ctor(System.Boolean)">
+            <summary>
+            Constructor. Sets the mode to 'Q', the currency to 'USD' and sets
+            the SDK identifier value. Use SetMode(char) and SetCurrency(string)
+            to change the RIS mode and currency respectively.
+            </summary>
+            <param name="checkConfiguration">If is true: will check config file if 
+            `Ris.Url`, 
+            `Ris.MerchantId`, 
+            `Ris.Config.Key` and `Ris.Connect.Timeout` are set.</param>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.#ctor(System.Boolean,Kount.Ris.Configuration)">
+            <summary>
+            Constructor. Sets the mode to 'Q', the currency to 'USD' and sets
+            the SDK identifier value. Use SetMode(char) and SetCurrency(string)
+            to change the RIS mode and currency respectively.
+            </summary>
+            <param name="checkConfiguration">If is true: will check config file if 
+            `Ris.Url`, 
+            `Ris.MerchantId`, 
+            `Ris.Config.Key` and `Ris.Connect.Timeout` are set.</param>
+            <param name="configuration">Configuration class with raw values</param>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.SetMode(System.Char)">
+            <summary>
+            Set the mode of the inquiry.
+            </summary>
+            <param name="mode">Set mode Q or P</param>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.SetDateOfBirth(System.String)">
+            <summary>
+            Set the date of birth in the format YYYY-MM-DD
+            </summary>
+            <param name="dob">Date of birth</param>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.SetGender(System.Char)">
+            <summary>
+            Set the gender
+            </summary>
+            <param name="gender">M(ale) or F(emale)</param>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.SetUserDefinedField(System.String,System.String)">
+            <summary>
+            Set the value of a named user defined field
+            </summary>
+            <param name="label">Label of the user defined field</param>
+            <param name="value">Value of the user defined field</param>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.SetCurrency(System.String)">
+            <summary>
+            Set the three character ISO-4217 currency code.
+            </summary>
+            <param name="currency">Three character code e.g. USD.</param>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.SetSdkVersion(System.String)">
+            <summary>
+            Set the current SDK version SDK_Type-RIS_VERSION-SDK_BUILD_DATETIMESTAMP.
+            e.g. Sdk-Ris-Dnet-0651-20170505T1458
+            </summary>
+            <param name="sdkVersion">Three character code e.g. USD.</param>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.SetTotal(System.Int32)">
+            <summary>
+            Set the total amount of the transaction.
+            </summary>
+            <param name="total">Total transaction amount in pennies.</param>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.SetIpAddress(System.String)">
+            <summary>
+            Set the IP address of the client.
+            </summary>
+            <param name="address">IP address of the client.</param>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.SetUserAgent(System.String)">
+            <summary>
+            Set the user agent of the client.
+            </summary>
+            <param name="userAgent"> User agent string of the client.</param>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.SetEmail(System.String)">
+            <summary>
+            Set the email address of the client.
+            </summary>
+            <param name="email">Email address.</param>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.SetName(System.String)">
+            <summary>
+            Set the name of the client.
+            </summary>
+            <param name="name">Client name.</param>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.SetUnique(System.String)">
+            <summary>
+            Set the uniqe (cookie identifier, etc.) of the client.
+            </summary>
+            <param name="unique">Unique client identifier</param>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.SetEpoch(System.Int64)">
+            <summary>
+            Set the timestamp (in seconds) since the UNIX epoch for when the
+            UNIQ value was set.
+            </summary>
+            <param name="timeStamp">Set the timestamp</param>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.SetCash(System.Int32)">
+            <summary>
+            Set the cash value of any fencible goods.
+            </summary>
+            <param name="cash">Cash value in pennies.</param>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.SetShipType(System.String)">
+            <summary>
+            Set the shipping type.
+            </summary>
+            <param name="shipType">Ship type: e.g. ST, ND, etc.</param>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.SetBillingAddress(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Set the billing address.
+            </summary>
+            <param name="address1">Address line 1.</param>
+            <param name="address2">Address line 2.</param>
+            <param name="city">Set the city.</param>
+            <param name="state">Set the state.</param>
+            <param name="postalCode">Set the postal code.</param>
+            <param name="country">The the country.</param>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.SetBillingAddress(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Set the billing address.
+            </summary>
+            <param name="address1">Address line 1.</param>
+            <param name="address2">Address line 2.</param>
+            <param name="city">Set the city.</param>
+            <param name="state">Set the state.</param>
+            <param name="postalCode">Set the postal code.</param>
+            <param name="country">Set the country.</param>
+            <param name="premise">Set the premise.</param>
+            <param name="street">Set the street.</param>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.SetBillingPhoneNumber(System.String)">
+            <summary>
+            Set the billing phone number.
+            </summary>
+            <param name="phoneNumber">Phone number.</param>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.SetShippingAddress(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Set the shipping address.
+            </summary>
+            <param name="address1">Address line 1.</param>
+            <param name="address2">Address line 2.</param>
+            <param name="city">Set the city.</param>
+            <param name="state">Set the state.</param>
+            <param name="postalCode">Set the postal code.</param>
+            <param name="country">Set the country.</param>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.SetShippingAddress(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Set the shipping address.
+            </summary>
+            <param name="address1">Address line 1.</param>
+            <param name="address2">Address line 2.</param>
+            <param name="city">Set the city.</param>
+            <param name="state">Set the state.</param>
+            <param name="postalCode">Set the postal code.</param>
+            <param name="country">Set the country.</param>
+            <param name="premise">Set the premise.</param>
+            <param name="street">Set the street.</param>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.SetShippingPhoneNumber(System.String)">
+            <summary>
+            Set the shipping phone number.
+            </summary>
+            <param name="phoneNumber">Phone number.</param>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.SetShippingName(System.String)">
+            <summary>
+            Set the shipping name.
+            </summary>
+            <param name="shipName">Shipping Name.</param>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.SetShippingEmail(System.String)">
+            <summary>
+            Set the shipping email.
+            </summary>
+            <param name="shipEmail">Shipping Email.</param>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.SetAnid(System.String)">
+            <summary>
+            Set the Anid of the client.
+            </summary>
+            <param name="anid">Anid of the client.</param>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.SetWebsite(System.String)">
+            <summary>
+            Website id associated with the transaction
+            </summary>
+            <param name="site">String 1 - 8 characters long</param>
+        </member>
+        <member name="M:Kount.Ris.Inquiry.SetCart(System.Collections.ArrayList)">
+            <summary>
+            Set a shoppinng cart
+            </summary>
+            <param name="cart">ArrayList of Kount.Ris.CartItem objects</param>
+        </member>
+        <member name="T:Kount.Ris.KcEvent">
+            <summary>
+            Kount Central Event class description <br/>
+            <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
+            <b>Version:</b> 7.0.0. <br/>
+            <b>Copyright:</b> 2014 Keynetics Inc <br/>
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.KcEvent.code">
+            <summary>
+            Get the code of this event
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.KcEvent.expression">
+            <summary>
+            Get the expression of this event
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.KcEvent.decision">
+            <summary>
+            Get the decision of this event
+            </summary>
+        </member>
+        <member name="M:Kount.Ris.KcEvent.#ctor(System.String,System.String,System.String)">
+            <summary>
+            A helper class to oraganize Kount Central threshold event data in the RIS response.
+            </summary>
+            <param name="code">The threshold event's code</param>
+            <param name="expression">The threshold event's expression</param>
+            <param name="decision">The threshold event's decision</param>
+        </member>
+        <member name="P:Kount.Ris.KcEvent.Code">
+            <summary>
+            Gets the threshold event code
+            </summary>
+        </member>
+        <member name="P:Kount.Ris.KcEvent.Expression">
+            <summary>
+            Gets the threshold event expression
+            </summary>
+        </member>
+        <member name="P:Kount.Ris.KcEvent.Decision">
+            <summary>
+            Gets the threshold event decision
+            </summary>
+        </member>
+        <member name="M:Kount.Ris.KcEvent.ToString">
+            <summary>
+            Our ToString method
+            </summary>
+            <returns>
+            This object string representation
+            </returns>
+        </member>
+        <member name="T:Kount.Ris.Request">
+            <summary>
+            Abstract parent class for request objects.<br/>
+            <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
+            <b>Version:</b> 7.0.0. <br/>
+            <b>Copyright:</b> 2020 Kount Inc <br/>
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.Request.RisVersion">
+            <summary>
+            The RIS version
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.Request.logger">
+            <summary>
+            The Logger to use.
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.Request.data">
+            <summary>
+            Hash table of request data.
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.Request.url">
+            <summary>
+            URL of the target RIS server.
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.Request.connectTimeout">
+            <summary>
+            RIS connect timeout in milliseconds.
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.Request.certificate">
+            <summary>
+            Absolute path of the certificate file. Deprecated in favor of API key.
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.Request.password">
+            <summary>
+            Password used to export the certificate. Depcrecated in favor of API key.
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.Request.apiKey">
+            <summary>
+            API key used for authentication to RIS server. Obtained from the AWC.
+            </summary>
+        </member>
+        <member name="M:Kount.Ris.Request.#ctor(System.Boolean,Kount.Ris.Configuration)">
+            <summary>
+            Construct a request object. Set the static setting from the
+            web.config file.
+            </summary>
+            <param name="checkConfiguration">By default is true: will check config file if 
+            `Ris.Url`, 
+            `Ris.MerchantId`, 
+            `Ris.Config.Key` are set.</param>
+            <param name="configuration">Instance of configuration.</param>
+            <exception cref="T:Kount.Ris.RequestException">Thrown when there is
+            static data missing for a RIS request.</exception>
+        </member>
+        <member name="M:Kount.Ris.Request.#ctor(System.Boolean)">
+            <summary>
+            Construct a request object. Set the static setting from the web.config file.
+            </summary>
+            <param name="checkConfiguration">By default is true: will check config file if 
+            `Ris.Url`, 
+            `Ris.MerchantId`, 
+            `Ris.Config.Key` are set.</param>
+            <exception cref="T:Kount.Ris.RequestException">Thrown when there is
+            static data missing for a RIS request.</exception>
+        </member>
+        <member name="P:Kount.Ris.Request.Data">
+            <summary>
+            Gets hashtable data
+            </summary>
+        </member>
+        <member name="M:Kount.Ris.Request.GetResponse(System.Boolean)">
+            <summary>
+            Get the response from the RIS server.
+            </summary>
+            <param name="validate">default value is TRUE. If FALSE validate silently doesn't throw exception.</param>
+            <returns>Kount.Ris.Response populated object.</returns>
+        </member>
+        <member name="M:Kount.Ris.Request.SetParameter(System.String,System.String)">
+            <summary>
+            Set parameters in the Response
+            </summary>
+            <param name="key">Parameter key</param>
+            <param name="value">Parameter value</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetMode(System.Char)">
+            <summary>
+            Set the mode of the transaction.
+            </summary>
+            <param name="mode">Depends on the request type.</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetMode(Kount.Enums.InquiryTypes)">
+            <summary>
+            Set the mode of the transaction.
+            </summary>
+            <param name="inquiryType">Depends on the inquiry type.</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetMode(Kount.Enums.UpdateTypes)">
+            <summary>
+            Set the mode of the transaction.
+            </summary>
+            <param name="updateType">Depends on the update type.</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetMerchantId(System.Int32)">
+            <summary>
+            Set the merchant Id.
+            </summary>
+            <param name="merchantId">Merchant Id.</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetKountCentralCustomerId(System.String)">
+            <summary>
+            Set the Kount Central customer Id.
+            </summary>
+            <param name="customerId">Kount Central customer Id.</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetSessionId(System.String)">
+            <summary>
+            Set the session ID of this session.
+            </summary>
+            <param name="sessionId">Session Id from the merchant.</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetOrderNumber(System.String)">
+            <summary>
+            Set the merchant order number.
+            </summary>
+            <param name="orderNumber">Unique, up to 32 characters.</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetMack(System.Char)">
+            <summary>
+            Set the merchant acknowledgement that this product will ship.
+            </summary>
+            <param name="mack">Set Y or N.</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetAuth(System.Char)">
+            <summary>
+            Set the auth status of the payment.
+            </summary>
+            <param name="auth">Set A or D.</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetAvsz(System.Char)">
+            <summary>
+            Bankcard AVS ZIP CODE reply.
+            </summary>
+            <param name="avsz">M, N, or X.</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetAvst(System.Char)">
+            <summary>
+            Bankcard AVS STREET ADDRESS reply.
+            </summary>
+            <param name="avst">M, N, or X.</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetCvvr(System.Char)">
+            <summary>
+            Bankcard CVV/CVC/CVV2 reply.
+            </summary>
+            <param name="cvvr">M, N, or X.</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetCardPaymentMasked(System.String)">
+            <summary>
+            Sets a card payment and masks the card number in the following way: <br/>
+            First 6 characters remain as they are, following characters up to the last 4 are
+            replaced with the 'X' character, last 4 characters remain as they are.
+            If the provided Payment parameter is not a card payment, standard encoding
+            will be applied.
+            </summary>
+            <example> card number 0007380568572514 is masked to 000738XXXXXX2514 </example>
+            <param name="cardNumber">Raw credit card number</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetNoPayment">
+            <summary>
+            Set No Payment.
+            </summary>
+        </member>
+        <member name="M:Kount.Ris.Request.SetPayment(System.String,System.String)">
+            <summary>
+            Set a payment type and payment token. This method is Obsoleted.
+            </summary>
+            <param name="ptyp">Payment Type</param>
+            <param name="ptok">Payment Token</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetPayment(Kount.Enums.PaymentTypes,System.String)">
+            <summary>
+            Set a payment 
+            </summary>
+            <param name="paymentType">Payment Type</param>
+            <param name="payerId">Payment Token</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetGreenDotMoneyPakPayment(System.String)">
+            <summary>
+            Set a Green Dot MoneyPak payment.
+            </summary>
+            <param name="id">Green Dot MoneyPak payment ID number</param>
+        </member>
+        <member name="M:Kount.Ris.Request.GetParam(System.String)">
+            <summary>
+            Get value from Data - Hashtable.
+            </summary>
+            <param name="param">Key string in hashtable</param>
+            <returns></returns>
+        </member>
+        <member name="M:Kount.Ris.Request.GetUrl">
+            <summary>
+            Get the URL of the target RIS server.
+            </summary>
+            <returns>String of the target url.</returns>
+        </member>
+        <member name="M:Kount.Ris.Request.SetUrl(System.String)">
+            <summary>
+            Set the URL of the target RIS server.
+            </summary>
+            <param name="url">String of the target RIS server.</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetCertificate(System.String,System.String)">
+            <summary>
+            Set the RIS certificate information.
+            </summary>
+            <param name="certificate">Full path of the certificate pk12 or
+            pfx file.</param>
+            <param name="password">Password used to export the certificate.
+            </param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetApiKey(System.String)">
+            <summary>
+            Set the API key.
+            </summary>
+            <param name="key">Key used to authenticate.</param>
+        </member>
+        <member name="M:Kount.Ris.Request.GetCertificateFile">
+            <summary>
+            Get the certificate file path.
+            </summary>
+            <returns>String of the certificate file path.</returns>
+        </member>
+        <member name="M:Kount.Ris.Request.GetPrivateKeyPassword">
+            <summary>
+            Private key password used to export the certificate file.
+            </summary>
+            <returns>String of the certificate export password.</returns>
+        </member>
+        <member name="M:Kount.Ris.Request.SetKhashPaymentEncoding">
+            <summary>
+            Set the RIS payment encoding to KHASH.
+            </summary>
+        </member>
+        <member name="M:Kount.Ris.Request.SetKhashPaymentEncoding(System.Boolean)">
+            <summary>
+            Set the RIS payment encoding to KHASH.
+            </summary>
+            <param name="enabled">TRUE when enabled</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetPaymentTokenLast4(System.String)">
+            <summary>
+            Set the last 4 characters of the payment token.
+            </summary>
+            <param name="last4">Last 4 characters</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetVersion(System.String)">
+            <summary>
+            Set the version of the RIS response.
+            </summary>
+            <param name="version">Response version.</param>
+        </member>
+        <member name="M:Kount.Ris.Request.IsSetKhashPaymentEncoding">
+            <summary>
+            Check if KHASH payment encoding has been set.
+            </summary>
+            <returns>TRUE when set</returns>
+        </member>
+        <member name="M:Kount.Ris.Request.SetPaymentToken(System.String)">
+            <summary>
+            Set the payment token.
+            </summary>
+            <param name="token">Payment token</param>
+        </member>
+        <member name="M:Kount.Ris.Request.CheckConfigurationParameter(System.String,System.String)">
+            <summary>
+            Check configuration parameters for existence in application
+            configuration.
+            </summary>
+            <param name="parameter">Parameter name</param>
+            <exception cref="T:Kount.Ris.RequestException">Thrown when parameter
+            is missing</exception>
+        </member>
+        <member name="M:Kount.Ris.Request.SafeGet(System.String)">
+            <summary>
+            Sanitize a variable before return it.
+            </summary>
+            <param name="var">Raw variable</param>
+            <returns>Sanitized variable</returns>
+        </member>
+        <member name="M:Kount.Ris.Request.SetApplePayment(System.String)">
+            <summary>
+            Set a Apple payment.
+            </summary>
+            <param name="appleId">Apple payer ID</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetBpayPayment(System.String)">
+            <summary>
+            Set a Bpay payment.
+            </summary>
+            <param name="bpayId">Bpay payer ID</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetCarteBleuePayment(System.String)">
+            <summary>
+            Set a CarteBleue payment.
+            </summary>
+            <param name="carteBleueId">CarteBleue payer ID</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetElvPayment(System.String)">
+            <summary>
+            Set a Elv payment.
+            </summary>
+            <param name="elvId">Elv payer ID</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetGiroPayPayment(System.String)">
+            <summary>
+            Set a GiroPay payment.
+            </summary>
+            <param name="giroPayId">GiroPay payer ID</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetInteracPayment(System.String)">
+            <summary>
+            Set a Interac payment.
+            </summary>
+            <param name="interacId">Interac payer ID</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetMercadePagoPayment(System.String)">
+            <summary>
+            Set a MercadePago payment.
+            </summary>
+            <param name="mercadePagoId">MercadePago payer ID</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetNetellerPayment(System.String)">
+            <summary>
+            Set a Neteller payment.
+            </summary>
+            <param name="netellerId">Neteller payer ID</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetPoliPayment(System.String)">
+            <summary>
+            Set a Poli payment.
+            </summary>
+            <param name="poliId">Poli payer ID</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetSepaPayment(System.String)">
+            <summary>
+            Set a Sepa payment.
+            </summary>
+            <param name="sepaId">Sepa payer ID</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetSkrillPayment(System.String)">
+            <summary>
+            Set a Skrill payment.
+            </summary>
+            <param name="skrillId">Skrill payer ID</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetSofortPayment(System.String)">
+            <summary>
+            Set a Sofort payment.
+            </summary>
+            <param name="sofortId">Sofort payer ID</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetTokenPayment(System.String)">
+            <summary>
+            Set a Token payment.
+            </summary>
+            <param name="tokenId">Token payer ID</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetPaypalPayment(System.String)">
+            <summary>
+            Set a Paypal payment.
+            </summary>
+            <param name="paypalId">Paypal payer ID</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetGooglePayment(System.String)">
+            <summary>
+            Set a google payment
+            </summary>
+            <param name="googleId">Google pay id</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetCheckPayment(System.String)">
+            <summary>
+            Set a check payment.
+            </summary>
+            <param name="micr">Micro number on the check.</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetBillMeLaterPayment(System.String)">
+            <summary>
+            Set a Bill Me Later payment.
+            </summary>
+            <param name="blmlId">bill me later id</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetCardPayment(System.String)">
+            <summary>
+            Set a credit card payment
+            </summary>
+            <param name="cardNumber">Raw credit card number</param>
+        </member>
+        <member name="M:Kount.Ris.Request.SetGiftCardPayment(System.String)">
+            <summary>
+            Set a gift card payment
+            </summary>
+            <param name="giftCardNum">Gift card number</param>
+        </member>
+        <member name="M:Kount.Ris.Request.Validate(System.Collections.Hashtable)">
+            <summary>
+            Validate the RIS request.
+            </summary>
+            <param name="data">Throws an exception if validation fails.</param>
+            <returns>List of invalid elements</returns>
+        </member>
+        <member name="M:Kount.Ris.Request.GetWebError(System.Net.WebResponse)">
+            <summary>
+            Get error description from webException
+            </summary>
+            <param name="exResponse">Response from web exception</param>
+            <returns></returns>
+        </member>
+        <member name="M:Kount.Ris.Request.MaskToken(System.String)">
+            <summary>
+            Encodes the provided payment token according to the MASK encoding scheme
+            </summary>
+            <param name="token">CARD token</param>
+            <returns>masked token</returns>
+        </member>
+        <member name="M:Kount.Ris.Request.ValidateHelper(System.Xml.XmlNode,System.String,System.Collections.IList)">
+            <summary>
+            Validation helper method
+            </summary>
+            <param name="node">XML node containing the validation data</param>
+            <param name="name">The value to validate</param>
+            <param name="errors">The list of validation errors</param>
+        </member>
+        <member name="M:Kount.Ris.Request.FetchArrayParams(System.Collections.Hashtable)">
+            <summary>
+            Fetch data parameters in arrays
+            </summary>
+            <param name="data">The data hashtable</param>
+            <returns>A hashtable of array data</returns>
+        </member>
+        <member name="T:Kount.Ris.RequestException">
+            <summary>
+            Request Exception.<br/>
+            <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
+            <b>Version:</b> 7.0.0. <br/>
+            <b>Copyright:</b> 2020 Kount Inc <br/>
+            </summary>
+        </member>
+        <member name="M:Kount.Ris.RequestException.#ctor(System.String)">
+            <summary>
+            Create an exception with an error message
+            </summary>
+            <param name="errorMessage">Error message.</param>
+        </member>
+        <member name="M:Kount.Ris.RequestException.#ctor(System.String,System.Exception)">
+            <summary>
+            Create an exception with a message and another exception
+            </summary>
+            <param name="errorMessage">Error message.</param>
+            <param name="innerEx">Inner exception.</param>
+        </member>
+        <member name="P:Kount.Ris.RequestException.ErrorMessage">
+            <summary>
+            Gets the string of the error message.
+            </summary>
+        </member>
+        <member name="T:Kount.Ris.Response">
+            <summary>
+            Response immutable data object containing data from the RIS server.<br/>
+            <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
+            <b>Version:</b> 7.0.0. <br/>
+            <b>Copyright:</b> 2020 Kount Inc <br/>
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.Response.logger">
+            <summary>
+            The logger to use
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.Response.response">
+            <summary>
+            Response hashtable
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.Response.warnings">
+            <summary>
+            Warnings hashtable
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.Response.raw">
+            <summary>
+            Raw RIS output data
+            </summary>
+        </member>
+        <member name="M:Kount.Ris.Response.#ctor(System.String)">
+            <summary>
+            Response constructor.
+            </summary>
+            <param name="raw">Splits name=value formatted response string
+            populating a hash for getters.</param>
+        </member>
+        <member name="M:Kount.Ris.Response.GetErrorCode">
+            <summary>
+            Get the error code returned from the server
+            </summary>
+            <returns>Error code returned from the RIS server.</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetVersion">
+            <summary>
+            Get the version of the RIS response.
+            </summary>
+            <returns>String of the version.</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetMode">
+            <summary>
+            Get the mode of the RIS request.
+            </summary>
+            <returns>Character of the original RIS request mode: e.g. U.
+            </returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetTransactionId">
+            <summary>
+            Get Kount transaction Id.
+            </summary>
+            <returns>Alphanumeric transaction id generated by Kount.</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetMerchantId">
+            <summary>
+            Get the merchant Id of the merchant making the request.
+            </summary>
+            <returns>Merchant Id.</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetSessionId">
+            <summary>
+            Get the session Id.
+            </summary>
+            <returns>Session Id of this transaction generated by the merchant.
+            </returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetOrderNumber">
+            <summary>
+            Get the Order Number.
+            </summary>
+            <returns>Order number generated by the merchant.</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetAuto">
+            <summary>
+            Get the automated Kount RIS response.
+            </summary>
+            <returns>(A)pprove, (R)eview, or (D)ecline.</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetReason">
+            <summary>
+            Get the reason for the RIS response.
+            </summary>
+            <returns>Main response reason, e.g. LIST, SCOR, etc.</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetReasonCode">
+            <summary>
+            Get the merchant defined reason code for the RIS response.
+            </summary>
+            <returns>Reason code</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetScore">
+            <summary>
+            Get the Kount score.
+            </summary>
+            <returns>1 to 99. The highter the score, the more risk.</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.getOmniscore">
+            <summary>
+            Get the Kount Omniscore.
+            </summary>
+            <returns>1 to 99.9. The highter the score, the less risk.</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetGeox">
+            <summary>
+            Get the geo location of the client
+            </summary>
+            <returns>Geox of the client</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetBrand">
+            <summary>
+            Get the brand of the credit card if a card was the payment method
+            </summary>
+            <returns>Brand of credit card, e.g. VISA</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetVelo">
+            <summary>
+            6 hour card velocity
+            </summary>
+            <returns>Number of times this card number was used in the last 6
+            hours</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetVmax">
+            <summary>
+            2 week card velocity
+            </summary>
+            <returns>Number of times this card number was used in the last
+            two weeks</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetNetwork">
+            <summary>
+            Get the network type
+            </summary>
+            <returns>Get the network type of the client, e.g. L for library
+            </returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetKnowYourCustomer">
+            <summary>
+            Get the Know Your Customer flag
+            </summary>
+            <returns>Y means a KYC match, N means no match.</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetRegion">
+            <summary>
+            Get the customer region
+            </summary>
+            <returns>US state abbreviation or country code.</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetKaptcha">
+            <summary>
+            Get the Kaptcha flag: enabled upon request and for when a RIS
+            record has no Kaptcha data
+            </summary>
+            <returns>Returns Y or N</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetProxy">
+            <summary>
+            Get a string representing whether the remote device is using a
+            proxy
+            </summary>
+            <returns>Returns Y or N</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetEmails">
+            <summary>
+            Get the number of transactions associated with the email
+            </summary>
+            <returns>Number of emails</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetHttpCountry">
+            <summary>
+            Get the two character country code setting in the remote device's
+            browser
+            </summary>
+            <returns>Get the country</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetTimeZone">
+            <summary>
+            Get the two character country code setting in the remote device's
+            browser
+            </summary>
+            <returns>The time zone</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetCards">
+            <summary>
+            Get the number of transactions associated with the credit card
+            </summary>
+            <returns>Number of cards</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetPcRemote">
+            <summary>
+            Get a string representing whether the end device is a remotely
+            controlled computer
+            </summary>
+            <returns>"Y" or "N"</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetDevices">
+            <summary>
+            Get the number of transactions associated with the particular
+            device
+            </summary>
+            <returns>Number of devices</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetDeviceLayers">
+            <summary>
+            Get a string representing the five layers (Operating System, SSL,
+            HTTP, Flash, JavaScript) of the remote device
+            </summary>
+            <returns>Device layers</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetMobileForwarder">
+            <summary>
+            Get the mobile device's wireless application protocol
+            </summary>
+            <returns>The protocol</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetVoiceDevice">
+            <summary>
+            Get a string representing whether or not the remote device is
+            voice controlled
+            </summary>
+            <returns>"Y" or "N"</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetLocalTime">
+            <summary>
+            Get local time of the remote device in the YYYY-MM-DD format
+            </summary>
+            <returns>Local time</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetMobileType">
+            <summary>
+            Get the mobile device type
+            </summary>
+            <returns>Mobile type</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetFingerPrint">
+            <summary>
+            Get the device finger print
+            </summary>
+            <returns>Finger print</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetFlash">
+            <summary>
+            Get a string representing whether or not the remote device allows
+            flash.
+            </summary>
+            <returns>"Y" or "N"</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetLanguage">
+            <summary>
+            Get the language setting on the remote device
+            </summary>
+            <returns>The language</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetCountry">
+            <summary>
+            Get the remote device's country of origin as a two character code
+            </summary>
+            <returns>The country</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetJavaScript">
+            <summary>
+            Get a string representing whether the remote device allows
+            JavaScript
+            </summary>
+            <returns>"Y" or "N"</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetCookies">
+            <summary>
+            Get a string representing whether the remote device allows cookies
+            </summary>
+            <returns>"Y" or "N"</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetMobileDevice">
+            <summary>
+            Get a string representing whether the remote device is a mobile
+            device
+            </summary>
+            <returns>"Y" or "N"</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetSite">
+            <summary>
+            Get the site ID
+            </summary>
+            <returns>The site ID</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetMasterCardFraudScore">
+            <summary>
+            Get MasterCard Fraud Score associated with the RIS transaction.
+            Please contact your Kount representative to enable support for this
+            feature in your merchant account.
+            </summary>
+            <returns>MasterCard Fraud Score</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetPiercedIPAddress">
+            <summary>
+            Get pierced IP address
+            </summary>
+            <returns>Pierced IP address</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetPiercedIPAddressLatitude">
+            <summary>
+            Get latitude of pierced IP address
+            </summary>
+            <returns>Latitude of pierced IP address</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetPiercedIPAddressLongitude">
+            <summary>
+            Get longitude of pierced IP address
+            </summary>
+            <returns>Longitude of pierced IP address</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetPiercedIPAddressCountry">
+            <summary>
+            Get country of pierced IP address
+            </summary>
+            <returns>Country of pierced IP address</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetPiercedIPAddressRegion">
+            <summary>
+            Get region of pierced IP address
+            </summary>
+            <returns>Region of pierced IP address</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetPiercedIPAddressCity">
+            <summary>
+            Get city of pierced IP address
+            </summary>
+            <returns>City of pierced IP address</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetPiercedIPAddressOrganization">
+            <summary>
+            Get organization of pierced IP address
+            </summary>
+            <returns>Organization of pierced IP address</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetIPAddress">
+            <summary>
+            Get proxy IP address
+            </summary>
+            <returns>Proxy IP Address</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetIPAddressLatitude">
+            <summary>
+            Get latitude of proxy IP address
+            </summary>
+            <returns>Latitude of proxy IP address</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetIPAddressLongitude">
+            <summary>
+            Get longitude of proxy IP address
+            </summary>
+            <returns>Longitude of proxy IP address</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetIPAddressCountry">
+            <summary>
+            Get country of proxy IP address
+            </summary>
+            <returns>Country of proxy IP address</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetIPAddressRegion">
+            <summary>
+            Get region of proxy IP address
+            </summary>
+            <returns>Region of proxy IP address</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetIPAddressCity">
+            <summary>
+            Get city of proxy IP address
+            </summary>
+            <returns>City of proxy IP address</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetIPAddressOrganization">
+            <summary>
+            Get organization of proxy IP address
+            </summary>
+            <returns>Organization of proxy IP address</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetDateDeviceFirstSeen">
+            <summary>
+            Get date device first seen
+            </summary>
+            <returns>Date device first seen</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetUserAgentString">
+            <summary>
+            Get user agent string
+            </summary>
+            <returns>User agent string</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetDeviceScreenResolution">
+            <summary>
+            Get device screen resolution
+            </summary>
+            <returns>Device screen resolution (HxW - Height by Width)</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetOS">
+            <summary>
+            Get operating system (derived from user agent string)
+            </summary>
+            <returns>OS (operating system)</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetBrowser">
+            <summary>
+            Get browser (derived from user agent string)
+            </summary>
+            <returns>Browser string</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.ToString">
+            <summary>
+            Get the original raw name=value pair string of the response.
+            </summary>
+            <returns>Raw string of the response.</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetRulesTriggered">
+            <summary>
+            Get a Map of the rules triggered by this Response.
+            </summary>
+            <returns>Map of the rules</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetNumberRulesTriggered">
+            <summary>
+            Get the number of rules triggered with the response.
+            </summary>
+            <returns>Number of rules</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetWarnings">
+            <summary>
+            Get a Map of the warnings returned by this Response.
+            </summary>
+            <returns>Get the warnings</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetWarningCount">
+            <summary>
+            Get the number of warnings associated with the response.
+            </summary>
+            <returns>Number of warnings</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetErrors">
+            <summary>
+            Get a map of the errors associated with the response.
+            </summary>
+            <returns>Array of errors</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetErrorCount">
+            <summary>
+            Get the number of errors associated with the response.
+            </summary>
+            <returns>Number of errors</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.HasErrors">
+            <summary>
+            Check if the response has errors.
+            </summary>
+            <returns>True if response has errors, false otherwise.</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetLexisNexisCbdAttributes">
+            <summary>
+            Get LexisNexis Chargeback Defender attribute data associated with
+            the RIS transaction. Please contact your Kount representative to
+            enable support for this feature in your merchant account.
+            </summary>
+            <returns>Map of attributes where the keys are the attribute names
+            and the values are the attribute values.</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetLexisNexisInstantIdAttributes">
+            <summary>
+            Get LexisNexis Instant ID attribute data associated with
+            the RIS transaction. Please contact your Kount representative to
+            enable support for this feature in your merchant account.
+            </summary>
+            <returns>Map of attributes where the keys are the attribute names
+            and the values are the attribute values.</returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetCountersTriggered">
+            <summary>
+            Get a map of the rules counters triggered in the response.
+            </summary>
+            <returns>
+            Map Key: counter name, Value: counter value.
+            </returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetNumberCountersTriggered">
+            <summary>
+            Get the number of rules counters triggered in the response.
+            </summary>
+            <returns>
+            Number of counters triggered
+            </returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetKountCentralCustomerId">
+            <summary>
+            Get the Kount Central Customer ID
+            </summary>
+            <returns>
+            Kount Central Customer ID
+            </returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetKountCentralWarnings">
+            <summary>
+            Get all the Kount Central Warnings for this response
+            </summary>
+            <returns>
+            Kount Central Warnings
+            </returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetKountCentralWarningCount">
+            <summary>
+            Get the number of Kount Central Warnings
+            </summary>
+            <returns>
+            Number of Kount Central Warnings
+            </returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetKountCentralErrors">
+            <summary>
+            Get all the Kount Central Errors for this response
+            </summary>
+            <returns>
+            Kount Central Errors
+            </returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetKountCentralErrorCount">
+            <summary>
+            Get the number of Kount Central Errors
+            </summary>
+            <returns>
+            Number of Kount Central Errors
+            </returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetKountCentralNumberThresholdsTriggered">
+            <summary>
+            Get the number of Kount Central thresholds triggered
+            </summary>
+            <returns>
+            Number of Kount Central thresholds triggered
+            </returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetKountCentralDecision">
+            <summary>
+            Get the Kount Central Decision
+            </summary>
+            <returns>
+            The Kount Central Decision
+            </returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetKountCentralThresholdEvents">
+            <summary>
+            Get list of KcEvent objects for this Response
+            </summary>
+            <returns>
+            List of KcEvent objects
+            </returns>
+        </member>
+        <member name="M:Kount.Ris.Response.GetPrefixedResponseDataDictionary(System.String)">
+            <summary>
+            Get a dictionary of the response data where the keys are the RIS
+            response keys that begin with a specified prefix.
+            </summary>
+            <param name="prefix">Key prefix.</param>
+            <returns>Dictionary of key-value pairs for a specified RIS key
+            prefix.</returns>
+        </member>
+        <member name="T:Kount.Ris.RSA">
+            <summary>
+            RSA Utility class for encrypting PANs <br/>
+            <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
+            <b>Version:</b> 7.0.0. <br/>
+            <b>Copyright:</b> 2020 Kount Inc <br/>
+            </summary>
+        </member>
+        <member name="M:Kount.Ris.RSA.Encrypt(System.String)">
+            <summary>
+            Encrypt a token with an RSA public key
+            </summary>
+            <param name="plainText">Plaintext string</param>
+            <returns>Encrypted string</returns>
+        </member>
+        <member name="M:Kount.Ris.RSA.CompareBytearrays(System.Byte[],System.Byte[])">
+            <summary>
+            Compare byte arrays.
+            </summary>
+            <param name="a">Byte array a for comparison.</param>
+            <param name="b">Byte array b for comparison.</param>
+            <returns>Bool true if byte arrays are equal.</returns>
+        </member>
+        <member name="T:Kount.Ris.Update">
+            <summary>
+            Update class. A bunch of setters for sending transaction update <br/>
+            data to a Kount RIS server.
+            <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
+            <b>Version:</b> 7.0.0. <br/>
+            <b>Copyright:</b> 2020 Kount Inc <br/>
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.Update.RfcbR">
+            <summary>
+            Refund chargeback type refund
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.Update.RfcbC">
+            <summary>
+            Refund chargeback type chargeback
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.Update.logger">
+            <summary>
+            The Logger to use.
+            </summary>
+        </member>
+        <member name="M:Kount.Ris.Update.#ctor">
+            <summary>
+            Constructor. Sets the mode to 'U' by default.
+            Use setMode(char) to change it.
+            </summary>
+        </member>
+        <member name="M:Kount.Ris.Update.#ctor(System.Boolean)">
+            <summary>
+            Constructor. Sets the mode to 'U' by default.
+            Use setMode(char) to change it.
+            </summary>
+            <param name="checkConfiguration">If is true: will check config file if 
+            `Ris.Url`, 
+            `Ris.MerchantId`, 
+            `Ris.Config.Key` and `Ris.Connect.Timeout` are set.</param>
+        </member>
+        <member name="M:Kount.Ris.Update.#ctor(System.Boolean,Kount.Ris.Configuration)">
+            <summary>
+            Constructor. Sets the mode to 'U' by default.
+            Use setMode(char) to change it.
+            </summary>
+            <param name="checkConfiguration">If is true: will check config file if 
+            `Ris.Url`, 
+            `Ris.MerchantId`, 
+            `Ris.Config.Key` and `Ris.Connect.Timeout` are set.</param>
+            <param name="configuration">Configuration class with raw values</param>
+        </member>
+        <member name="M:Kount.Ris.Update.SetMode(System.Char)">
+            <summary>
+            Set the mode of the update.
+            </summary>
+            <param name="mode">Set U or X</param>
+            <exception cref="T:Kount.Ris.IllegalArgumentException">Thrown if
+            parameter is an invalid mode.</exception>
+        </member>
+        <member name="M:Kount.Ris.Update.SetTransactionId(System.String)">
+            <summary>
+            Set the original associated transaction id generated by Kount
+            </summary>
+            <param name="transactionId">Transaction id.</param>
+        </member>
+        <member name="M:Kount.Ris.Update.SetRefundChargeback(System.Char)">
+            <summary>
+            Set if this transaction ended up being a refund or chargback.
+            </summary>
+            <param name="rfcb">Set R or C.</param>
+        </member>
+        <member name="M:Kount.Ris.Update.SetPayPalId(System.String)">
+            <summary>
+            Set the paypal Id
+            </summary>
+            <param name="paypalId">Set paypal Id</param>
+        </member>
+        <member name="T:Kount.Ris.ValidationError">
+            <summary>
+            A class representing a RIS SDK client side validation error.<br/>
+            <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
+            <b>Version:</b> 7.0.0. <br/>
+            <b>Copyright:</b> 2020 Kount Inc <br/>
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.ValidationError.RequiredError">
+            <summary>
+            Missing required field validation error
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.ValidationError.RegexError">
+            <summary>
+            Regular expression validation error
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.ValidationError.LengthError">
+            <summary>
+            Maximum length exceeded validation error
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.ValidationError.error">
+            <summary>
+            The type of error this is.
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.ValidationError.field">
+            <summary>
+            The field.
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.ValidationError.mode">
+            <summary>
+            The RIS mode.
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.ValidationError.value">
+            <summary>
+            Field value.
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.ValidationError.pattern">
+            <summary>
+            Regular expression pattern.
+            </summary>
+        </member>
+        <member name="F:Kount.Ris.ValidationError.maxLength">
+            <summary>
+            Maximum allowable length of a field.
+            </summary>
+        </member>
+        <member name="M:Kount.Ris.ValidationError.#ctor(System.String,System.String)">
+            <summary>
+            Constructor for missing required field.
+            </summary>
+            <param name="field">The name of the bad field</param>
+            <param name="mode">The RIS mode the field is associated with</param>
+        </member>
+        <member name="M:Kount.Ris.ValidationError.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructor for regular expression error.
+            </summary>
+            <param name="field">The name of the bad field</param>
+            <param name="value">The value of the field</param>
+            <param name="pattern">The regular expression violated</param>
+        </member>
+        <member name="M:Kount.Ris.ValidationError.#ctor(System.String,System.String,System.Int32)">
+            <summary>
+            Constructor for maximum length error.
+            </summary>
+            <param name="field">The name of the bad field</param>
+            <param name="value">The value of the field</param>
+            <param name="length">The maximum allowable length</param>
+        </member>
+        <member name="M:Kount.Ris.ValidationError.ToString">
+            <summary>
+            Get the string representation of the error.
+            </summary>
+            <returns>Error message string</returns>
+        </member>
+        <member name="T:Kount.Ris.ValidationException">
+            <summary>
+            Validation Exception.<br/>
+            <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
+            <b>Version:</b> 7.0.0. <br/>
+            <b>Copyright:</b> 2020 Kount Inc <br/>
+            </summary>
+        </member>
+        <member name="M:Kount.Ris.ValidationException.#ctor(System.String)">
+            <summary>
+            Create an exception with an error message
+            </summary>
+            <param name="errorMessage">Error message.</param>
+        </member>
+        <member name="M:Kount.Ris.ValidationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Create an exception with an error message and another exception
+            </summary>
+            <param name="errorMessage">Error message.</param>
+            <param name="innerEx">Inner exception.</param>
+        </member>
+        <member name="P:Kount.Ris.ValidationException.ErrorMessage">
+            <summary>
+            Gets a string of the error message.
+            </summary>
+        </member>
+        <member name="T:Kount.SimpleLogger.File">
+            <summary>
+            A simple file logger.<br/>
+            <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
+            <b>Version:</b> 7.0.0. <br/>
+            <b>Copyright:</b> 2020 Kount Inc <br/>
+            </summary>
+        </member>
+        <member name="F:Kount.SimpleLogger.File.LogDebug">
+            <summary>
+            Debug log level
+            </summary>
+        </member>
+        <member name="F:Kount.SimpleLogger.File.LogInfo">
+            <summary>
+            Info log level
+            </summary>
+        </member>
+        <member name="F:Kount.SimpleLogger.File.LogWarn">
+            <summary>
+            Warn log level
+            </summary>
+        </member>
+        <member name="F:Kount.SimpleLogger.File.LogError">
+            <summary>
+            Error log level
+            </summary>
+        </member>
+        <member name="F:Kount.SimpleLogger.File.LogFatal">
+            <summary>
+            Fatal log level
+            </summary>
+        </member>
+        <member name="F:Kount.SimpleLogger.File.logLevels">
+            <summary>
+            Hashtable of log levels
+            </summary>
+        </member>
+        <member name="F:Kount.SimpleLogger.File.loggerName">
+            <summary>
+            Name of the logger
+            </summary>
+        </member>
+        <member name="F:Kount.SimpleLogger.File.configLogLevel">
+            <summary>
+            Log level in configuration
+            </summary>
+        </member>
+        <member name="F:Kount.SimpleLogger.File.logFilePath">
+            <summary>
+            Logging file path
+            </summary>
+        </member>
+        <member name="P:Kount.SimpleLogger.File.SdkElapsed">
+            <summary>
+            Configurable property. In `app.config` set setting `LOG.SIMPLE.ELAPSED` to <b>ON/OFF</b><br/>
+            example: 
+            <example>`<add key="LOG.SIMPLE.ELAPSED" value="ON" />`</example><br/>
+            In case is not set is `OFF`.
+            </summary>
+        </member>
+        <member name="M:Kount.SimpleLogger.File.#ctor(System.String)">
+            <summary>
+            Constructor for file logger.
+            </summary>
+            <param name="name">Name of the logger</param>
+        </member>
+        <member name="M:Kount.SimpleLogger.File.Debug(System.String)">
+            <summary>
+            Log a debug level message.
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Kount.SimpleLogger.File.Debug(System.String,System.Exception)">
+            <summary>
+            Log a debug level message and exception.
+            </summary>
+            <param name="message">Mesage to log</param>
+            <param name="e">Exception to log</param>
+        </member>
+        <member name="M:Kount.SimpleLogger.File.Info(System.String)">
+            <summary>
+            Log an info level message.
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Kount.SimpleLogger.File.Info(System.String,System.Exception)">
+            <summary>
+            Log an info level message and exception.
+            </summary>
+            <param name="message">Mesage to log</param>
+            <param name="e">Exception to log</param>
+        </member>
+        <member name="M:Kount.SimpleLogger.File.Warn(System.String)">
+            <summary>
+            Log a warn level message.
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Kount.SimpleLogger.File.Warn(System.String,System.Exception)">
+            <summary>
+            Log a warn level message and exception.
+            </summary>
+            <param name="message">Mesage to log</param>
+            <param name="e">Exception to log</param>
+        </member>
+        <member name="M:Kount.SimpleLogger.File.Error(System.String)">
+            <summary>
+            Log an error level message.
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Kount.SimpleLogger.File.Error(System.String,System.Exception)">
+            <summary>
+            Log an error level message and exception.
+            </summary>
+            <param name="message">Mesage to log</param>
+            <param name="e">Exception to log</param>
+        </member>
+        <member name="M:Kount.SimpleLogger.File.Fatal(System.String)">
+            <summary>
+            Log a fatal level message.
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Kount.SimpleLogger.File.Fatal(System.String,System.Exception)">
+            <summary>
+            Log a fatal level message and exception.
+            </summary>
+            <param name="message">Mesage to log</param>
+            <param name="e">Exception to log</param>
+        </member>
+        <member name="M:Kount.SimpleLogger.File.ProcessMessage(System.String,System.String,System.Exception)">
+            <summary>
+            Process a log message, by determining if it should be logged,
+            formatting the message, and logging it.
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="level">Logging level</param>
+            <param name="e">Exception to log</param>
+        </member>
+        <member name="M:Kount.SimpleLogger.File.FormatMessage(System.String,System.String,System.Exception)">
+            <summary>
+            Format a message so it can be logged
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="level">Logging level</param>
+            <param name="e">Exception to log</param>
+            <returns>Formatted message</returns>
+        </member>
+        <member name="M:Kount.SimpleLogger.File.Log(System.String)">
+            <summary>
+            Log a message.
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:Kount.SimpleLogger.File.IsLoggable(System.String)">
+            <summary>
+            Determine if a message should be logged based on the logging
+            level defined in the app configuration.
+            </summary>
+            <param name="level">Logging level of the message</param>
+            <returns>True if the message should be logged, false otherwise</returns>
+        </member>
+        <member name="T:Kount.Util.Base85">
+            <summary>
+            C# implementation of BASE85 encoding. 
+            Based on C code from http://www.stillhq.com/cgi-bin/cvsweb/BASE85/
+            </summary>
+        </member>
+        <member name="F:Kount.Util.Base85.LineLength">
+            <summary>
+            Maximum line length for encoded BASE85 string; 
+            set to zero for one unbroken line.
+            </summary>
+        </member>
+        <member name="M:Kount.Util.Base85.Decode(System.String)">
+            <summary>
+            Decodes an BASE85 encoded string into the original binary data
+            </summary>
+            <param name="s">BASE85 encoded string</param>
+            <returns>byte array of decoded binary data</returns>
+        </member>
+        <member name="M:Kount.Util.Base85.Encode(System.Byte[])">
+            <summary>
+            Encodes binary data into a plaintext BASE85 format string
+            </summary>
+            <param name="ba">binary data to encode</param>
+            <returns>BASE85 encoded string</returns>
+        </member>
+        <member name="T:Kount.Util.Khash">
+            <summary>
+            Class for creating Kount RIS KHASH encoding payment tokens.<br/>
+            <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
+            <b>Version:</b> 7.0.0. <br/>
+            <b>Copyright:</b> 2020 Kount Inc. All Rights Reserved.<br/>
+            </summary>
+        </member>
+        <member name="P:Kount.Util.Khash.ConfigKey">
+            <summary>
+            Getting or Setting Config Key used in hashing method
+            </summary>
+        </member>
+        <member name="M:Kount.Util.Khash.HashPaymentToken(System.String)">
+            <summary>
+            Create a Kount hash of a provided payment token. Payment tokens
+            that can be hashed via this method include: credit card numbers,
+            Paypal payment IDs, Check numbers, Google Checkout IDs, Bill Me
+            Later IDs, and Green Dot MoneyPak IDs.
+            </summary>
+            <param name="token">String to be hashed</param>
+            <returns>String Hashed</returns>
+        </member>
+        <member name="M:Kount.Util.Khash.HashGiftCard(System.Int32,System.String)">
+            <summary>
+            Hash a gift card payment token using the Kount hashing algorithm.
+            </summary>
+            <param name="merchantId">Merchant ID number</param>
+            <param name="cardNumber">Card number to be hashed</param>
+            <returns>String Hashed</returns>
+        </member>
+        <member name="M:Kount.Util.Khash.Hash(System.String)">
+             <summary>
+             Compute a Kount hash of a given plain text string.
+            
+             Preserves the first six characters of the input
+             so that hasked tokens can be categorized
+             by Bank Idenfication Number (BIN).
+             </summary>
+             <param name="plainText">String to be hashed</param>
+             <returns>String Hashed</returns>
+        </member>
+        <member name="M:Kount.Util.Khash.GetBase85ConfigKey(System.String)">
+            <summary>
+            Get Base85 encoded ConfigKey
+            </summary>
+            <returns>encoded config key</returns>
+        </member>
+    </members>
+</doc>

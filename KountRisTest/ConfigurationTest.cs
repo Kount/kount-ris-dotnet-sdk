@@ -1,65 +1,71 @@
-﻿using Kount.Ris;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+﻿
 namespace KountRisTest
 {
-    [TestClass]
+    using Kount.Ris;
+    using Microsoft.Extensions.Configuration;
+    using System.Configuration;
+    using System.IO;
+    using Xunit;
+
+
+
     public class ConfigurationTest
     {
-        public Configuration SUT;
+        public Kount.Ris.Configuration SUT;
 
-        [TestInitialize]
-        public void Setup()
-        {
-            SUT = Configuration.FromAppSettings();
+        
+        public ConfigurationTest()
+        {        
+
+            SUT = Kount.Ris.Configuration.FromAppSettings();
         }
 
-        [TestMethod]
+         [Fact]
         public void FromAppSettings_assigns_Connect_Timeout()
         {
-            Assert.AreEqual(SUT.ConnectTimeout, "10000");
+            Assert.Equal("10000", SUT.ConnectTimeout);
         }
 
-        [TestMethod]
+         [Fact]
         public void FromAppSettings_assigns_MerchantId()
         {
-            Assert.AreEqual(SUT.MerchantId, "000000");
+            Assert.Equal("000000", SUT.MerchantId);
         }
 
-        [TestMethod]
+         [Fact]
         public void FromAppSettings_assigns_API_Key()
         {
-            Assert.AreEqual(SUT.ApiKey, "");
+            Assert.Equal("", SUT.ApiKey);
         }
 
-        [TestMethod]
+         [Fact]
         public void FromAppSettings_assigns_Version()
         {
-            Assert.AreEqual(SUT.Version, "0700");
+            Assert.Equal("0700", SUT.Version);
         }
 
-        [TestMethod]
+         [Fact]
         public void FromAppSettings_assigns_Url()
         {
-            Assert.AreEqual(SUT.URL, "https://risk.beta.kount.net");
+            Assert.Equal("https://risk.test.kount.net", SUT.URL);
         }
 
-        [TestMethod]
+         [Fact]
         public void FromAppSettings_assigns_CertificateFile()
         {
-            Assert.AreEqual(SUT.CertificateFile, "certificate.pfx");
+            Assert.Equal("certificate.pfx", SUT.CertificateFile);
         }
 
-        [TestMethod]
+         [Fact]
         public void FromAppSettings_assigns_PrivateKeyPassword()
         {
-            Assert.AreEqual(SUT.PrivateKeyPassword, "11111111111111111");
+            Assert.Equal("11111111111111111", SUT.PrivateKeyPassword);
         }
 
-        [TestMethod]
+         [Fact]
         public void FromAppSettings_assigns_ConfigKey()
         {
-            Assert.AreEqual(SUT.ConfigKey, null);
+            Assert.NotNull(SUT.ConfigKey);
         }
     }
 }

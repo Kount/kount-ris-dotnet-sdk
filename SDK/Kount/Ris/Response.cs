@@ -5,8 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Kount.Ris
 {
-    using Kount.Log.Binding;
-    using Kount.Log.Factory;
+
     using System;
     using System.Collections;
     using System.Collections.Generic;
@@ -16,14 +15,14 @@ namespace Kount.Ris
     /// Response immutable data object containing data from the RIS server.<br/>
     /// <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
     /// <b>Version:</b> 7.0.0. <br/>
-    /// <b>Copyright:</b> 2010 Keynetics Inc <br/>
+    /// <b>Copyright:</b> 2020 Kount Inc <br/>
     /// </summary>
     public class Response
     {
         /// <summary>
         /// The logger to use
         /// </summary>
-        private ILogger logger;
+        private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(typeof(Response));
 
         /// <summary>
         /// Response hashtable
@@ -47,9 +46,7 @@ namespace Kount.Ris
         /// populating a hash for getters.</param>
         public Response(string raw)
         {
-            ILoggerFactory factory = LogFactory.GetLoggerFactory();
-            this.logger = factory.GetLogger(typeof(Response).ToString());
-            this.logger.Debug("RIS Response:\n" + raw);
+            logger.Debug("RIS Response:\n" + raw);
             this.raw = raw;
             string[] lines = Regex.Split(raw, "[\r\n]+");
             foreach (string line in lines)
@@ -153,7 +150,7 @@ namespace Kount.Ris
             string message = "The method " +
                 "Kount.Ris.Response.GetReason() is obsolete. Use " +
                 "Kount.Ris.Response.GetReasonCode() instead.";
-            this.logger.Info(message);
+            logger.Info(message);
             return (string)this.response["REAS"];
         }
 
@@ -174,9 +171,9 @@ namespace Kount.Ris
         {
             return (string)this.response["SCOR"];
         }
-		
-		
-		/// <summary>
+
+
+        /// <summary>
         /// Get the Kount Omniscore.
         /// </summary>
         /// <returns>1 to 99.9. The highter the score, the less risk.</returns>
@@ -184,7 +181,7 @@ namespace Kount.Ris
         {
             return (string)response["OMNISCORE"];
         }
-		
+
 
         /// <summary>
         /// Get the geo location of the client
@@ -680,7 +677,7 @@ namespace Kount.Ris
             }
             catch (Exception nfe)
             {
-                this.logger.Error(
+                logger.Error(
                         "RIS returned a RULES_TRIGGERED field " +
                         "which could not be parsed to a number",
                         nfe);
@@ -724,7 +721,7 @@ namespace Kount.Ris
             }
             catch (Exception nfe)
             {
-                this.logger.Error(
+                logger.Error(
                         "RIS returned a WARNING_COUNT field " +
                         "which could not be parsed to a number",
                         nfe);
@@ -768,7 +765,7 @@ namespace Kount.Ris
             }
             catch (Exception nfe)
             {
-                this.logger.Error(
+                logger.Error(
                         "RIS returned an ERROR_COUNT field which could " +
                         "not be parsed to a number",
                         nfe);
@@ -851,7 +848,7 @@ namespace Kount.Ris
             }
             catch (Exception nfe)
             {
-                this.logger.Error(
+                logger.Error(
                     "RIS returned a COUNTERS_TRIGGERED field " +
                     "which could not be parsed to a number",
                     nfe);
@@ -908,7 +905,7 @@ namespace Kount.Ris
             }
             catch (Exception e)
             {
-                this.logger.Error("KC_WARNING_COUNT doesn't contain a number", e);
+                logger.Error("KC_WARNING_COUNT doesn't contain a number", e);
             }
 
             return count;
@@ -951,7 +948,7 @@ namespace Kount.Ris
             }
             catch (Exception e)
             {
-                this.logger.Error("KC_ERROR_COUNT doesn't contain a number", e);
+                logger.Error("KC_ERROR_COUNT doesn't contain a number", e);
             }
 
             return count;
@@ -976,7 +973,7 @@ namespace Kount.Ris
             }
             catch (Exception e)
             {
-                this.logger.Error("KC_ERROR_COUNT doesn't contain a number", e);
+                logger.Error("KC_ERROR_COUNT doesn't contain a number", e);
             }
 
             return count;
@@ -1039,6 +1036,29 @@ namespace Kount.Ris
             }
 
             return data;
+        }
+
+        /// <summary>
+        /// Get Previously WhiteListed
+        /// </summary>
+        /// <returns>
+        /// PREVIOUSLY_WHITELISTED
+        /// </returns>
+        public string GetPreviouslyWhiteListed()
+        {
+            return (string)this.response["PREVIOUSLY_WHITELISTED"];
+        }
+
+
+        /// <summary>
+        /// Get 3d Secure Merchant Response
+        /// </summary>
+        /// <returns>
+        /// 3D_SECURE_MERCHANT_RESPONSE
+        /// </returns>
+        public string Get3dSecureMerchantResponse()
+        {
+            return (string)this.response["3D_SECURE_MERCHANT_RESPONSE"];
         }
     }
 }

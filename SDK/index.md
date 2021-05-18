@@ -1,7 +1,5 @@
 
-Beat Fraud and boost Sales
-==========================================
-
-We have the resources **developers** need to add enterprise-level fraud protection to your ecommerce site. 
-Whether you sell goods and services, transfer money, create accounts or take online applications, 
-Kount provides award-winning protection that helps merchants of all types Boost Sales and Beat Fraud. 
+# This is the **HOMEPAGE**.
+Refer to [Markdown](http://daringfireball.net/projects/markdown/) for how to write markdown files.
+## Quick Start Notes:
+1. Add images to *images* folder if the file is referencing an image.

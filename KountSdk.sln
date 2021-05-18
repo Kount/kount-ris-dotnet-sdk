@@ -1,18 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.645
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KountRisSdk", "SDK\KountRisSdk.csproj", "{623B98A9-3DE7-431F-A582-D102F4F2CD3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KountRisSdk", "SDK\KountRisSdk.csproj", "{136CADD7-FACD-458D-BB59-908819CEF3DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KountRisTest", "KountRisTest\KountRisTest.csproj", "{204F2B91-82BB-461E-9300-53A2146FD1F2}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{A3B099B0-AA9B-4414-95F5-B687556CB610}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{D7DE17B0-8A8C-4901-9B18-800238618BB4}"
-	ProjectSection(SolutionItems) = preProject
-		docs\spec_guide.pdf = docs\spec_guide.pdf
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "builds", "builds", "{33A324A3-5FB6-4E4B-BBE8-1308AD39DED7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "builds", "builds", "{B01ED076-3231-4E0D-B9F1-14DDE0DE065F}"
 	ProjectSection(SolutionItems) = preProject
 		builds\build_sdk.bat = builds\build_sdk.bat
 		builds\buildSdk.ps1 = builds\buildSdk.ps1
@@ -24,7 +19,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "builds", "builds", "{33A324
 		builds\zipBuild.ps1 = builds\zipBuild.ps1
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KountRisConfigTest", "KountRisConfigTest\KountRisConfigTest.csproj", "{CB941125-AA04-4176-A8FA-7292289ACEFA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KountRisTest", "KountRisTest\KountRisTest.csproj", "{2FFA458C-091B-464A-9665-89F9E4F5AE4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KountRisConfigTest", "KountRisConfigTest\KountRisConfigTest.csproj", "{9884199E-2F26-47AC-9D1D-665AA765E811}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,20 +29,23 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{623B98A9-3DE7-431F-A582-D102F4F2CD3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{623B98A9-3DE7-431F-A582-D102F4F2CD3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{623B98A9-3DE7-431F-A582-D102F4F2CD3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{623B98A9-3DE7-431F-A582-D102F4F2CD3D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{204F2B91-82BB-461E-9300-53A2146FD1F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{204F2B91-82BB-461E-9300-53A2146FD1F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{204F2B91-82BB-461E-9300-53A2146FD1F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{204F2B91-82BB-461E-9300-53A2146FD1F2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CB941125-AA04-4176-A8FA-7292289ACEFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CB941125-AA04-4176-A8FA-7292289ACEFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CB941125-AA04-4176-A8FA-7292289ACEFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CB941125-AA04-4176-A8FA-7292289ACEFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{136CADD7-FACD-458D-BB59-908819CEF3DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{136CADD7-FACD-458D-BB59-908819CEF3DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{136CADD7-FACD-458D-BB59-908819CEF3DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{136CADD7-FACD-458D-BB59-908819CEF3DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FFA458C-091B-464A-9665-89F9E4F5AE4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FFA458C-091B-464A-9665-89F9E4F5AE4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FFA458C-091B-464A-9665-89F9E4F5AE4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FFA458C-091B-464A-9665-89F9E4F5AE4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9884199E-2F26-47AC-9D1D-665AA765E811}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9884199E-2F26-47AC-9D1D-665AA765E811}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9884199E-2F26-47AC-9D1D-665AA765E811}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9884199E-2F26-47AC-9D1D-665AA765E811}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {52764E1C-43C4-4C7C-8D28-045B0D658306}
 	EndGlobalSection
 EndGlobal

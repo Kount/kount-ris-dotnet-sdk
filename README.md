@@ -1,17 +1,17 @@
 # README #
 
-Kount .NET SDK
+Kount .NET Standard SDK
 
 ### What is this repository for? ###
 
 * Contains sources, tests, and resources for the Kount .NET SDK
-* SDK Version: `7.1.0` 
+* SDK Version: `1.0.0` 
    
 ### How do I get set up? ###
 
-* [Configuration](https://github.com/Kount/kount-ris-dotnet-sdk/wiki/Adding-Configuration)
-* [Dependencies](https://github.com/Kount/kount-ris-dotnet-sdk/wiki/Installation#prerequisites)
-* [How to run tests](https://github.com/Kount/kount-ris-dotnet-sdk/wiki/Installation#steps)
+* [Configuration](https://github.com/Kount/kount-ris-dotnet-standard-sdk/wiki/Adding-Configuration)
+* [Dependencies](https://github.com/Kount/kount-ris-dotnet-standard-sdk/wiki/Installation#prerequisites)
+* [How to run tests](https://github.com/Kount/kount-ris-dotnet-standard-sdk/wiki/Installation#steps)
 
 ### Contribution guidelines ###
 

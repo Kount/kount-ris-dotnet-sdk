@@ -14,7 +14,7 @@ namespace Kount.Ris
     /// RSA Utility class for encrypting PANs <br/>
     /// <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
     /// <b>Version:</b> 7.0.0. <br/>
-    /// <b>Copyright:</b> 2010 Keynetics Inc <br/>
+    /// <b>Copyright:</b> 2020 Kount Inc <br/>
     /// </summary>
     public class RSA
     {

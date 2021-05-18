@@ -1,4 +1,6 @@
+using Microsoft.Extensions.Configuration;
 using System.Configuration;
+using System.IO;
 
 namespace Kount.Ris
 {
@@ -13,23 +15,51 @@ namespace Kount.Ris
         /// <returns>Configuration class with raw values.</returns>
         public static Configuration FromAppSettings()
         {
-            return new Configuration()
+            var config = new Configuration();
+            if (ConfigurationManager.AppSettings.AllKeys.Length != 0 && ConfigurationManager.AppSettings["Ris.MerchantId"] != null && ConfigurationManager.AppSettings["Ris.API.Key"] != null)
+            {           
+
+                config = new Configuration()
+                {
+                    MerchantId = ConfigurationManager.AppSettings["Ris.MerchantId"],
+                    URL = ConfigurationManager.AppSettings["Ris.Url"],
+                    ConfigKey = ConfigurationManager.AppSettings["Ris.Config.Key"],
+                    ConnectTimeout = ConfigurationManager.AppSettings["Ris.Connect.Timeout"],
+                    Version = ConfigurationManager.AppSettings["Ris.Version"],
+                    ApiKey = ConfigurationManager.AppSettings["Ris.API.Key"],
+                    CertificateFile = ConfigurationManager.AppSettings["Ris.CertificateFile"],
+                    PrivateKeyPassword = ConfigurationManager.AppSettings["Ris.PrivateKeyPassword"],
+                    LogSimpleElapsed = ConfigurationManager.AppSettings["LOG.SIMPLE.ELAPSED"]
+                };
+            }
+            else if (File.Exists("appsettings.json"))
             {
-                MerchantId = ConfigurationManager.AppSettings["Ris.MerchantId"],
-                URL = ConfigurationManager.AppSettings["Ris.Url"],
-                ConfigKey = ConfigurationManager.AppSettings["Ris.Config.Key"],
-                ConnectTimeout = ConfigurationManager.AppSettings["Ris.Connect.Timeout"],
-                Version = ConfigurationManager.AppSettings["Ris.Version"],
-                ApiKey = ConfigurationManager.AppSettings["Ris.API.Key"],
-                CertificateFile = ConfigurationManager.AppSettings["Ris.CertificateFile"],
-                PrivateKeyPassword = ConfigurationManager.AppSettings["Ris.PrivateKeyPassword"],
-            };
+                var builder = new ConfigurationBuilder()
+                 .SetBasePath(Directory.GetCurrentDirectory())
+                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+                IConfigurationRoot configuration = builder.Build();
+
+                config = new Configuration()
+                {
+                    MerchantId = configuration.GetConnectionString("Ris.MerchantId"),
+                    URL = configuration.GetConnectionString("Ris.Url"),
+                    ConfigKey = configuration.GetConnectionString("Ris.Config.Key"),
+                    ConnectTimeout = configuration.GetConnectionString("Ris.Connect.Timeout"),
+                    Version = configuration.GetConnectionString("Ris.Version"),
+                    ApiKey = configuration.GetConnectionString("Ris.API.Key"),
+                    CertificateFile = configuration.GetConnectionString("Ris.CertificateFile"),
+                    PrivateKeyPassword = configuration.GetConnectionString("Ris.PrivateKeyPassword"),
+                };
+            }        
+
+            return config;
         }
 
         /// <summary>
         /// Six digit identifier issued by Kount.
         /// </summary>
-        public string MerchantId {get; set; }
+        public string MerchantId { get; set; }
 
         /// <summary>
         /// HTTPS URL path to the company's servers provided in boarding documentation from Kount.
@@ -65,5 +95,10 @@ namespace Kount.Ris
         /// Password used to export the certificate
         /// </summary>
         public string PrivateKeyPassword { get; set; }
+
+        /// <summary>
+        /// Read LogElapsedTime from config
+        /// </summary>
+        public string LogSimpleElapsed { get; set; }
     }
 }

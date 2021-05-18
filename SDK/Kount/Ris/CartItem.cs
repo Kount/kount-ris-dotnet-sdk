@@ -9,7 +9,7 @@ namespace Kount.Ris
     /// Shopping cart item data object.<br/>
     /// <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
     /// <b>Version:</b> 7.0.0. <br/>
-    /// <b>Copyright:</b> 2010 Keynetics Inc <br/>
+    /// <b>Copyright:</b> 2020 Kount Inc <br/>
     /// </summary>
     public class CartItem
     {

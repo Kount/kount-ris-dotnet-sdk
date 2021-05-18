@@ -5,8 +5,6 @@
 //-----------------------------------------------------------------------
 namespace Kount.Ris
 {
-    using Kount.Log.Binding;
-    using Kount.Log.Factory;
     using System;
 
     /// <summary>
@@ -14,7 +12,7 @@ namespace Kount.Ris
     /// data to a Kount RIS server.
     /// <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
     /// <b>Version:</b> 7.0.0. <br/>
-    /// <b>Copyright:</b> 2010 Keynetics Inc <br/>
+    /// <b>Copyright:</b> 2020 Kount Inc <br/>
     /// </summary>
     public class Update : Kount.Ris.Request
     {
@@ -31,7 +29,7 @@ namespace Kount.Ris
         /// <summary>
         /// The Logger to use.
         /// </summary>
-        private ILogger logger;
+        private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(typeof(Update));
 
         /// <summary>
         /// Constructor. Sets the mode to 'U' by default.
@@ -39,8 +37,6 @@ namespace Kount.Ris
         /// </summary>
         public Update() : base()
         {
-            ILoggerFactory factory = LogFactory.GetLoggerFactory();
-            this.logger = factory.GetLogger(typeof(Update).ToString());
             this.SetMode(Enums.UpdateTypes.ModeU);
         }
 
@@ -54,8 +50,6 @@ namespace Kount.Ris
         /// `Ris.Config.Key` and `Ris.Connect.Timeout` are set.</param>
         public Update(bool checkConfiguration) : base(checkConfiguration)
         {
-            ILoggerFactory factory = LogFactory.GetLoggerFactory();
-            this.logger = factory.GetLogger(typeof(Update).ToString());
             this.SetMode(Enums.UpdateTypes.ModeU);
         }
 
@@ -70,8 +64,6 @@ namespace Kount.Ris
         /// <param name="configuration">Configuration class with raw values</param>
         public Update(bool checkConfiguration, Configuration configuration) : base(checkConfiguration, configuration)
         {
-            ILoggerFactory factory = LogFactory.GetLoggerFactory();
-            this.logger = factory.GetLogger(typeof(Update).ToString());
             this.SetMode(Enums.UpdateTypes.ModeU);
         }
 
@@ -83,7 +75,7 @@ namespace Kount.Ris
         /// parameter is an invalid mode.</exception>
         protected override void SetMode(char mode)
         {
-            if (((char)Enums.UpdateTypes.ModeU != mode) 
+            if (((char)Enums.UpdateTypes.ModeU != mode)
                 && ((char)Enums.UpdateTypes.ModeX != mode))
             {
                 throw new Kount.Ris.IllegalArgumentException(
@@ -127,7 +119,7 @@ namespace Kount.Ris
             string message = "The method " +
                 "Kount.Ris.Update.SetPaypalId() is obsolete. " +
                 "Use Kount.Ris.Update.SetPaypalPayment(bool) instead.";
-            this.logger.Info(message);
+            logger.Info(message);
             this.SetPayment(Enums.PaymentTypes.Paypal, paypalId);
         }
     }

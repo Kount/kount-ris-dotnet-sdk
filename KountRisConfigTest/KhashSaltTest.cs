@@ -1,16 +1,21 @@
-﻿namespace KountRisConfigTest
+﻿
+namespace KountRisConfigTest
 {
     using Kount.Ris;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Xunit;
+
+
 
     /// <summary>
     /// Khash Salt Test samples
     /// <b>MerchantId:</b> 999666
     /// <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
     /// <b>Version:</b> 0700 <br/>
-    /// <b>Copyright:</b> 2017 Kount Inc. All Rights Reserved<br/>
-    /// </summary>
-    [TestClass]
+    /// <b>Copyright:</b> 2019 Kount Inc. All Rights Reserved<br/>
+    /// </summary> 
+
+
+
     public class KhashSaltTest
     {
         private const string CARD_NUM_1 = "4111111111111111";
@@ -24,7 +29,8 @@
         /// raw input 4111111111111111,
         /// expected KHASH 411111WMS5YA6FUZA1KC
         /// </summary>
-        [TestMethod]
+       
+        [Fact]
         public void TestKhashCreditCard1()
         {
             string _sid = null;
@@ -34,7 +40,8 @@
 
             var hashCardNum = inquiry.GetParam("PTOK");
 
-            Assert.IsTrue("411111WMS5YA6FUZA1KC".Equals(hashCardNum), $"Wrong result: {hashCardNum}. Expected KHASH 411111WMS5YA6FUZA1KC.");
+            Assert.True("411111WMS5YA6FUZA1KC".Equals(hashCardNum), $"Wrong result: {hashCardNum}. Expected KHASH 411111WMS5YA6FUZA1KC.");
+
         }
 
         /// <summary>
@@ -42,7 +49,8 @@
         /// raw input 5199185454061655,
         /// expected KHASH 5199182NOQRXNKTTFL11
         /// </summary>
-        [TestMethod]
+
+        [Fact]
         public void TestKhashCreditCard2()
         {
             string _sid = null;
@@ -52,7 +60,7 @@
 
             var hashCardNum = inquiry.GetParam("PTOK");
 
-            Assert.IsTrue("5199182NOQRXNKTTFL11".Equals(hashCardNum), $"Wrong result: {hashCardNum}. Expected KHASH 5199182NOQRXNKTTFL11.");
+            Assert.True("5199182NOQRXNKTTFL11".Equals(hashCardNum), $"Wrong result: {hashCardNum}. Expected KHASH 5199182NOQRXNKTTFL11.");
         }
 
         /// <summary>
@@ -60,7 +68,8 @@
         /// raw input 4259344583883,
         /// expected KHASH 425934FEXQI1QS6TH2O5
         /// </summary>
-        [TestMethod]
+
+        [Fact]
         public void TestKhashCreditCard3()
         {
             string _sid = null;
@@ -70,7 +79,7 @@
 
             var hashCardNum = inquiry.GetParam("PTOK");
 
-            Assert.IsTrue("425934FEXQI1QS6TH2O5".Equals(hashCardNum), $"Wrong result: {hashCardNum}. Expected KHASH 425934FEXQI1QS6TH2O5.");
+            Assert.True("425934FEXQI1QS6TH2O5".Equals(hashCardNum), $"Wrong result: {hashCardNum}. Expected KHASH 425934FEXQI1QS6TH2O5.");
         }
 
         /// <summary>
@@ -78,7 +87,7 @@
         /// raw input 4111111111111111,
         /// expected KHASH 666666WMS5YA6FUZA1KC
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void TestKhashGiftCard1()
         {
             string _sid = null;
@@ -92,7 +101,7 @@
 
             var hashCardNum = inquiry.GetParam("PTOK");
 
-            Assert.IsTrue("666666WMS5YA6FUZA1KC".Equals(hashCardNum), $"Wrong result: {hashCardNum}. Expected KHASH 666666WMS5YA6FUZA1KC.");
+            Assert.True("666666WMS5YA6FUZA1KC".Equals(hashCardNum), $"Wrong result: {hashCardNum}. Expected KHASH 666666WMS5YA6FUZA1KC.");
         }
 
         /// <summary>
@@ -100,7 +109,7 @@
         /// raw input 5199185454061655,
         /// expected KHASH 6666662NOQRXNKTTFL11
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void TestKhashGiftCard2()
         {
             string _sid = null;
@@ -114,7 +123,7 @@
 
             var hashCardNum = inquiry.GetParam("PTOK");
 
-            Assert.IsTrue("6666662NOQRXNKTTFL11".Equals(hashCardNum), $"Wrong result: {hashCardNum}. Expected KHASH 6666662NOQRXNKTTFL11.");
+            Assert.True("6666662NOQRXNKTTFL11".Equals(hashCardNum), $"Wrong result: {hashCardNum}. Expected KHASH 6666662NOQRXNKTTFL11.");
         }
 
         /// <summary>
@@ -122,7 +131,7 @@
         /// raw input 4259344583883,
         /// expected KHASH 666666FEXQI1QS6TH2O5
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void TestKhashGiftCard3()
         {
             string _sid = null;
@@ -136,8 +145,10 @@
 
             var hashCardNum = inquiry.GetParam("PTOK");
 
-            Assert.IsTrue("666666FEXQI1QS6TH2O5".Equals(hashCardNum), $"Wrong result: {hashCardNum}. Expected KHASH 666666FEXQI1QS6TH2O5.");
+            Assert.True("666666FEXQI1QS6TH2O5".Equals(hashCardNum), $"Wrong result: {hashCardNum}. Expected KHASH 666666FEXQI1QS6TH2O5.");
         }
+
+
 
     }
 }
