@@ -5,7 +5,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<PackageId>Kount.Net.RisSDK</PackageId>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Version>7.1.0</Version>
+    <Version>8.0.0</Version>
 	<Authors>Kount Inc.</Authors>
   <Company>Kount</Company>
   <PackageLicenseUrl>https://kount.com/</PackageLicenseUrl>
