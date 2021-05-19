@@ -5,7 +5,7 @@ Kount .NET SDK
 ### What is this repository for? ###
 
 * Contains sources, tests, and resources for the Kount .NET SDK
-* SDK Version: `7.1.0` 
+* SDK Version: `8.0.0` 
    
 ### How do I get set up? ###
 
@@ -15,7 +15,8 @@ Kount .NET SDK
 
 ### Contribution guidelines ###
 
-* [Writing tests](https://msdn.microsoft.com/en-us/library/hh598960.aspx)
+* [Writing tests](https://msdn.microsoft.com/en-us/library/hh598960.aspx , 
+                 https://docs.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-dotnet-test)
 * New features development / bug fixes should be implemented in their own branch having a meaningful name. Create a pull request, assign a reviewer, and respond to comments.
 * Code review -- if you are the assigned reviewer, check for
     * correct usage of programming language tools

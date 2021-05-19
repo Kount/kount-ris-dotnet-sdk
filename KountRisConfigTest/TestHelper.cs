@@ -10,9 +10,7 @@ namespace KountRisConfigTest
     using System;
 
     public class TestHelper
-    {
-        //public const string TEST_API_KEY = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI5OTk2NjYiLCJhdWQiOiJLb3VudC4xIiwiaWF0IjoxNDg4NTYzMzgzLCJzY3AiOnsia2EiOm51bGwsImtjIjpudWxsLCJhcGkiOmZhbHNlLCJyaXMiOnRydWV9fQ.u8ycf3GuUKKHpNsR8BL40VxLDGFMEpO59k6cYcku9Tc";
-        //public const int TEST_MERCHANT_ID = 999666;
+    {    
 
         /// <summary>
         /// Payment Type
@@ -132,12 +130,12 @@ namespace KountRisConfigTest
         /// <summary>
         /// Total amount in currency submitted in lowest currency factor
         /// </summary>
-        private const int TOTL = 123456;
+        private const long TOTL = 123456;
 
         /// <summary>
         /// Total cash amount in currency submitted
         /// </summary>
-        private const int CASH = 4444;
+        private const long CASH = 4444;
 
         /// <summary>
         /// Risk Inquiry Service Mode

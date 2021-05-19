@@ -3,13 +3,16 @@
 //     Copyright Kount Inc. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
+
 namespace KountRisTest
 {
     using Kount.Enums;
     using Kount.Ris;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Xunit;
     using System;
     using System.Collections;
+    using Microsoft.Extensions.Configuration;
+    using System.IO;
     using System.Configuration;
 
     /// <summary>
@@ -20,11 +23,9 @@ namespace KountRisTest
     /// <b>Version:</b> 0700 <br/>
     /// <b>Copyright:</b> 2017 Kount Inc. All Rights Reserved.<br/>
     /// </summary>
-    [TestClass]
+
     public class PredictiveResponseTest
     {
-        private const string API_KEY = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI5OTk2NjciLCJhdWQiOiJLb3VudC4xIiwiaWF0IjoxNDk0NTM1OTE2LCJzY3AiOnsia2EiOm51bGwsImtjIjpudWxsLCJhcGkiOmZhbHNlLCJyaXMiOnRydWV9fQ.KK3zG4dMIhTIaE5SeCbej1OAFhZifyBswMPyYFAVRrM";
-        private const int MERCHANT_ID = 999667;
 
         /// <summary>
         /// Email of Merchant
@@ -68,7 +69,7 @@ namespace KountRisTest
 
         private string _sid;
         private string _orderNum;
-
+               
         private Inquiry CreateInquiry()
         {
             Inquiry inquiry = new Inquiry(false);
@@ -80,15 +81,7 @@ namespace KountRisTest
 
             _orderNum = uniq.Substring(0, 10);
             inquiry.SetUnique(uniq);
-            inquiry.SetOrderNumber(_orderNum);
-
-            string apiKey = ConfigurationManager.AppSettings["Ris.API.Key"];
-            if (String.IsNullOrEmpty(apiKey))
-            {
-                inquiry.SetMerchantId(MERCHANT_ID); // 999667
-                inquiry.SetApiKey(API_KEY);
-            }
-
+            inquiry.SetOrderNumber(_orderNum);          
             inquiry.SetEmail(EMAL);
             inquiry.SetMode(InquiryTypes.ModeQ);
 
@@ -115,7 +108,7 @@ namespace KountRisTest
         /// Produces RIS output, AUTO=R
         /// Email input will need to be, EMAL=predictive @kount.com
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void PredictiveResponseScore42AutoR()
         {
             Inquiry inquiry = CreateInquiry();
@@ -131,13 +124,13 @@ namespace KountRisTest
             Response response = inquiry.GetResponse();
             // optional getter
             var errors = response.GetErrors();
-            Assert.IsTrue(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
+            Assert.True(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
 
             var score = response.GetScore();
-            Assert.IsTrue("42".Equals(score), "Inquiry failed!   Expected Score=42.");
+            Assert.True("42".Equals(score), "Inquiry failed!   Expected Score=42.");
 
             var auto = response.GetAuto();
-            Assert.IsTrue("R".Equals(auto), "Inquiry failed!  Expected Decision=R");
+            Assert.True("R".Equals(auto), "Inquiry failed!  Expected Decision=R");
         }
 
         /// <summary>
@@ -151,7 +144,7 @@ namespace KountRisTest
         /// UDF[~K!_GEOX]=NG
         /// Email input will need to be, EMAL=predictive @kount.com
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void PredictiveResponseScore42AutoD()
         {
             Inquiry inquiry = CreateInquiry();
@@ -168,16 +161,16 @@ namespace KountRisTest
             Response response = inquiry.GetResponse();
             // optional getter
             var errors = response.GetErrors();
-            Assert.IsTrue(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
+            Assert.True(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
 
             var score = response.GetScore();
-            Assert.IsTrue("42".Equals(score), "Inquiry failed!   Expected Score=42.");
+            Assert.True("42".Equals(score), "Inquiry failed!   Expected Score=42.");
 
             var auto = response.GetAuto();
-            Assert.IsTrue("D".Equals(auto), "Inquiry failed!  Expected Decision=D");
+            Assert.True("D".Equals(auto), "Inquiry failed!  Expected Decision=D");
 
             var geox = response.GetGeox();
-            Assert.IsTrue("NG".Equals(geox), "Inquiry failed!  Expected GEOX=NG");
+            Assert.True("NG".Equals(geox), "Inquiry failed!  Expected GEOX=NG");
         }
 
         /// <summary>
@@ -188,7 +181,7 @@ namespace KountRisTest
         /// ERRO=601
         /// Email input will need to be, EMAL=predictive @kount.com
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void PredictiveResponseScore18ModeE()
         {
             Inquiry inquiry = CreateInquiry();
@@ -205,14 +198,14 @@ namespace KountRisTest
             Response response = inquiry.GetResponse();
             // optional getter
             var errors = response.GetErrors();
-            Assert.IsTrue(errors.Count == 1, String.Join(Environment.NewLine, errors, "Errors are not equals to 1!"));
+            Assert.True(errors.Count == 1, String.Join(Environment.NewLine, errors, "Errors are not equals to 1!"));
 
             var mode = response.GetMode();
-            Assert.IsTrue("E".Equals(mode), "Inquiry failed!  Expected Mode=E");
+            Assert.True("E".Equals(mode), "Inquiry failed!  Expected Mode=E");
 
             var err0 = errors[0];
             string errCode = err0.Substring(0, 3);
-            Assert.IsTrue("601".Equals(errCode), "Inquiry failed!  Expected ERRO=601");
+            Assert.True("601".Equals(errCode), "Inquiry failed!  Expected ERRO=601");
         }
     }
 }

@@ -3,16 +3,20 @@
 //     Copyright  Kount Inc. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
+
 namespace KountRisTest
 {
     using Kount.Ris;
     using Kount.Enums;
     using Kount.Util;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Xunit;
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Text.RegularExpressions;
+    using Microsoft.Extensions.Configuration;
+    using System.Configuration;
+    using System.IO;
 
     /// <summary>
     /// Inquiry Test samples with MASK parameter 
@@ -20,9 +24,9 @@ namespace KountRisTest
     /// <b>MerchantId:</b> 999666
     /// <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
     /// <b>Version:</b> 0700 <br/>
-    /// <b>Copyright:</b> 2017 Kount Inc. All Rights Reserved<br/>
+    /// <b>Copyright:</b> 2019 Kount Inc. All Rights Reserved<br/>
     /// </summary>
-    [TestClass]
+
     public class MaskInquiryTest
     {
         /// <summary>
@@ -34,14 +38,28 @@ namespace KountRisTest
         //Fields
         private string _sid = "";
         private string _orderNum = "";
-
+        private int merchentID;
+        private string apiKey;
         /// <summary>
         /// <b>TEST 1</b>
         /// Mode Q call,
         /// One cart item, one rule triggered,
         /// approval status of REVIEW is returned
         /// </summary>
-        [TestMethod]
+        /// 
+
+        public MaskInquiryTest()
+        {
+            var builder = new ConfigurationBuilder()
+             .SetBasePath(Directory.GetCurrentDirectory())
+             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+            IConfigurationRoot configuration = builder.Build();
+
+           this.merchentID = int.Parse(configuration.GetConnectionString("Ris.MerchantId"));
+           this.apiKey = configuration.GetConnectionString("Ris.API.Key");
+        }
+        [Fact]
         public void MaskRisQOneItemRequiredFieldsOneRuleReview()
         {
             Inquiry inquiry = TestHelper.CreateInquiryMasked(PTOK, out _sid, out _orderNum);
@@ -54,22 +72,22 @@ namespace KountRisTest
             Response response = inquiry.GetResponse();
 
             var errors = response.GetErrors();
-            Assert.IsTrue(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
+            Assert.True(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
 
             var auto = response.GetAuto();
-            Assert.IsTrue("R".Equals(auto), "Inquiry failed!  Approval Status is not equal to R");
+            Assert.True("R".Equals(auto), "Inquiry failed!  Approval Status is not equal to R");
 
             var warnings = response.GetWarnings();
-            Assert.IsTrue(warnings.Count == 0, String.Join(Environment.NewLine, warnings, "There are warnings in response!"));
+            Assert.True(warnings.Count == 0, String.Join(Environment.NewLine, warnings, "There are warnings in response!"));
 
             var sid = response.GetSessionId();
-            Assert.IsTrue(_sid.Equals(sid), "Inquiry failed! Wrong session ID");
+            Assert.True(_sid.Equals(sid), "Inquiry failed! Wrong session ID");
 
             var orderNum = response.GetOrderNumber();
-            Assert.IsTrue(_orderNum.Equals(orderNum), "Inquiry failed! Wrong order number.");
+            Assert.True(_orderNum.Equals(orderNum), "Inquiry failed! Wrong order number.");
 
             var rulesTrigg = response.GetRulesTriggered();
-            Assert.IsTrue(rulesTrigg.Count == 1, "Inquiry failed! RULES TRIGGERED is not 1");
+            Assert.True(rulesTrigg.Count == 1, "Inquiry failed! RULES TRIGGERED is not 1");
         }
 
         /// <summary>
@@ -77,7 +95,7 @@ namespace KountRisTest
         /// Mode Q call with multiple items in cart, two rules triggered, an optional fields included,
         /// approval status of DECLINED is returned
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void MaskRisQMultiCartItemsTwoOptionalFieldsTwoRulesDecline()
         {
             Inquiry inquiry = TestHelper.CreateInquiryMasked(PTOK, out _sid, out _orderNum);
@@ -96,23 +114,23 @@ namespace KountRisTest
             Response response = inquiry.GetResponse();
             // optional getter
             var errors = response.GetErrors();
-            Assert.IsTrue(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
+            Assert.True(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
 
             var auto = response.GetAuto();
-            Assert.IsTrue("D".Equals(auto), "Inquiry failed! Approval Status is not equal to D");
+            Assert.True("D".Equals(auto), "Inquiry failed! Approval Status is not equal to D");
 
             var warnings = response.GetWarnings();
-            Assert.IsTrue(warnings.Count == 0, String.Join(Environment.NewLine, warnings, "There are warnings in response!"));
+            Assert.True(warnings.Count == 0, String.Join(Environment.NewLine, warnings, "There are warnings in response!"));
 
             var rulesTrigg = response.GetRulesTriggered();
-            Assert.IsTrue(rulesTrigg.Count == 2, "Inquiry failed! RULES TRIGGERED is not 2");
+            Assert.True(rulesTrigg.Count == 2, "Inquiry failed! RULES TRIGGERED is not 2");
         }
 
         /// <summary>
         /// TEST 3
         /// Ris mode Q with user defined fields
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void MaskRisQWithUserDefinedFields()
         {
             Inquiry inquiry = TestHelper.CreateInquiryMasked(PTOK, out _sid, out _orderNum);
@@ -128,31 +146,31 @@ namespace KountRisTest
             Response response = inquiry.GetResponse();
 
             var errors = response.GetErrors();
-            Assert.IsTrue(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
+            Assert.True(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
 
             var auto = response.GetAuto();
-            Assert.IsTrue("R".Equals(auto), "Inquiry failed!  Approval Status is not equal to R");
+            Assert.True("R".Equals(auto), "Inquiry failed!  Approval Status is not equal to R");
 
             var warnings = response.GetWarnings();
-            Assert.IsTrue(warnings.Count == 0, String.Join(Environment.NewLine, warnings, "There are warnings in response!"));
+            Assert.True(warnings.Count == 0, String.Join(Environment.NewLine, warnings, "There are warnings in response!"));
 
             var rulesTrigg = response.GetRulesTriggered();
-            Assert.IsTrue(rulesTrigg != null && rulesTrigg.Count != 0, "Inquiry failed! There no RULES_TRIGGERED.");
+            Assert.True(rulesTrigg != null && rulesTrigg.Count != 0, "Inquiry failed! There no RULES_TRIGGERED.");
 
             List<string> listResponce = new List<string>(Regex.Split(response.ToString(), "[\r\n]+"));
             var filteredList = listResponce.FindAll(i => i.Contains("RULE_DESCRIPTION"));
-            Assert.IsTrue(rulesTrigg.Count == filteredList.Count, "Inquiry failed! Count of RULES_TRIGGERED is wrong!");
+            Assert.True(rulesTrigg.Count == filteredList.Count, "Inquiry failed! Count of RULES_TRIGGERED is wrong!");
 
             var r1 = filteredList.Find(r => r.Contains("review if ARBITRARY_ALPHANUM_UDF contains \"trigger\""));
             var r2 = filteredList.Find(r => r.Contains("review if ARBITRARY_NUMERIC_UDF == 777"));
-            Assert.IsTrue(r1 != null && r2 != null, "Inquiry failed! The content of triggered rules are wrong!");
+            Assert.True(r1 != null && r2 != null, "Inquiry failed! The content of triggered rules are wrong!");
         }
 
         /// <summary>
         /// TEST 4
         /// Invalid value for a required field is sent, hard error returned
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void MaskRisQHardErrorExpected()
         {
             Inquiry inquiry = TestHelper.CreateInquiryMasked(PTOK, out _sid, out _orderNum);
@@ -169,22 +187,22 @@ namespace KountRisTest
             Response response = inquiry.GetResponse();
 
             var mode = response.GetMode();
-            Assert.IsTrue("E".Equals(mode), $"Update failed! Wrong response mode {mode}.");
+            Assert.True("E".Equals(mode), $"Update failed! Wrong response mode {mode}.");
 
             // optional getter
             var errors = response.GetErrors();
-            Assert.IsTrue(errors.Count == 1, "Wrong responce expected error_num: 332, ERROR_COUNT=1");
+            Assert.True(errors.Count == 1, "Wrong responce expected error_num: 332, ERROR_COUNT=1");
 
             var err0 = errors[0];
             string errCode = err0.Substring(0, 3);
-            Assert.IsTrue(err0.Contains(@"340 BAD_MASK Cause: [value [BADPTOK] did not match regex /^\d{6}X{5,9}\d{1,4}$/], Field: [PTOK], Value: [BADPTOK]"), $"Wrong error value: {err0}, expected 340");
+            Assert.True(err0.Contains(@"340 BAD_MASK Cause: [value [BADPTOK] did not match regex /^\d{6}X{5,9}\d{1,4}$/], Field: [PTOK], Value: [BADPTOK]"), $"Wrong error value: {err0}, expected 340");
         }
 
         /// <summary>
         /// TEST 5
         /// Warning reported but status of APPROVED returned
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void MaskRisQWarningApproved()
         {
             Inquiry inquiry = TestHelper.CreateInquiryMasked(PTOK, out _sid, out _orderNum);
@@ -205,28 +223,28 @@ namespace KountRisTest
             var ordNum = response.GetOrderNumber();
 
             var errors = response.GetErrors();
-            Assert.IsTrue(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
+            Assert.True(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
 
             var auto = response.GetAuto();
-            Assert.IsTrue("A".Equals(auto), $"Inquiry failed! Approval status {auto} is not equal to A");
+            Assert.True("A".Equals(auto), $"Inquiry failed! Approval status {auto} is not equal to A");
 
             var warnings = response.GetWarnings();
-            Assert.IsTrue(warnings.Count == 2, $"TranID: {tranID} - Wrong number of warnings: {warnings.Count}, expected 2.");
+            Assert.True(warnings.Count == 2, $"TranID: {tranID} - Wrong number of warnings: {warnings.Count}, expected 2.");
 
             List<string> listResponce = new List<string>(Regex.Split(response.ToString(), "[\r\n]+"));
             var filteredList = listResponce.FindAll(i => i.Contains("WARNING_"));
             var w1 = filteredList.Find(r => r.Contains("[UDF_DOESNOTEXIST=>throw a warning please!]"));
-            var w2 = filteredList.Find(r => r.Contains("[The label [UDF_DOESNOTEXIST] is not defined for merchant ID [999666].]"));
+            var w2 = filteredList.Find(r => r.Contains("[The label [UDF_DOESNOTEXIST] is not defined for merchant ID"));
 
-            Assert.IsTrue(w1 != null, $"Inquiry failed! The value {warnings[0]} of warning is wrong!");
-            Assert.IsTrue(w2 != null, $"Inquiry failed! The value {warnings[1]} of warning is wrong!");
+            Assert.True(w1 != null, $"Inquiry failed! The value {warnings[0]} of warning is wrong!");
+            Assert.True(w2 != null, $"Inquiry failed! The value {warnings[1]} of warning is wrong!");
         }
 
         /// <summary>
         /// TEST 6
         /// One hard error triggered, one warning triggered
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void MaskRisQHardSoftErrorsExpected()
         {
             Inquiry inquiry = TestHelper.CreateInquiryMasked(PTOK, out _sid, out _orderNum);
@@ -243,28 +261,28 @@ namespace KountRisTest
             Response response = inquiry.GetResponse(false);
 
             var mode = response.GetMode();
-            Assert.IsTrue("E".Equals(mode), $"Update failed! Wrong response mode {mode}.");
+            Assert.True("E".Equals(mode), $"Update failed! Wrong response mode {mode}.");
 
             // optional getter
             var errors = response.GetErrors();
-            Assert.IsTrue(errors.Count == 1, "Wrong responce expected error_num: 332, ERROR_COUNT=1");
+            Assert.True(errors.Count == 1, "Wrong responce expected error_num: 332, ERROR_COUNT=1");
 
             var err0 = errors[0];
             //340 BAD_MASK Cause: [value [BADPTOK] did not match regex /^\d{6}X{5,9}\d{1,4}$/], Field: [PTOK], Value: [BADPTOK]
-            Assert.IsTrue(err0.Contains(@"340 BAD_MASK Cause: [value [BADPTOK] did not match regex /^\d{6}X{5,9}\d{1,4}$/], Field: [PTOK], Value: [BADPTOK]"), $"Wrong error content: {err0}, expected 332.");
+            Assert.True(err0.Contains(@"340 BAD_MASK Cause: [value [BADPTOK] did not match regex /^\d{6}X{5,9}\d{1,4}$/], Field: [PTOK], Value: [BADPTOK]"), $"Wrong error content: {err0}, expected 332.");
 
             var warnings = response.GetWarnings();
-            Assert.IsTrue(warnings.Count == 3, $"Wrong number of warnings: {warnings.Count}, expected 2.");
+            Assert.True(warnings.Count == 3, $"Wrong number of warnings: {warnings.Count}, expected 2.");
 
             List<string> listResponce = new List<string>(Regex.Split(response.ToString(), "[\r\n]+"));
             var filteredList = listResponce.FindAll(i => i.Contains("WARNING_"));
             var w1 = filteredList.Find(r => r.Contains("[UDF_DOESNOTEXIST=>throw a warning please!]"));
-            var w2 = filteredList.Find(r => r.Contains("[The label [UDF_DOESNOTEXIST] is not defined for merchant ID [999666].]"));
+            var w2 = filteredList.Find(r => r.Contains("[The label [UDF_DOESNOTEXIST] is not defined for merchant ID"));
             var w3 = filteredList.Find(r => r.Contains("[LAST4 does not match last 4 characters in payment token]"));
 
-            Assert.IsTrue(w1 != null, $"Inquiry failed! The value {warnings[0]} of warning is wrong!");
-            Assert.IsTrue(w2 != null, $"Inquiry failed! The value {warnings[1]} of warning is wrong!");
-            Assert.IsTrue(w3 != null, $"Inquiry failed! The value {warnings[2]} of warning is wrong!");
+            Assert.True(w1 != null, $"Inquiry failed! The value {warnings[0]} of warning is wrong!");
+            Assert.True(w2 != null, $"Inquiry failed! The value {warnings[1]} of warning is wrong!");
+            Assert.True(w3 != null, $"Inquiry failed! The value {warnings[2]} of warning is wrong!");
         }
 
         /// <summary>
@@ -273,7 +291,7 @@ namespace KountRisTest
         /// two Kount Central rules triggered,
         /// Kount Central status of REVIEW
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void MaskRisWTwoKCRulesReview()
         {
             Inquiry inquiry = TestHelper.CreateInquiryMasked(PTOK, out _sid, out _orderNum);
@@ -294,13 +312,13 @@ namespace KountRisTest
             var ordNum = response.GetOrderNumber();
 
             var errors = response.GetErrors();
-            Assert.IsTrue(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
+            Assert.True(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
 
             var mode = response.GetMode();
-            Assert.IsTrue("W".Equals(mode), $"Update failed! Wrong response mode {mode}.");
+            Assert.True("W".Equals(mode), $"Update failed! Wrong response mode {mode}.");
 
             var warnings = response.GetWarnings();
-            Assert.IsTrue(warnings.Count == 0, String.Join(Environment.NewLine, warnings, "There are warnings in response!"));
+            Assert.True(warnings.Count == 0, String.Join(Environment.NewLine, warnings, "There are warnings in response!"));
 
             /*
                 "KC_TRIGGERED_COUNT": 2
@@ -313,26 +331,26 @@ namespace KountRisTest
             */
             var kcCustId = response.GetKountCentralCustomerId();
             var kcDecision = response.GetKountCentralDecision();
-            Assert.IsTrue("R".Equals(kcDecision), $"Inquiry failed! KC Decision {kcDecision} is not equal to R");
+            Assert.True("R".Equals(kcDecision), $"Inquiry failed! KC Decision {kcDecision} is not equal to R");
 
             var kcErrs = response.GetKountCentralErrors();
-            Assert.IsTrue(kcErrs.Count == 0, $"Inquiry failed! KC Errors: {String.Join(Environment.NewLine, kcErrs)}");
+            Assert.True(kcErrs.Count == 0, $"Inquiry failed! KC Errors: {String.Join(Environment.NewLine, kcErrs)}");
 
             var kcWarn = response.GetKountCentralWarnings();
-            Assert.IsTrue(kcWarn.Count == 0, $"Inquiry failed! KC Warnings: {String.Join(Environment.NewLine, kcWarn)}");
+            Assert.True(kcWarn.Count == 0, $"Inquiry failed! KC Warnings: {String.Join(Environment.NewLine, kcWarn)}");
 
             var kcEvents = response.GetKountCentralThresholdEvents();
-            Assert.IsTrue(kcEvents.Count == 2, $"Inquiry failed! KC Events: {kcEvents.Count} are not 2.");
+            Assert.True(kcEvents.Count == 2, $"Inquiry failed! KC Events: {kcEvents.Count} are not 2.");
 
-            Assert.IsTrue("R".Equals(kcEvents[0].Decision), $"Inquiry failed! Wrong decisions d1 = {kcEvents[0].Decision}, d2 = {kcEvents[1].Decision} by Kount Central ThresholdEvents.");
-            Assert.IsTrue("R".Equals(kcEvents[1].Decision), $"Inquiry failed! Wrong decisions d1 = {kcEvents[0].Decision}, d2 = {kcEvents[1].Decision} by Kount Central ThresholdEvents.");
+            Assert.True("R".Equals(kcEvents[0].Decision), $"Inquiry failed! Wrong decisions d1 = {kcEvents[0].Decision}, d2 = {kcEvents[1].Decision} by Kount Central ThresholdEvents.");
+            Assert.True("R".Equals(kcEvents[1].Decision), $"Inquiry failed! Wrong decisions d1 = {kcEvents[0].Decision}, d2 = {kcEvents[1].Decision} by Kount Central ThresholdEvents.");
 
             var code1 = kcEvents[0].Code;
             var code2 = kcEvents[1].Code;
-            Assert.IsTrue("billingToShippingAddressReview".Equals(code1) || "billingToShippingAddressReview".Equals(code2),
+            Assert.True("billingToShippingAddressReview".Equals(code1) || "billingToShippingAddressReview".Equals(code2),
                             $"Inquiry failed! Wrong  KC codes: {code1}, {code2} expected billingToShippingAddressReview.");
 
-            Assert.IsTrue("orderTotalReview".Equals(code1) || "orderTotalReview".Equals(code2),
+            Assert.True("orderTotalReview".Equals(code1) || "orderTotalReview".Equals(code2),
                         $"Inquiry failed! Wrong  KC codes: {code1}, {code2} expected orderTotalReview.");
         }
 
@@ -342,65 +360,65 @@ namespace KountRisTest
         /// "KC_EVENT_1_CODE": "orderTotalDecline",
         /// "KC_EVENT_1_DECISION": "D"
         /// </summary>
-        [TestMethod]
-        public void MaskRisJOneKountCentralRuleDecline()
-        {
-            Inquiry inquiry = TestHelper.CreateInquiryMasked(PTOK, out _sid, out _orderNum);
+        //[Fact]
+        //public void MaskRisJOneKountCentralRuleDecline()
+        //{
+        //    Inquiry inquiry = TestHelper.CreateInquiryMasked(PTOK, out _sid, out _orderNum);
 
-            inquiry.SetMode(InquiryTypes.ModeJ);
-            inquiry.SetTotal(1000);
-            inquiry.SetKountCentralCustomerId("KCentralCustomerDeclineMe");
+        //    inquiry.SetMode(InquiryTypes.ModeJ);
+        //    inquiry.SetTotal(1000);
+        //    inquiry.SetKountCentralCustomerId("KCentralCustomerDeclineMe");
 
-            // set CART with one item
-            var cart = new ArrayList();
-            cart.Add(new CartItem("cart item 0 type", "cart item 0", "cart item 0 description", 10, 1234));
-            inquiry.SetCart(cart);
+        //    // set CART with one item
+        //    var cart = new ArrayList();
+        //    cart.Add(new CartItem("cart item 0 type", "cart item 0", "cart item 0 description", 10, 1234));
+        //    inquiry.SetCart(cart);
 
-            Response response = inquiry.GetResponse();
-            // optional getter
-            var errors = response.GetErrors();
-            Assert.IsTrue(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
+        //    Response response = inquiry.GetResponse();
+        //    // optional getter
+        //    var errors = response.GetErrors();
+        //    Assert.True(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
 
-            var mode = response.GetMode();
-            Assert.IsTrue("J".Equals(mode), $"Update failed! Wrong response mode {mode}.");
+        //    var mode = response.GetMode();
+        //    Assert.True("J".Equals(mode), $"Update failed! Wrong response mode {mode}.");
 
-            var warnings = response.GetWarnings();
-            Assert.IsTrue(warnings.Count == 0, String.Join(Environment.NewLine, warnings, "There are warnings in response!"));
-            /*
-              "KC_TRIGGERED_COUNT": 1,
-              "KC_WARNING_COUNT": 0,
-              "KC_DECISION": "D",
-              "KC_EVENT_1_CODE": "orderTotalDecline",
-              "KC_EVENT_1_DECISION": "D"
-             */
-            var kcCustId = response.GetKountCentralCustomerId();
-            var kcDecision = response.GetKountCentralDecision();
-            Assert.IsTrue("D".Equals(kcDecision), $"Inquiry failed! KC Decision {kcDecision} is not equal to D");
+        //    var warnings = response.GetWarnings();
+        //    Assert.True(warnings.Count == 0, String.Join(Environment.NewLine, warnings, "There are warnings in response!"));
+        //    /*
+        //      "KC_TRIGGERED_COUNT": 1,
+        //      "KC_WARNING_COUNT": 0,
+        //      "KC_DECISION": "D",
+        //      "KC_EVENT_1_CODE": "orderTotalDecline",
+        //      "KC_EVENT_1_DECISION": "D"
+        //     */
+        //    var kcCustId = response.GetKountCentralCustomerId();
+        //    var kcDecision = response.GetKountCentralDecision();
+        //    Assert.True("D".Equals(kcDecision), $"Inquiry failed! KC Decision {kcDecision} is not equal to D");
 
-            var kcErrs = response.GetKountCentralErrors();
-            Assert.IsTrue(kcErrs.Count == 0, $"Inquiry failed! KC Errors: {String.Join(Environment.NewLine, kcErrs)}");
+        //    var kcErrs = response.GetKountCentralErrors();
+        //    Assert.True(kcErrs.Count == 0, $"Inquiry failed! KC Errors: {String.Join(Environment.NewLine, kcErrs)}");
 
-            var kcWarn = response.GetKountCentralWarnings();
-            Assert.IsTrue(kcWarn.Count == 0, $"Inquiry failed! KC Warnings: {String.Join(Environment.NewLine, kcWarn)}");
+        //    var kcWarn = response.GetKountCentralWarnings();
+        //    Assert.True(kcWarn.Count == 0, $"Inquiry failed! KC Warnings: {String.Join(Environment.NewLine, kcWarn)}");
 
-            var kcEvents = response.GetKountCentralThresholdEvents();
-            Assert.IsTrue(kcEvents.Count == 1, $"Inquiry failed! KC Events: {kcEvents.Count} are not 1.");
-            Assert.IsTrue("D".Equals(kcEvents[0].Decision), $"Inquiry failed! Wrong decisions d1 = {kcEvents[0].Decision} by Kount Central ThresholdEvents.");
+        //    var kcEvents = response.GetKountCentralThresholdEvents();
+        //    Assert.True(kcEvents.Count == 1, $"Inquiry failed! KC Events: {kcEvents.Count} are not 1.");
+        //    Assert.True("D".Equals(kcEvents[0].Decision), $"Inquiry failed! Wrong decisions d1 = {kcEvents[0].Decision} by Kount Central ThresholdEvents.");
 
-            var code1 = kcEvents[0].Code;
-            Assert.IsTrue("orderTotalDecline".Equals(code1), $"Inquiry failed! Wrong  KC codes: {code1}, expected orderTotalDecline.");
-        }
+        //    var code1 = kcEvents[0].Code;
+        //    Assert.True("orderTotalDecline".Equals(code1), $"Inquiry failed! Wrong  KC codes: {code1}, expected orderTotalDecline.");
+        //}
 
         /// <summary>
         /// TEST 9
         /// Mode U call submits updated values, but return values do not include the re-evalued transaction results.
         /// Default values mode Q transaction, capture TRAN, SESS, ORDR values, use those to submit a mode U
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void MaskModeUAfterModeQ()
         {
             Inquiry inquiry = TestHelper.CreateInquiryMasked(PTOK, out _sid, out _orderNum);
-
+            MaskInquiryTest maskInquiry = new MaskInquiryTest();
             // set CART with one item
             var cart = new ArrayList();
             cart.Add(new CartItem("cart item 0 type", "cart item 0", "cart item 0 description", 10, 1234));
@@ -409,7 +427,7 @@ namespace KountRisTest
             Response response = inquiry.GetResponse();
             // optional getter
             var errors = response.GetErrors();
-            Assert.IsTrue(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
+            Assert.True(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
 
             var sessID = response.GetSessionId();
             var tranID = response.GetTransactionId();
@@ -417,9 +435,9 @@ namespace KountRisTest
 
             Update update = new Update(false);
             update.SetMode(UpdateTypes.ModeU);
-            update.SetVersion("0700");
-            update.SetMerchantId(TestHelper.TEST_MERCHANT_ID);
-            update.SetApiKey(TestHelper.TEST_API_KEY);
+            update.SetVersion("0695");
+            update.SetMerchantId(maskInquiry.merchentID);
+            update.SetApiKey(maskInquiry.apiKey);
             update.SetSessionId(sessID);
             update.SetTransactionId(tranID);
             update.SetOrderNumber(ordNum);
@@ -433,25 +451,25 @@ namespace KountRisTest
 
             response = update.GetResponse();
             errors = response.GetErrors();
-            Assert.IsTrue(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
+            Assert.True(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
 
             var mode = response.GetMode();
-            Assert.IsTrue("U".Equals(mode), $"Update failed! Wrong response mode {mode}.");
+            Assert.True("U".Equals(mode), $"Update failed! Wrong response mode {mode}.");
 
-            Assert.IsTrue(sessID.Equals(response.GetSessionId()), $"Update failed! Wrong session ID  {sessID}.");
+            Assert.True(sessID.Equals(response.GetSessionId()), $"Update failed! Wrong session ID  {sessID}.");
 
-            Assert.IsTrue(tranID.Equals(response.GetTransactionId()), $"Update failed! Wrong Transaction Id  {tranID}.");
+            Assert.True(tranID.Equals(response.GetTransactionId()), $"Update failed! Wrong Transaction Id  {tranID}.");
 
             var ordU = response.GetOrderNumber(); // orderNum is null
 
             var auto = response.GetAuto();
-            Assert.IsTrue(auto == null, $"Inquiry failed! Approval status {auto} is not null");
+            Assert.True(auto == null, $"Inquiry failed! Approval status {auto} is not null");
 
             var scor = response.GetScore();
-            Assert.IsTrue(scor == null, $"Inquiry failed! Score {scor} is not null");
+            Assert.True(scor == null, $"Inquiry failed! Score {scor} is not null");
 
             var geox = response.GetGeox();
-            Assert.IsTrue(geox == null, $"Inquiry failed! GEOX {geox} is not null");
+            Assert.True(geox == null, $"Inquiry failed! GEOX {geox} is not null");
         }
 
         /// <summary>
@@ -459,11 +477,11 @@ namespace KountRisTest
         /// Mode X call submits updated values, and return values include all mode Q values, re-evaluated for updated data.
         /// To test, submit a default value mode Q transaction, capture TRAN, SESS, ORDR values, and then use those to submit a mode X
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void MaskModeXAfterModeQ()
         {
             Inquiry inquiry = TestHelper.CreateInquiryMasked(PTOK, out _sid, out _orderNum);
-
+            MaskInquiryTest maskInquiry = new MaskInquiryTest();
             // set CART with one item
             var cart = new ArrayList();
             cart.Add(new CartItem("cart item 0 type", "cart item 0", "cart item 0 description", 10, 1234));
@@ -472,17 +490,17 @@ namespace KountRisTest
             Response response = inquiry.GetResponse();
             // optional getter
             var errors = response.GetErrors();
-            Assert.IsTrue(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
+            Assert.True(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
 
             var sessID = response.GetSessionId();
             var tranID = response.GetTransactionId();
             var ordNum = response.GetOrderNumber();
             Update update = new Update(false);
             update.SetMode(UpdateTypes.ModeX);
-            update.SetVersion("0700");
+            update.SetVersion("0695");
 
-            update.SetMerchantId(TestHelper.TEST_MERCHANT_ID);
-            update.SetApiKey(TestHelper.TEST_API_KEY);
+            update.SetMerchantId(maskInquiry.merchentID);
+            update.SetApiKey(maskInquiry.apiKey);
 
             update.SetSessionId(sessID);
             update.SetTransactionId(tranID);
@@ -496,35 +514,35 @@ namespace KountRisTest
 
             response = update.GetResponse();
             errors = response.GetErrors();
-            Assert.IsTrue(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
+            Assert.True(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
 
             var mode = response.GetMode();
-            Assert.IsTrue("X".Equals(mode), $"Update failed! Wrong response mode  {mode}.");
+            Assert.True("X".Equals(mode), $"Update failed! Wrong response mode  {mode}.");
 
             var sID = response.GetSessionId();
-            Assert.IsTrue(sessID.Equals(sID), $"Update failed! Wrong session ID  {sID}.");
+            Assert.True(sessID.Equals(sID), $"Update failed! Wrong session ID  {sID}.");
 
             var tId = response.GetTransactionId();
-            Assert.IsTrue(tranID.Equals(tId), $"Update failed! Wrong Transaction Id  {tranID}.");
+            Assert.True(tranID.Equals(tId), $"Update failed! Wrong Transaction Id  {tranID}.");
 
             var ordU = response.GetOrderNumber();
-            Assert.IsTrue(ordNum.Equals(ordU), $"Update failed! Wrong Order Number {ordNum}.");
+            Assert.True(ordNum.Equals(ordU), $"Update failed! Wrong Order Number {ordNum}.");
 
             var auto = response.GetAuto();
-            Assert.IsTrue(auto != null, $"Update failed! AUTO not presented in response.");
+            Assert.True(auto != null, $"Update failed! AUTO not presented in response.");
 
             var scor = response.GetScore();
-            Assert.IsTrue(scor != null, $"Update failed! SCOR not presented in response.");
+            Assert.True(scor != null, $"Update failed! SCOR not presented in response.");
 
             var geox = response.GetGeox();
-            Assert.IsTrue(geox != null, $"Update failed! GEOX not presented in response.");
+            Assert.True(geox != null, $"Update failed! GEOX not presented in response.");
         }
 
         /// <summary>
         /// TEST 11
         /// Approval status of APPROVED returned
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void MaskModeP()
         {
             Inquiry inquiry = TestHelper.CreateInquiryMasked(PTOK, out _sid, out _orderNum);
@@ -540,20 +558,20 @@ namespace KountRisTest
             Response response = inquiry.GetResponse();
             // optional getter
             var errors = response.GetErrors();
-            Assert.IsTrue(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
+            Assert.True(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
 
             var mode = response.GetMode();
-            Assert.IsTrue("P".Equals(mode), $"Update failed! Wrong response mode {mode}.");
+            Assert.True("P".Equals(mode), $"Update failed! Wrong response mode {mode}.");
 
             var auto = response.GetAuto();
-            Assert.IsTrue("A".Equals(auto), $"Inquiry failed! Approval status {auto} is wrong, expected 'A'.");
+            Assert.True("A".Equals(auto), $"Inquiry failed! Approval status {auto} is wrong, expected 'A'.");
         }
 
         /// <summary>
         /// TEST 12
         /// Mode Q call using payment encoding Mask with valid format
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void RisQUsingPaymentEncodingMaskValid()
         {
             Inquiry inquiry = TestHelper.CreateInquiryMasked(PTOK_2, out _sid, out _orderNum);
@@ -566,17 +584,17 @@ namespace KountRisTest
             Response response = inquiry.GetResponse();
 
             var errors = response.GetErrors();
-            Assert.IsTrue(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
+            Assert.True(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
 
             var brdn = response.GetBrand();
-            Assert.IsTrue("AMEX".Equals(brdn), "Inquiry failed!  Approval Status is not equal to R");
+            Assert.True("AMEX".Equals(brdn), "Inquiry failed!  Approval Status is not equal to R");
         }
 
         /// <summary>
         /// TEST 13
         /// Mode Q call using payment encoding Mask with invalid format
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void RisQUsingPaymentEncodingMaskError()
         {
             Inquiry inquiry = TestHelper.CreateInquiryMasked(PTOK_2, out _sid, out _orderNum);
@@ -592,11 +610,11 @@ namespace KountRisTest
             Response response = inquiry.GetResponse();
 
             var errors = response.GetErrors();
-            Assert.IsTrue(errors.Count == 1, String.Join(Environment.NewLine, errors, "There are errors in response!"));
+            Assert.True(errors.Count == 1, String.Join(Environment.NewLine, errors, "There are errors in response!"));
 
             var err0 = errors[0];
             //340 BAD_MASK Cause: [value [370070538959797] did not match regex /^\d{6}X{5,9}\d{1,4}$/], Field: [PTOK], Value: [370070538959797]
-            Assert.IsTrue(err0.Contains(@"340 BAD_MASK Cause: [value [370070538959797] did not match regex /^\d{6}X{5,9}\d{1,4}$/], Field: [PTOK], Value: [370070538959797]"), $"Wrong error content: {err0}, expected 332.");
+            Assert.True(err0.Contains(@"340 BAD_MASK Cause: [value [370070538959797] did not match regex /^\d{6}X{5,9}\d{1,4}$/], Field: [PTOK], Value: [370070538959797]"), $"Wrong error content: {err0}, expected 332.");
 
         }
     }
