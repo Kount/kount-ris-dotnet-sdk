@@ -34,7 +34,7 @@ namespace Kount.Ris
         /// <summary>
         /// The RIS version
         /// </summary>
-        private const string RisVersion = "0800";
+        private const string RisVersion = "0710";
 
         /// <summary>
         /// Hash table of request data.
