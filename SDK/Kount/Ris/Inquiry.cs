@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------
 namespace Kount.Ris
 {
-
+    using Microsoft.Extensions.Logging;
     /// <summary>
     /// Inquiry class. A bunch of setters for sending initial transaction
     /// data to a Kount RIS server.<br/>
@@ -19,8 +19,9 @@ namespace Kount.Ris
         /// Constructor. Sets the mode to 'Q', the currency to 'USD' and sets
         /// the SDK identifier value. Use SetMode(char) and SetCurrency(string)
         /// to change the RIS mode and currency respectively.
+        /// <param name="logger">ILogger object for logging output</param>
         /// </summary>
-        public Inquiry() : base()
+        public Inquiry(ILogger logger = null) : base(true, logger)
         {
             this.SetMode(Enums.InquiryTypes.ModeQ);
             this.SetCurrency("USD");
@@ -136,6 +137,7 @@ namespace Kount.Ris
         public void SetIpAddress(string address)
         {
             this.Data["IPAD"] = this.SafeGet(address);
+            
         }
 
         /// <summary>
