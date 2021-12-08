@@ -1,0 +1,38 @@
+stages:
+  - build
+  - test
+  - deploy
+
+image: mcr.microsoft.com/dotnet/sdk:5.0 
+before_script:
+  - apt-get update -qq 
+
+build:
+  stage: build
+  script:
+    - dotnet build 
+    
+test:
+ stage: test
+ script:
+   - dotnet test "KountRisTest"
+
+test config:
+ stage: test
+ script:
+   - dotnet test "KountRisConfigTest"
+    
+nuget deploy:
+  stage: deploy
+  only:
+    - tags
+  script:
+    - dotnet build
+    - PKGPATH=$(find /builds/kount/third_party/kount-ris-dotnet-sdk/SDK/bin/Debug/*.nupkg)
+    - echo $PKGPATH
+    - dotnet nuget push $PKGPATH --source https://www.nuget.org/ -k $NUGET_API_KEY
+    # let's deploy locally as well, just to have a copy in gitlab
+    - dotnet nuget add source "$CI_SERVER_URL/api/v4/projects/$CI_PROJECT_ID/packages/nuget/index.json" --name gitlab --username gitlab-ci-token --password $CI_JOB_TOKEN --store-password-in-clear-text
+    - dotnet nuget push $PKGPATH --source gitlab
+
+
