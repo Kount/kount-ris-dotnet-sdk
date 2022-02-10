@@ -29,19 +29,19 @@ namespace KountRisTest
          [Fact]
         public void FromAppSettings_assigns_MerchantId()
         {
-            Assert.Equal("000000", SUT.MerchantId);
+            Assert.Equal("MERCHANT_ID", SUT.MerchantId);
         }
 
          [Fact]
         public void FromAppSettings_assigns_API_Key()
         {
-            Assert.Equal("", SUT.ApiKey);
+            Assert.Equal("API_KEY", SUT.ApiKey);
         }
 
          [Fact]
         public void FromAppSettings_assigns_Version()
         {
-            Assert.Equal("0700", SUT.Version);
+            Assert.Equal("0710", SUT.Version);
         }
 
          [Fact]

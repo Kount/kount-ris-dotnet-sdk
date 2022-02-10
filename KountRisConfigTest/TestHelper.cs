@@ -8,6 +8,9 @@ namespace KountRisConfigTest
     using Kount.Ris;
     using Kount.Enums;
     using System;
+    using Configuration = Kount.Ris.Configuration;
+    using Microsoft.Extensions.Configuration;
+    using System.IO;
 
     public class TestHelper
     {    
@@ -196,6 +199,34 @@ namespace KountRisConfigTest
         }
 
         /// <summary>
+        /// Get Configuration 
+        /// </summary>
+        /// <returns>config</returns>
+        public static Configuration GetConfiguration()
+        {
+            var builder = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+            IConfigurationRoot configuration = builder.Build();
+
+            Configuration config = new Configuration()
+            {
+                MerchantId = String.IsNullOrEmpty(Environment.GetEnvironmentVariable("RIS_SDK_SANDBOX_MERCHANT_ID")) ? configuration.GetConnectionString("Ris.MerchantId") : Environment.GetEnvironmentVariable("RIS_SDK_SANDBOX_MERCHANT_ID"),
+                ApiKey = String.IsNullOrEmpty(Environment.GetEnvironmentVariable("RIS_SDK_SANDBOX_API_KEY")) ? configuration.GetConnectionString("Ris.API.Key") : Environment.GetEnvironmentVariable("RIS_SDK_SANDBOX_API_KEY"),
+                ConfigKey = String.IsNullOrEmpty(Environment.GetEnvironmentVariable("RIS_CONFIG_KEY_BASE64")) ? configuration.GetConnectionString("Ris.Config.Key") : System.Text.Encoding.UTF8.GetString(System.Convert.FromBase64String(Environment.GetEnvironmentVariable("RIS_CONFIG_KEY_BASE64"))),
+                URL = configuration.GetConnectionString("Ris.Url"),
+                ConnectTimeout = configuration.GetConnectionString("Ris.Connect.Timeout"),
+                Version = configuration.GetConnectionString("Ris.Version"),
+                CertificateFile = configuration.GetConnectionString("Ris.CertificateFile"),
+                PrivateKeyPassword = configuration.GetConnectionString("Ris.PrivateKeyPassword"),
+                LogSimpleElapsed = configuration.GetConnectionString("LOG.SIMPLE.ELAPSED")
+            };
+
+            return config;
+        }
+
+        /// <summary>
         /// Create inquiry with default settings
         /// </summary>
         /// <param name="sid">session id</param>
@@ -203,7 +234,7 @@ namespace KountRisConfigTest
         /// <returns>inquiry with default settings</returns>
         public static Inquiry DefaultInquiry(out string sid, out string orderNum)
         {
-            Inquiry inquiry = new Inquiry();
+            Inquiry inquiry = new Inquiry(true, GetConfiguration());
 
             // generate session id from new guid
             sid = Guid.NewGuid().ToString().Replace("-", String.Empty);

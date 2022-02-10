@@ -83,7 +83,7 @@ namespace Kount.Ris
         /// <param name="logger">ILogger object for logging output</param>
         /// <exception cref="Kount.Ris.RequestException">Thrown when there is
         /// static data missing for a RIS request.</exception>
-         protected Request(bool checkConfiguration, Configuration configuration, ILogger logger = null) : base(logger)
+         protected Request(bool checkConfiguration, Configuration configuration, ILogger logger = null) : base(logger, typeof(Request))
         {
             if (checkConfiguration)
             {
@@ -289,7 +289,7 @@ namespace Kount.Ris
             }
 
             logger.LogDebug("End GetResponse()");
-            return new Kount.Ris.Response(risString);
+            return new Kount.Ris.Response(risString, logger);
         }
         
 

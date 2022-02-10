@@ -72,7 +72,7 @@ namespace KountRisTest
                
         private Inquiry CreateInquiry()
         {
-            Inquiry inquiry = new Inquiry(false);
+            Inquiry inquiry = new Inquiry(true, TestHelper.GetConfiguration());
             _sid = Guid.NewGuid().ToString().Replace("-", String.Empty);
             inquiry.SetSessionId(_sid);
 

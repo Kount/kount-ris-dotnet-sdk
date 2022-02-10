@@ -5,7 +5,10 @@
 //-----------------------------------------------------------------------
 namespace Kount.Ris
 {
+    using KountRisSdk.Kount.Log.Factory;
     using Microsoft.Extensions.Logging;
+    using System;
+
     /// <summary>
     /// Inquiry class. A bunch of setters for sending initial transaction
     /// data to a Kount RIS server.<br/>
@@ -15,6 +18,7 @@ namespace Kount.Ris
     /// </summary>
     public class Inquiry : Kount.Ris.Request
     {
+
         /// <summary>
         /// Constructor. Sets the mode to 'Q', the currency to 'USD' and sets
         /// the SDK identifier value. Use SetMode(char) and SetCurrency(string)
@@ -38,7 +42,7 @@ namespace Kount.Ris
         /// `Ris.Url`, 
         /// `Ris.MerchantId`, 
         /// `Ris.Config.Key` and `Ris.Connect.Timeout` are set.</param>
-        public Inquiry(bool checkConfiguration) : base(checkConfiguration)
+        public Inquiry(bool checkConfiguration, ILogger logger = null) : base(checkConfiguration, logger)
         {
             this.SetMode(Enums.InquiryTypes.ModeQ);
             this.SetCurrency("USD");
@@ -56,7 +60,7 @@ namespace Kount.Ris
         /// `Ris.MerchantId`, 
         /// `Ris.Config.Key` and `Ris.Connect.Timeout` are set.</param>
         /// <param name="configuration">Configuration class with raw values</param>
-        public Inquiry(bool checkConfiguration, Configuration configuration) : base(checkConfiguration, configuration)
+        public Inquiry(bool checkConfiguration, Configuration configuration, ILogger logger = null) : base(checkConfiguration, configuration, logger)
         {
             this.SetMode(Enums.InquiryTypes.ModeQ);
             this.SetCurrency("USD");

@@ -46,14 +46,10 @@ namespace KountRisTest
 
         public BasicConnectivityTest()
         {
-            var builder = new ConfigurationBuilder()
-              .SetBasePath(Directory.GetCurrentDirectory())
-              .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            Kount.Ris.Configuration configuration = TestHelper.GetConfiguration();
 
-            IConfigurationRoot configuration = builder.Build();
-
-            this.merchentID = int.Parse(configuration.GetConnectionString("Ris.MerchantId"));
-            this.apiKey = configuration.GetConnectionString("Ris.API.Key");         
+            this.merchentID = int.Parse(configuration.MerchantId);
+            this.apiKey = configuration.ApiKey;
 
         }
        
@@ -381,7 +377,7 @@ namespace KountRisTest
             var ordNum = response.GetOrderNumber();
 
             // create Update
-            Update update = new Update(false);
+            Update update = new Update(true, TestHelper.GetConfiguration());
             update.SetMode(UpdateTypes.ModeU);
             update.SetVersion("0695");
             update.SetMerchantId(basicConnectivity.merchentID);
@@ -450,7 +446,7 @@ namespace KountRisTest
             var tranID = response.GetTransactionId();
             var ordNum = response.GetOrderNumber();
             // create update without check in config
-            Update update = new Update(false);
+            Update update = new Update(true, TestHelper.GetConfiguration());
             update.SetMode(UpdateTypes.ModeX);
             update.SetVersion("0695");
 
