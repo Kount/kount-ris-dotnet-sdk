@@ -369,7 +369,7 @@ namespace KountRisConfigTest
             var ordNum = response.GetOrderNumber();
 
             // create Update
-            Update update = new Update();
+            Update update = new Update(true, TestHelper.GetConfiguration());
             update.SetMode(UpdateTypes.ModeU);
             update.SetVersion("0695");
             update.SetSessionId(sessID);
@@ -436,7 +436,7 @@ namespace KountRisConfigTest
             var tranID = response.GetTransactionId();
             var ordNum = response.GetOrderNumber();
             // create update
-            Update update = new Update();
+            Update update = new Update(true, TestHelper.GetConfiguration());
             update.SetMode(UpdateTypes.ModeX);
             update.SetVersion("0695");
 

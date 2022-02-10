@@ -1,3 +1,4 @@
+using KountRisSdk.Kount.Log.Factory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using System;
@@ -9,8 +10,7 @@ namespace Kount.Ris
     /// <summary>
     /// Logging Container
     /// </summary>
-    public abstract class 
-        LoggingComponent
+    public abstract class LoggingComponent
     {
         private static ILogger _defaultLogger = NullLogger.Instance;
 
@@ -34,12 +34,20 @@ namespace Kount.Ris
             set => _logger = value;
         }
 
+        KountRisSdk.Kount.Log.Factory.ILoggerFactory factory = LogFactory.GetLoggerFactory();
+
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="logger"></param>
-        public LoggingComponent(ILogger logger = null)
+        /// <param name="type"></param>
+        public LoggingComponent(ILogger logger = null, Type type = null)
         {
+            if (logger == null)
+            {
+                logger = factory.GetLogger(type.FullName);
+            }
+
             this.logger = logger;
         }
     }

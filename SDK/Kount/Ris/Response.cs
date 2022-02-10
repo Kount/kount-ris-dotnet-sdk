@@ -41,7 +41,8 @@ namespace Kount.Ris
         /// </summary>
         /// <param name="raw">Splits name=value formatted response string
         /// populating a hash for getters.</param>
-        public Response(string raw, ILogger logger = null) : base(logger)
+        /// <param name="logger"></param>
+        public Response(string raw, ILogger logger = null) : base(logger, typeof(Response))
         {
             //logger.Debug("RIS Response:\n" + raw);
             this.raw = raw;
@@ -1055,7 +1056,7 @@ namespace Kount.Ris
         /// </returns>
         public string Get3dSecureMerchantResponse()
         {
-            return (string)this.response["3D_SECURE_MERCHANT_RESPONSE"];
+            return (string)this.response["THREE_DS_MERCHANT_RESPONSE"];
         }
     }
 }

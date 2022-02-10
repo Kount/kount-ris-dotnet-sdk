@@ -50,14 +50,10 @@ namespace KountRisTest
 
         public MaskInquiryTest()
         {
-            var builder = new ConfigurationBuilder()
-             .SetBasePath(Directory.GetCurrentDirectory())
-             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            Kount.Ris.Configuration configuration = TestHelper.GetConfiguration();
 
-            IConfigurationRoot configuration = builder.Build();
-
-           this.merchentID = int.Parse(configuration.GetConnectionString("Ris.MerchantId"));
-           this.apiKey = configuration.GetConnectionString("Ris.API.Key");
+            this.merchentID = int.Parse(configuration.MerchantId);
+            this.apiKey = configuration.ApiKey;
         }
         [Fact]
         public void MaskRisQOneItemRequiredFieldsOneRuleReview()
@@ -433,7 +429,7 @@ namespace KountRisTest
             var tranID = response.GetTransactionId();
             var ordNum = response.GetOrderNumber();
 
-            Update update = new Update(false);
+            Update update = new Update(true, TestHelper.GetConfiguration());
             update.SetMode(UpdateTypes.ModeU);
             update.SetVersion("0695");
             update.SetMerchantId(maskInquiry.merchentID);
@@ -495,7 +491,7 @@ namespace KountRisTest
             var sessID = response.GetSessionId();
             var tranID = response.GetTransactionId();
             var ordNum = response.GetOrderNumber();
-            Update update = new Update(false);
+            Update update = new Update(true, TestHelper.GetConfiguration());
             update.SetMode(UpdateTypes.ModeX);
             update.SetVersion("0695");
 

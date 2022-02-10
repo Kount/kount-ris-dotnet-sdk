@@ -19,7 +19,7 @@ namespace KountRisTest
         [Fact]
         public void TestMaskingCorrectUsage()
         {
-            Request request = new Inquiry(false);
+            Request request = new Inquiry(true, TestHelper.GetConfiguration());
 
             request.SetCardPaymentMasked(PTOK);
 
@@ -31,7 +31,7 @@ namespace KountRisTest
         [Fact]
         public void TestIncorrectMasking()
         {
-            Inquiry request = new Inquiry(false);
+            Inquiry request = new Inquiry(true, TestHelper.GetConfiguration());
 
             request.SetPayment(Kount.Enums.PaymentTypes.Card, "000738XXXXXX2514");
 
