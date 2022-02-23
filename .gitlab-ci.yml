@@ -1,6 +1,12 @@
+include:
+  - project: kount/third_party/tpa-ci-shared
+    file: base/sq-scan.yml
+    ref: 2.4.0
+
 stages:
   - build
   - test
+  - sonarqube scan
   - deploy
 
 image: mcr.microsoft.com/dotnet/sdk:5.0 
@@ -21,7 +27,13 @@ test config:
  stage: test
  script:
    - dotnet test "KountRisConfigTest"
-    
+
+sonarqube scan:
+  extends: .sq-scan
+  stage: sonarqube scan
+  variables:
+    SRC_EXCLUSIONS: "**/bin/**,**/obj/**,**/DS_Store/**,**/.git/**,**/*.vs,**/*_site,**/*articles,**/*.gitignore,**/*.key,**/*.yml"
+
 nuget deploy:
   stage: deploy
   only:
