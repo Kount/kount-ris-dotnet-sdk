@@ -1,30 +1,36 @@
 include:
   - project: kount/third_party/tpa-ci-shared
-    file: base/sq-scan.yml
-    ref: 2.4.0
+    file:
+        - base/sq-scan.yml
+        - core/rules.yml
+        - version.yml
+    ref: 2.5.3
 
 stages:
+  - version
   - build
   - test
   - sonarqube scan
   - deploy
 
-image: mcr.microsoft.com/dotnet/sdk:5.0 
-before_script:
-  - apt-get update -qq 
-
+.dotnet:
+  image: mcr.microsoft.com/dotnet/sdk:5.0
+   
 build:
   stage: build
+  extends: .dotnet
   script:
     - dotnet build 
     
 test:
  stage: test
+ extends: .dotnet
  script:
    - dotnet test "KountRisTest"
 
 test config:
  stage: test
+ extends: .dotnet
  script:
    - dotnet test "KountRisConfigTest"
 
@@ -36,10 +42,25 @@ sonarqube scan:
 
 nuget deploy:
   stage: deploy
+  extends: .dotnet
   only:
     - tags
   script:
     - dotnet build
+    - apt-get update -qq
+    - BUILD_VERSION= ${BUILD_VERSION} || true
+    - BUILD_VERSION=`echo $BUILD_VERSION | cut -c-17`
+    - SDK_VERSION=${BUILD_VERSION}
+    - echo ${SDK_VERSION}
+    - |
+      if [ -n "${BUILD_VERSION}" ]
+      then
+        # BUILD_VERSION is cut to 17 characters so SDK_VERSION will not exceed 32 characters in total
+        BUILD_VERSION=`echo $BUILD_VERSION | cut -c-17`
+        echo "sed -i \"s/0.0.0/${BUILD_VERSION}/g\" ${CI_PROJECT_DIR}/SDK/Kount/Ris/Config.cs"
+        sed -i "s/0.0.0/${BUILD_VERSION}/g" ${CI_PROJECT_DIR}/SDK/Kount/Ris/Config.cs
+        cat ${CI_PROJECT_DIR}/SDK/Kount/Ris/Config.cs
+      fi
     - PKGPATH=$(find /builds/kount/third_party/kount-ris-dotnet-sdk/SDK/bin/Debug/*.nupkg)
     - echo $PKGPATH
     - dotnet nuget push $PKGPATH --source https://www.nuget.org/ -k $NUGET_API_KEY

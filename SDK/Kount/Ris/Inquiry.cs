@@ -4,7 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 namespace Kount.Ris
-{
+{   
     using KountRisSdk.Kount.Log.Factory;
     using Microsoft.Extensions.Logging;
     using System;
@@ -29,8 +29,8 @@ namespace Kount.Ris
         {
             this.SetMode(Enums.InquiryTypes.ModeQ);
             this.SetCurrency("USD");
-            this.Data["SDK"] = ".NET";
-            this.SetSdkVersion("Sdk-Ris-Dotnet-0700");
+            this.Data["SDK"] = Config.SDK;
+            this.SetSdkVersion(Config.SDK_NAME);
         }
 
         /// <summary>
@@ -46,8 +46,8 @@ namespace Kount.Ris
         {
             this.SetMode(Enums.InquiryTypes.ModeQ);
             this.SetCurrency("USD");
-            this.Data["SDK"] = ".NET";
-            this.SetSdkVersion("Sdk-Ris-Dotnet-0651");
+            this.Data["SDK"] = Config.SDK;
+            this.SetSdkVersion(Config.SDK_NAME);
         }
 
         /// <summary>
@@ -64,8 +64,8 @@ namespace Kount.Ris
         {
             this.SetMode(Enums.InquiryTypes.ModeQ);
             this.SetCurrency("USD");
-            this.Data["SDK"] = ".NET";
-            this.SetSdkVersion("Sdk-Ris-Dotnet-0700");
+            this.Data["SDK"] = Config.SDK;
+            this.SetSdkVersion(Config.SDK_NAME);
         }
 
         /// <summary>
