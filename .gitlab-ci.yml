@@ -48,17 +48,14 @@ nuget deploy:
   script:
     - dotnet build
     - apt-get update -qq
-    - BUILD_VERSION= ${BUILD_VERSION} || true
-    - BUILD_VERSION=`echo $BUILD_VERSION | cut -c-17`
-    - SDK_VERSION=${BUILD_VERSION}
+    # BUILD_VERSION is cut to 17 characters so SDK_VERSION will not exceed 32 characters in total
+    - SDK_VERSION=`echo $BUILD_VERSION | cut -c-17`
     - echo ${SDK_VERSION}
     - |
-      if [ -n "${BUILD_VERSION}" ]
+      if [ ${SDK_VERSION} ]
       then
-        # BUILD_VERSION is cut to 17 characters so SDK_VERSION will not exceed 32 characters in total
-        BUILD_VERSION=`echo $BUILD_VERSION | cut -c-17`
-        echo "sed -i \"s/0.0.0/${BUILD_VERSION}/g\" ${CI_PROJECT_DIR}/SDK/Kount/Ris/Config.cs"
-        sed -i "s/0.0.0/${BUILD_VERSION}/g" ${CI_PROJECT_DIR}/SDK/Kount/Ris/Config.cs
+        echo "sed -i \"s/0.0.0/${SDK_VERSION}/g\" ${CI_PROJECT_DIR}/SDK/Kount/Ris/Config.cs"
+        sed -i "s/0.0.0/${SDK_VERSION}/g" ${CI_PROJECT_DIR}/SDK/Kount/Ris/Config.cs
         cat ${CI_PROJECT_DIR}/SDK/Kount/Ris/Config.cs
       fi
     - PKGPATH=$(find /builds/kount/third_party/kount-ris-dotnet-sdk/SDK/bin/Debug/*.nupkg)
