@@ -207,5 +207,37 @@ namespace KountRisTest
             string errCode = err0.Substring(0, 3);
             Assert.True("601".Equals(errCode), "Inquiry failed!  Expected ERRO=601");
         }
+
+        /// <summary>
+        /// TEST 1
+        /// Expected LBIN=12345678
+        /// Input to predictive response, UDF[LBIN] = 12345678
+        /// Produces RIS output, LBIN=1234567
+        /// </summary>
+        [Fact]
+        public void PredictiveResponseLbinWithValue()
+        {
+            Inquiry inquiry = CreateInquiry();
+            inquiry.SetLbin("12345678");
+            Response response = inquiry.GetResponse();
+        
+            Assert.True(response.GetErrorCount() == 0, "RIS request sent successfully with LBIN field");
+        }
+
+        /// <summary>
+        /// TEST 1
+        /// Expected LBIN=''
+        /// Input to predictive response, UDF[LBIN] = ''
+        /// Produces RIS output, LBIN=''
+        /// </summary>
+        [Fact]
+        public void PredictiveResponseLbinWithOutValue()
+        {
+            Inquiry inquiry = CreateInquiry();
+            Response response = inquiry.GetResponse();
+        
+            Assert.True(response.GetErrorCount() == 0, "RIS request sent successfully without LBIN field");
+        }
+
     }
 }
