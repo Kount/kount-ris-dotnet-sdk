@@ -633,5 +633,32 @@ namespace KountRisTest
 
         }
 
+        /// <summary>
+        /// TEST 17
+        /// Test case to vrify weather RIS request sent successfully with 'LBIN' field
+        /// </summary>
+        [Fact]
+        public void TestLbinWithValue()
+        {
+            Inquiry inquiry = CreateInquiry();
+            inquiry.SetLbin("12345678");
+            Response response = inquiry.GetResponse();
+        
+            Assert.True(response.GetErrorCount() == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
+        }
+
+        /// <summary>
+        /// TEST 18
+        /// Test case to vrify weather RIS request sent successfully without 'LBIN' field
+        /// </summary>
+        [Fact]
+        public void TestLbinWithOutValue()
+        {
+            Inquiry inquiry = CreateInquiry();
+            Response response = inquiry.GetResponse();
+        
+            Assert.True(response.GetErrorCount() == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
+        }
+
     }
 }
