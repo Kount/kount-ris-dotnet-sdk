@@ -207,6 +207,5 @@ namespace KountRisTest
             string errCode = err0.Substring(0, 3);
             Assert.True("601".Equals(errCode), "Inquiry failed!  Expected ERRO=601");
         }
-
     }
 }

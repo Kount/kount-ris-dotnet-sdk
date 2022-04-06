@@ -34,7 +34,7 @@ namespace Kount.Ris
         /// <summary>
         /// The RIS version
         /// </summary>
-        private const string RisVersion = "0720";
+        private const string RisVersion = "0710";
 
         /// <summary>
         /// Hash table of request data.
@@ -946,15 +946,6 @@ namespace Kount.Ris
         {
             this.Data["PTYP"] = Enums.PaymentTypes.GiftCard.GetValueAsString();
             this.SetPaymentToken(this.SafeGet(giftCardNum));
-        }
-
-        /// <summary>
-        /// Set the Bank Identification Number.
-        /// </summary>
-        /// <param name="lbin">Bank Identification Number.</param>
-        public void SetLbin(string lbin)
-        {
-            this.Data["LBIN"] = lbin;
         }
        
 
