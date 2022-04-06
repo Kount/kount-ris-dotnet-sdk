@@ -640,10 +640,11 @@ namespace KountRisTest
         [Fact]
         public void TestLbinWithValue()
         {
-            Inquiry inquiry = CreateInquiry();
+            Inquiry inquiry = TestHelper.CreateInquiry(KHASH_PTOK, out _sid, out _orderNum);
             inquiry.SetLbin("12345678");
             Response response = inquiry.GetResponse();
-        
+
+            var errors = response.GetErrors();
             Assert.True(response.GetErrorCount() == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
         }
 
@@ -654,9 +655,10 @@ namespace KountRisTest
         [Fact]
         public void TestLbinWithOutValue()
         {
-            Inquiry inquiry = CreateInquiry();
+            Inquiry inquiry = TestHelper.CreateInquiry(KHASH_PTOK, out _sid, out _orderNum);
             Response response = inquiry.GetResponse();
         
+            var errors = response.GetErrors();
             Assert.True(response.GetErrorCount() == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
         }
 
