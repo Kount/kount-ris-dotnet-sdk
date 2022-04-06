@@ -1,4 +1,3 @@
-﻿
 namespace KountRisTest
 {
     using Kount.Ris;
@@ -545,14 +544,14 @@ namespace KountRisTest
 
         /// <summary>
         /// <b>TEST 13</b>
-        /// Previously Whitelisted field should exist with ris call version 0710
+        /// Previously Whitelisted field should exist with ris call version 0720
         /// </summary>
         [Fact]
-        public void TestPreviouslyWhiteListedExistWithRisCallVersion_0710()
+        public void TestPreviouslyWhiteListedExistWithRisCallVersion_0720()
         {
             
             Inquiry inquiry = TestHelper.CreateInquiry(KHASH_PTOK, out _sid, out _orderNum);
-            inquiry.SetVersion("0710");
+            inquiry.SetVersion("0720");
             var cart = new ArrayList();
             cart.Add(new CartItem("cart item 0 type", "cart item 0", "cart item 0 description", 10, 1234));
             inquiry.SetCart(cart);
@@ -568,14 +567,14 @@ namespace KountRisTest
 
         /// <summary>
         /// <b>TEST 14</b>
-        /// 3d Secure Merchant Response should exist with ris call version 0710
+        /// 3d Secure Merchant Response should exist with ris call version0720
         /// </summary>
         [Fact]
-        public void Test3dSecureMerchantResponseExistWithRisCallVersion_0710()
+        public void Test3dSecureMerchantResponseExistWithRisCallVersion_0720()
         {
 
             Inquiry inquiry = TestHelper.CreateInquiry(KHASH_PTOK, out _sid, out _orderNum);
-            inquiry.SetVersion("0710");
+            inquiry.SetVersion("0720");
             var cart = new ArrayList();
             cart.Add(new CartItem("cart item 0 type", "cart item 0", "cart item 0 description", 10, 1234));
             inquiry.SetCart(cart);
@@ -605,7 +604,7 @@ namespace KountRisTest
             //SET Customer User-Agent HTTP header UAGT
             Response response = inquiry.GetResponse();
             var version = response.GetVersion();
-            Assert.True("0710".Equals(version), $"failed! default version is not 0710.");
+            Assert.True("0720".Equals(version), $"failed! default version is not 0720.");
             var errors = response.GetErrors();
             Assert.True(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
 
@@ -631,6 +630,41 @@ namespace KountRisTest
             var errors = response.GetErrors();
             Assert.True(errors.Count == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
 
+        }
+
+        /// <summary>
+        /// TEST 17
+        /// Test case to vrify weather RIS request sent successfully with 'LBIN' field
+        /// </summary>
+        [Fact]
+        public void TestLbinWithValue()
+        {
+            Inquiry inquiry = TestHelper.CreateInquiry(KHASH_PTOK, out _sid, out _orderNum);
+            var cart = new ArrayList();
+            cart.Add(new CartItem("cart item 0 type", "cart item 0", "cart item 0 description", 10, 1234));
+            inquiry.SetCart(cart);
+            inquiry.SetLbin("12345678");
+            Response response = inquiry.GetResponse();
+
+            var errors = response.GetErrors();
+            Assert.True(response.GetErrorCount() == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
+        }
+
+        /// <summary>
+        /// TEST 18
+        /// Test case to vrify weather RIS request sent successfully without 'LBIN' field
+        /// </summary>
+        [Fact]
+        public void TestLbinWithOutValue()
+        {
+            Inquiry inquiry = TestHelper.CreateInquiry(KHASH_PTOK, out _sid, out _orderNum);
+            var cart = new ArrayList();
+            cart.Add(new CartItem("cart item 0 type", "cart item 0", "cart item 0 description", 10, 1234));
+            inquiry.SetCart(cart);
+            Response response = inquiry.GetResponse();
+        
+            var errors = response.GetErrors();
+            Assert.True(response.GetErrorCount() == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
         }
 
     }
