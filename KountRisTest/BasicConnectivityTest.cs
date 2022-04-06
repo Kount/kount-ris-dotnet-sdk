@@ -646,8 +646,8 @@ namespace KountRisTest
             inquiry.SetLbin("12345678");
             Response response = inquiry.GetResponse();
 
-            var error = response.GetErrors()[0];
-            Assert.True(response.GetErrorCount() == 0, error);
+            var errors = response.GetErrors();
+            Assert.True(response.GetErrorCount() == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
         }
 
         /// <summary>
@@ -663,8 +663,8 @@ namespace KountRisTest
             inquiry.SetCart(cart);
             Response response = inquiry.GetResponse();
         
-            var error = response.GetErrors()[0];
-            Assert.True(response.GetErrorCount() == 0, error);
+            var errors = response.GetErrors();
+            Assert.True(response.GetErrorCount() == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
         }
 
     }
