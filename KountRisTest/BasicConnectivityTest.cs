@@ -1,4 +1,4 @@
-﻿
+
 namespace KountRisTest
 {
     using Kount.Ris;
@@ -644,8 +644,8 @@ namespace KountRisTest
             inquiry.SetLbin("12345678");
             Response response = inquiry.GetResponse();
 
-            var errors = response.GetErrors();
-            Assert.True(response.GetErrorCount() == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
+            var errors = response.GetErrors()[0];
+            Assert.True(response.GetErrorCount() == 0, errors));
         }
 
         /// <summary>
@@ -658,8 +658,8 @@ namespace KountRisTest
             Inquiry inquiry = TestHelper.CreateInquiry(KHASH_PTOK, out _sid, out _orderNum);
             Response response = inquiry.GetResponse();
         
-            var errors = response.GetErrors();
-            Assert.True(response.GetErrorCount() == 0, String.Join(Environment.NewLine, errors, "There are errors in response!"));
+            var errors = response.GetErrors()[0];
+            Assert.True(response.GetErrorCount() == 0, errors);
         }
 
     }
