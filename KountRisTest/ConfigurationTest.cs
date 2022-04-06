@@ -41,7 +41,7 @@ namespace KountRisTest
          [Fact]
         public void FromAppSettings_assigns_Version()
         {
-            Assert.Equal("0720", SUT.Version);
+            Assert.Equal("0710", SUT.Version);
         }
 
          [Fact]
