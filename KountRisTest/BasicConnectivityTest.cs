@@ -1,4 +1,3 @@
-
 namespace KountRisTest
 {
     using Kount.Ris;
@@ -645,7 +644,7 @@ namespace KountRisTest
             Response response = inquiry.GetResponse();
 
             var errors = response.GetErrors()[0];
-            Assert.True(response.GetErrorCount() == 0, errors));
+            Assert.True(response.GetErrorCount() == 0, errors);
         }
 
         /// <summary>
