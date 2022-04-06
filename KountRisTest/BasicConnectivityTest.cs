@@ -640,11 +640,14 @@ namespace KountRisTest
         public void TestLbinWithValue()
         {
             Inquiry inquiry = TestHelper.CreateInquiry(KHASH_PTOK, out _sid, out _orderNum);
+            var cart = new ArrayList();
+            cart.Add(new CartItem("cart item 0 type", "cart item 0", "cart item 0 description", 10, 1234));
+            inquiry.SetCart(cart);
             inquiry.SetLbin("12345678");
             Response response = inquiry.GetResponse();
 
-            var errors = response.GetErrors()[0];
-            Assert.True(response.GetErrorCount() == 0, errors);
+            var error = response.GetErrors()[0];
+            Assert.True(response.GetErrorCount() == 0, error);
         }
 
         /// <summary>
@@ -655,10 +658,13 @@ namespace KountRisTest
         public void TestLbinWithOutValue()
         {
             Inquiry inquiry = TestHelper.CreateInquiry(KHASH_PTOK, out _sid, out _orderNum);
+            var cart = new ArrayList();
+            cart.Add(new CartItem("cart item 0 type", "cart item 0", "cart item 0 description", 10, 1234));
+            inquiry.SetCart(cart);
             Response response = inquiry.GetResponse();
         
-            var errors = response.GetErrors()[0];
-            Assert.True(response.GetErrorCount() == 0, errors);
+            var error = response.GetErrors()[0];
+            Assert.True(response.GetErrorCount() == 0, error);
         }
 
     }
