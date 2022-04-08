@@ -203,9 +203,9 @@ namespace Kount.Ris
             // Set up the request object
             HttpWebRequest webReq = (HttpWebRequest)WebRequest.Create(this.url);
 
-            // Force using TLS 1.2 in case is not default - per request framework 4.5, 4, 3.5
-            //System.Net.ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072 | (SecurityProtocolType)768;
-            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
+            // Instead of forcing specific security protocols make sure
+            // that deprecated security protocols are not being used
+            AssertSecurityProtocol();
 
             webReq.Timeout = this.connectTimeout;
             webReq.Method = "POST";
@@ -301,6 +301,17 @@ namespace Kount.Ris
 
             this.logger.Debug("End GetResponse()");
             return new Kount.Ris.Response(risString);
+        }
+
+        private static void AssertSecurityProtocol()
+        {
+            var securityProtocol = System.Net.ServicePointManager.SecurityProtocol;
+
+            if ((securityProtocol & SecurityProtocolType.Ssl3) == SecurityProtocolType.Ssl3
+                || (securityProtocol & SecurityProtocolType.Tls) == SecurityProtocolType.Tls)
+            {
+                throw new InvalidOperationException("We do not support SSL 3.0 and TLS 1.0. They have been deprecated. Make sure ServicePointManager.SecurityProtocol doesn't include deprecated security protocols. On .NET Framework 4.7 and higher one should prefer SecurityProtocolTyp.SystemDefault to allow the operating system to choose the best protocol to use.");
+            }
         }
 
         /// <summary>
