@@ -38,6 +38,7 @@ sonarqube scan:
   extends: .sq-scan
   stage: sonarqube scan
   variables:
+    SRC_INCLUSIONS: "**/*.cs"
     SRC_EXCLUSIONS: "**/bin/**,**/obj/**,**/DS_Store/**,**/.git/**,**/*.vs,**/*_site,**/*articles,**/*.gitignore,**/*.key,**/*.yml"
 
 nuget deploy:
@@ -56,13 +57,16 @@ nuget deploy:
       then
         echo "sed -i \"s/0.0.0/${SDK_VERSION}/g\" ${CI_PROJECT_DIR}/SDK/Kount/Ris/Config.cs"
         sed -i "s/0.0.0/${SDK_VERSION}/g" ${CI_PROJECT_DIR}/SDK/Kount/Ris/Config.cs
+        echo "sed -i \"s/0.0.0/${SDK_VERSION}/g\" ${CI_PROJECT_DIR}/SDK/KountRisSdk.csproj"
+        sed -i "s/0.0.0/${SDK_VERSION}/g" ${CI_PROJECT_DIR}/SDK/KountRisSdk.csproj
+        echo "sed -i \"s/0.0.0/${SDK_VERSION}/g\" ${CI_PROJECT_DIR}/README.md"
+        sed -i "s/0.0.0/${SDK_VERSION}/g" ${CI_PROJECT_DIR}/README.md
         cat ${CI_PROJECT_DIR}/SDK/Kount/Ris/Config.cs
+        cat ${CI_PROJECT_DIR}/SDK/KountRisSdk.csproj
+        cat ${CI_PROJECT_DIR}/README.md
       fi
     - PKGPATH=$(find /builds/kount/third_party/kount-ris-dotnet-sdk/SDK/bin/Debug/*.nupkg)
     - echo $PKGPATH
     - dotnet nuget push $PKGPATH --source https://www.nuget.org/ -k $NUGET_API_KEY
-    # let's deploy locally as well, just to have a copy in gitlab
-    - dotnet nuget add source "$CI_SERVER_URL/api/v4/projects/$CI_PROJECT_ID/packages/nuget/index.json" --name gitlab --username gitlab-ci-token --password $CI_JOB_TOKEN --store-password-in-clear-text
-    - dotnet nuget push $PKGPATH --source gitlab
 
 
