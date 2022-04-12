@@ -153,8 +153,8 @@ namespace KountRisTest
             var rulesTrigg = response.GetRulesTriggered();
             Assert.True(rulesTrigg != null && rulesTrigg.Count != 0, "Inquiry failed! There no RULES_TRIGGERED.");
 
-            List<string> listResponce = new List<string>(Regex.Split(response.ToString(), "[\r\n]+"));
-            var filteredList = listResponce.FindAll(i => i.Contains("RULE_DESCRIPTION"));
+            List<string> listResponse = new List<string>(Regex.Split(response.ToString(), "[\r\n]+"));
+            var filteredList = listResponse.FindAll(i => i.Contains("RULE_DESCRIPTION"));
             Assert.True(rulesTrigg.Count == filteredList.Count, "Inquiry failed! Count of RULES_TRIGGERED is wrong!");
 
             var r1 = filteredList.Find(r => r.Contains("review if ARBITRARY_ALPHANUM_UDF contains \"trigger\""));
@@ -187,7 +187,7 @@ namespace KountRisTest
 
             // optional getter
             var errors = response.GetErrors();
-            Assert.True(errors.Count == 1, "Wrong responce expected error_num: 332, ERROR_COUNT=1");
+            Assert.True(errors.Count == 1, "Wrong response expected error_num: 332, ERROR_COUNT=1");
 
             var err0 = errors[0];
             string errCode = err0.Substring(0, 3);
@@ -227,8 +227,8 @@ namespace KountRisTest
             var warnings = response.GetWarnings();
             Assert.True(warnings.Count == 2, $"TranID: {tranID} - Wrong number of warnings: {warnings.Count}, expected 2.");
 
-            List<string> listResponce = new List<string>(Regex.Split(response.ToString(), "[\r\n]+"));
-            var filteredList = listResponce.FindAll(i => i.Contains("WARNING_"));
+            List<string> listResponse = new List<string>(Regex.Split(response.ToString(), "[\r\n]+"));
+            var filteredList = listResponse.FindAll(i => i.Contains("WARNING_"));
             var w1 = filteredList.Find(r => r.Contains("[UDF_DOESNOTEXIST=>throw a warning please!]"));
             var w2 = filteredList.Find(r => r.Contains("[The label [UDF_DOESNOTEXIST] is not defined for merchant ID"));
 
@@ -261,7 +261,7 @@ namespace KountRisTest
 
             // optional getter
             var errors = response.GetErrors();
-            Assert.True(errors.Count == 1, "Wrong responce expected error_num: 332, ERROR_COUNT=1");
+            Assert.True(errors.Count == 1, "Wrong response expected error_num: 332, ERROR_COUNT=1");
 
             var err0 = errors[0];
             //340 BAD_MASK Cause: [value [BADPTOK] did not match regex /^\d{6}X{5,9}\d{1,4}$/], Field: [PTOK], Value: [BADPTOK]
@@ -270,8 +270,8 @@ namespace KountRisTest
             var warnings = response.GetWarnings();
             Assert.True(warnings.Count == 3, $"Wrong number of warnings: {warnings.Count}, expected 2.");
 
-            List<string> listResponce = new List<string>(Regex.Split(response.ToString(), "[\r\n]+"));
-            var filteredList = listResponce.FindAll(i => i.Contains("WARNING_"));
+            List<string> listResponse = new List<string>(Regex.Split(response.ToString(), "[\r\n]+"));
+            var filteredList = listResponse.FindAll(i => i.Contains("WARNING_"));
             var w1 = filteredList.Find(r => r.Contains("[UDF_DOESNOTEXIST=>throw a warning please!]"));
             var w2 = filteredList.Find(r => r.Contains("[The label [UDF_DOESNOTEXIST] is not defined for merchant ID"));
             var w3 = filteredList.Find(r => r.Contains("[LAST4 does not match last 4 characters in payment token]"));
@@ -407,7 +407,7 @@ namespace KountRisTest
 
         /// <summary>
         /// TEST 9
-        /// Mode U call submits updated values, but return values do not include the re-evalued transaction results.
+        /// Mode U call submits updated values, but return values do not include the re-evaluated transaction results.
         /// Default values mode Q transaction, capture TRAN, SESS, ORDR values, use those to submit a mode U
         /// </summary>
         [Fact]

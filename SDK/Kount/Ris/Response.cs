@@ -164,7 +164,7 @@ namespace Kount.Ris
         /// <summary>
         /// Get the Kount score.
         /// </summary>
-        /// <returns>1 to 99. The highter the score, the more risk.</returns>
+        /// <returns>1 to 99. The higher the score, the more risk.</returns>
         public string GetScore()
         {
             return (string)this.response["SCOR"];
@@ -174,7 +174,7 @@ namespace Kount.Ris
         /// <summary>
         /// Get the Kount Omniscore.
         /// </summary>
-        /// <returns>1 to 99.9. The highter the score, the less risk.</returns>
+        /// <returns>1 to 99.9. The higher the score, the less risk.</returns>
         public String getOmniscore()
         {
             return (string)response["OMNISCORE"];

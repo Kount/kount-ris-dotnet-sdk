@@ -8,7 +8,7 @@ namespace Kount.Enums
     using System.ComponentModel;
 
     /// <summary>
-    /// Extention Helper
+    /// Extension Helper
     /// <b>Author:</b> Kount <a>custserv@kount.com</a>,<br/>
     /// <b>Version:</b> 7.0.0. <br/>
     /// <b>Copyright:</b> 2017 Kount Inc <br/>

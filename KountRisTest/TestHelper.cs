@@ -55,7 +55,7 @@ namespace KountRisTest
         private const string B2CI = "Albuquerque";
 
         /// <summary>
-        /// Billing address - Counry Code
+        /// Billing address - Country Code
         /// </summary>
         private const string B2CC = "US";
 
@@ -100,7 +100,7 @@ namespace KountRisTest
         private const string S2CI = "Gnome";
 
         /// <summary>
-        /// Shipping Address Recipient - Counry Code
+        /// Shipping Address Recipient - Country Code
         /// </summary>
         private const string S2CC = "US";
 
