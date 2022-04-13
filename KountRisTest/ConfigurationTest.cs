@@ -29,13 +29,13 @@ namespace KountRisTest
          [Fact]
         public void FromAppSettings_assigns_MerchantId()
         {
-            Assert.Equal("MERCHANT_ID", SUT.MerchantId);
+            Assert.NotNull(SUT.MerchantId);
         }
 
          [Fact]
         public void FromAppSettings_assigns_API_Key()
         {
-            Assert.Equal("API_KEY", SUT.ApiKey);
+            Assert.NotNull(SUT.ApiKey);
         }
 
          [Fact]
