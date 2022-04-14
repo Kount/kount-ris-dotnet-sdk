@@ -47,7 +47,6 @@ nuget deploy:
   only:
     - tags
   script:
-    - dotnet build
     - apt-get update -qq
     # BUILD_VERSION is cut to 17 characters so SDK_VERSION will not exceed 32 characters in total
     - SDK_VERSION=`echo $BUILD_VERSION | cut -c-17`
@@ -65,6 +64,7 @@ nuget deploy:
         cat ${CI_PROJECT_DIR}/SDK/KountRisSdk.csproj
         cat ${CI_PROJECT_DIR}/README.md
       fi
+    - dotnet build
     - PKGPATH=$(find /builds/kount/third_party/kount-ris-dotnet-sdk/SDK/bin/Debug/*.nupkg)
     - echo $PKGPATH
     - dotnet nuget push $PKGPATH --source https://www.nuget.org/ -k $NUGET_API_KEY
