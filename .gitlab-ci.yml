@@ -44,7 +44,6 @@ sonarqube scan:
     SRC_EXCLUSIONS: "**/bin/**,**/obj/**,**/DS_Store/**,**/.git/**,**/*.vs,**/*_site,**/*articles,**/*.gitignore,**/*.key,**/*.yml"
     SONAR_COVERAGE_REPORT_PATHS: "coverage/SonarQube.xml"
     PROJECT_KEY: "third_party:$PROJECT_NAME"
-  allow_failure: true
   before_script:
     - |
       install_dependencies () {
