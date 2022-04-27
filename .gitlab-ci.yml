@@ -4,7 +4,7 @@ include:
         - base/sq-scan.yml
         - core/rules.yml
         - version.yml
-    ref: 2.5.3
+    ref: 2.6.1
 
 stages:
   - version
@@ -35,11 +35,155 @@ test config:
    - dotnet test "KountRisConfigTest"
 
 sonarqube scan:
-  extends: .sq-scan
+  extends: 
+    - .sq-scan
+    - .dotnet
   stage: sonarqube scan
   variables:
     SRC_INCLUSIONS: "**/*.cs"
     SRC_EXCLUSIONS: "**/bin/**,**/obj/**,**/DS_Store/**,**/.git/**,**/*.vs,**/*_site,**/*articles,**/*.gitignore,**/*.key,**/*.yml"
+    SONAR_COVERAGE_REPORT_PATHS: "coverage/SonarQube.xml"
+    PROJECT_KEY: "third_party:$PROJECT_NAME"
+  allow_failure: true
+  before_script:
+    - |
+      install_dependencies () {
+        echo "install dotnet sonar scanner"
+        # install certs
+        mkdir /usr/local/share/ca-certificates/kount
+        chmod 755 /usr/local/share/ca-certificates/kount/
+        cd /usr/local/share/ca-certificates/kount
+        cp ${KOUNT_INTERMEDIATE_CRT} intermediate.crt
+        chmod 644 intermediate.crt
+        echo -e ${KOUNT_MASTER_CRT} > master.crt
+        awk 'BEGIN {c=0;} /BEGIN CERT/{c++} { print > "master." c ".pem"}' < master.crt
+        chmod 644 master.crt
+        cp ${CI_SERVER_TLS_CA_FILE} server.crt
+        awk 'BEGIN {c=0;} /BEGIN CERT/{c++} { print > "cert." c ".pem"}' < server.crt
+        chmod 644 *.pem
+        cd -
+        update-ca-certificates
+        # install JRE
+        apt-get update && apt-get install -y openjdk-11-jre jq
+        # install dotnet sonarscanner and reportgenerator
+        dotnet tool install --global dotnet-sonarscanner --version 5.5.3
+        dotnet tool install --global dotnet-reportgenerator-globaltool --version 5.1.4
+        PATH="${PATH}:/root/.dotnet/tools"
+      }
+
+    # Run the Sonarqube scan on code in the repo under test
+    - |
+      run_sonarqube_scan () { 
+        echo "Running code scan..."
+        dotnet-sonarscanner begin \
+          /key:"$PROJECT_KEY" \
+          /name:"$PROJECT_NAME" \
+          /d:sonar.host.url="${SONAR_HOST}" \
+          /d:sonar.login="$SONAR_TOKEN" \
+          /d:sonar.coverageReportPaths="$SONAR_COVERAGE_REPORT_PATHS"
+        dotnet build
+        dotnet test "KountRisTest" --collect:"XPlat Code Coverage" --results-directory ./coverage
+        dotnet test "KountRisConfigTest" --collect:"XPlat Code Coverage" --results-directory ./coverage
+        reportgenerator "-reports:./coverage/*/coverage.*.xml" "-targetdir:coverage" "-reporttypes:SonarQube"
+        dotnet-sonarscanner end /d:sonar.login="$SONAR_TOKEN"
+      }
+
+    # Wait for sonar-scanner to get the quality-gate result from the scan.
+    # Time out with error after TIMEOUT_IN_SECONDS if no result yet.
+    - |
+      get_quality_gate_result () { echo "Getting quality-gate results...";
+        ELAPSED_TIME=0;
+        while [ $TIMEOUT_IN_SECONDS -ge $ELAPSED_TIME ]; do
+          QG_STATUS=$(curl -sku "${SONAR_TOKEN}:" -X GET "${SONAR_HOST}/api/qualitygates/project_status?projectKey=${PROJECT_KEY}" | jq '.projectStatus.status' | tr -d '"');
+          echo "QG_STATUS at ${ELAPSED_TIME} seconds = ${QG_STATUS}";
+          if [[ -z "$QG_STATUS" || "$QG_STATUS" = "null" || "$QG_STATUS" = "NONE" ]]; then
+            sleep 5 && ELAPSED_TIME=$(($ELAPSED_TIME+5));
+            echo "ELAPSED_TIME = ${ELAPSED_TIME}";
+            echo "TIMEOUT_IN_SECONDS = ${TIMEOUT_IN_SECONDS}";
+            echo "still waiting..."; else
+            break;
+          fi;
+        done;
+        if [ $TIMEOUT_IN_SECONDS -lt $ELAPSED_TIME ]; then
+          echo "TIMEOUT ERROR. Sonarqube scan incomplete after ${TIMEOUT_IN_SECONDS} seconds.";
+          exit 1;
+        fi; }
+
+    # Trim "new_" from a scan condition name if it's there. We want to better
+    # describe these condition as applying specifically to new code added by
+    # the current commit.
+    - trim_key_prefix () { echo "${KEY:$KEY_PREFIX_LENGTH:$KEY_LENGTH}"; }
+
+    # Rename the "sqale_rating" condition since it won't mean much to users
+    # unless they read Sonarqube docs. This condition is a maintainability rating.
+    - translate_sqale_rating_for_readability () { echo "maintainability_rating"; }
+
+    # Translate the generic condition keys to a more informative format
+    - |
+      describe_key () { KEY=$1;
+        KEY_LENGTH=${#KEY};
+        KEY_STARTS_WITH="${KEY:0:4}";
+        if [ "${KEY_STARTS_WITH}" = "new_" ]; then \
+          IS_NEW_CODE_CONDITION="true";
+          KEY_PREFIX_LENGTH=4; else \
+          IS_NEW_CODE_CONDITION="false";
+          KEY_PREFIX_LENGTH=0;
+        fi;
+        KEY=$(trim_key_prefix);
+        if [ "${KEY}" = "sqale_rating" ]; then \
+          KEY=$(translate_sqale_rating_for_readability);
+        fi;
+        if [ "${IS_NEW_CODE_CONDITION}" = "true" ]; then \
+          echo "${KEY} for this commit's new code"; else \
+          echo "${KEY} overall";
+        fi; }
+
+    # Translate the scan result for each condition to an unambiguous pass/fail binary
+    - |
+      evaluate_scan_result () { CONDITION_STATUS=$1;
+        if [ "${CONDITION_STATUS}" = "OK" ]; then \
+          echo "PASSED"; else \
+          echo "FAILED";
+        fi; }
+
+    # Extract and translate the scan result from REST-response JSON
+    - |
+      report_scan_condition_result () { CONDITION=$1;
+        KEY=$(echo $CONDITION | jq -r '.metricKey');
+        KEY_DESCRIPTION=$(describe_key $KEY);
+        STATUS=$(echo $CONDITION | jq -r '.status');
+        STATUS_DESCRIPTION=$(evaluate_scan_result $STATUS);
+        echo "  * ${KEY_DESCRIPTION}: ${STATUS_DESCRIPTION}"; }
+
+    # Print a human-readable summary of the sonar-scanner result
+    - |
+      print_quality_gate_result () { echo "Printing quality-gate results...";
+        QG_RESULT_CONDITIONS=$(curl -sku "${SONAR_TOKEN}:" \
+          -X GET "${SONAR_HOST}/api/qualitygates/project_status?projectKey=${PROJECT_KEY}" | jq -c '.projectStatus.conditions[]');
+        printf "\n******************************************************************************************************";
+        printf "\n******************************************************************************************************\n";
+        echo "SONARQUBE QUALITY GATE ANALYSIS";
+        printf "\nOverall scan result = ${QG_STATUS}\n";
+        printf "\nIndividual conditions in quality gate analysis:\n";
+        for CONDITION in $QG_RESULT_CONDITIONS; do
+          report_scan_condition_result $CONDITION;
+        done;
+        printf "\n"
+        echo "To drill further into the scan results, go to"
+        echo "https://sonarqube.private.kount.com/dashboard?id=third_party%3A${CI_PROJECT_NAME}";
+        printf "\n******************************************************************************************************";
+        printf "\n******************************************************************************************************\n"; }
+
+    # Make the GitLab job fail if the Sonar scan failed
+    - |
+      fail_test_on_quality_gate_failure () { echo "Checking quality-gate results...";
+        if [ "$QG_STATUS" != "OK" ]; then exit 1; fi; }
+  script:
+    - install_dependencies
+    - run_sonarqube_scan
+    - get_quality_gate_result
+    - print_quality_gate_result
+    - fail_test_on_quality_gate_failure
 
 nuget deploy:
   stage: deploy

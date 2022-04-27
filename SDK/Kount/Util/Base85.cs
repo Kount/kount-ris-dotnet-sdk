@@ -19,7 +19,7 @@ namespace Kount.Util
         /// Maximum line length for encoded BASE85 string; 
         /// set to zero for one unbroken line.
         /// </summary>
-        public static int LineLength = 75;
+        private static int LineLength = 75;
 
         private const int _asciiOffset = 33;
         private static byte[] _decodedBlock = new byte[4];
