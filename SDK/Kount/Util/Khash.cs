@@ -52,8 +52,8 @@ namespace Kount.Util
         /// Compute a Kount hash of a given plain text string.
         ///
         /// Preserves the first six characters of the input
-        /// so that hasked tokens can be categorized
-        /// by Bank Idenfication Number (BIN).
+        /// so that hashed tokens can be categorized
+        /// by Bank Identification Number (BIN).
         /// </summary>
         /// <param name="plainText">String to be hashed</param>
         /// <returns>String Hashed</returns>

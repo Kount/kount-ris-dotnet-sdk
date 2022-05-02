@@ -46,7 +46,7 @@ public static Inquiry CreateInquiryMasked(string cardNumber, out string sid, out
 ```
 
 > [!NOTE]
-> Diference is only by calling `SetCardPayment` and `SetCardPaymentMasked`.
+> Difference is only by calling `SetCardPayment` and `SetCardPaymentMasked`.
 
 Basic Connectivity Tests
 ------------------------
@@ -217,7 +217,7 @@ public void RisQHardErrorExpected()
 
     // optional getter
     var errors = response.GetErrors();
-    Assert.IsTrue(errors.Count == 1, "Wrong responce expected error_num: 332, ERROR_COUNT=1");
+    Assert.IsTrue(errors.Count == 1, "Wrong response expected error_num: 332, ERROR_COUNT=1");
 
     var err0 = errors[0];
     string errCode = err0.Substring(0, 3);
@@ -261,8 +261,8 @@ public void RisQWarningApproved()
     Assert.IsTrue(warnings.Count == 2, 
                $"TranID: {tranID} - Wrong number of warnings: {warnings.Count}, expected 2.");
 
-    List<string> listResponce = new List<string>(Regex.Split(response.ToString(), "[\r\n]+"));
-    var filteredList = listResponce.FindAll(i => i.Contains("WARNING_"));
+    List<string> listResponse = new List<string>(Regex.Split(response.ToString(), "[\r\n]+"));
+    var filteredList = listResponse.FindAll(i => i.Contains("WARNING_"));
     var w1 = filteredList.Find(r => r.Contains("[UDF_DOESNOTEXIST=>throw a warning please!]"));
     var w2 = filteredList.Find(r => 
         r.Contains("[The label [UDF_DOESNOTEXIST] is not defined for merchant ID [999666].]"));
@@ -301,7 +301,7 @@ public void RisQHardSoftErrorsExpected()
     // optional getter
     var errors = response.GetErrors();
     Assert.IsTrue(errors.Count == 1, 
-                    "Wrong responce expected error_num: 332, ERROR_COUNT=1");
+                    "Wrong response expected error_num: 332, ERROR_COUNT=1");
 
     var err0 = errors[0];
     Assert.IsTrue(err0.Contains("332 BAD_CARD Cause: [PTOK invalid format], 
@@ -311,8 +311,8 @@ public void RisQHardSoftErrorsExpected()
     Assert.IsTrue(warnings.Count == 2, 
               $"Wrong number of warnings: {warnings.Count}, expected 2.");
 
-    List<string> listResponce = new List<string>(Regex.Split(response.ToString(), "[\r\n]+"));
-    var filteredList = listResponce.FindAll(i => i.Contains("WARNING_"));
+    List<string> listResponse = new List<string>(Regex.Split(response.ToString(), "[\r\n]+"));
+    var filteredList = listResponse.FindAll(i => i.Contains("WARNING_"));
     var w1 = filteredList.Find(r => r.Contains("[UDF_DOESNOTEXIST=>throw a warning please!]"));
     var w2 = filteredList.Find(r => 
         r.Contains("[The label [UDF_DOESNOTEXIST] is not defined for merchant ID [999666].]"));
@@ -478,7 +478,7 @@ public void RisJOneKountCentralRuleDecline()
 
 ```
 ### 9. Mode U call submits updated values.
-* return values do not include the re-evalued transaction results,
+* return values do not include the re-evaluated transaction results,
 
 ```cs
 public void ModeUAfterModeQ()

@@ -108,7 +108,7 @@
         /// <summary>
         /// Log a debug level message and exception.
         /// </summary>
-        /// <param name="message">Mesage to log</param>
+        /// <param name="message">Message to log</param>
         /// <param name="e">Exception to log</param>
         public void Debug(string message, Exception e)
         {
@@ -127,7 +127,7 @@
         /// <summary>
         /// Log an info level message and exception.
         /// </summary>
-        /// <param name="message">Mesage to log</param>
+        /// <param name="message">Message to log</param>
         /// <param name="e">Exception to log</param>
         public void Info(string message, Exception e)
         {
@@ -146,7 +146,7 @@
         /// <summary>
         /// Log a warn level message and exception.
         /// </summary>
-        /// <param name="message">Mesage to log</param>
+        /// <param name="message">Message to log</param>
         /// <param name="e">Exception to log</param>
         public void Warn(string message, Exception e)
         {
@@ -165,7 +165,7 @@
         /// <summary>
         /// Log an error level message and exception.
         /// </summary>
-        /// <param name="message">Mesage to log</param>
+        /// <param name="message">Message to log</param>
         /// <param name="e">Exception to log</param>
         public void Error(string message, Exception e)
         {
@@ -184,7 +184,7 @@
         /// <summary>
         /// Log a fatal level message and exception.
         /// </summary>
-        /// <param name="message">Mesage to log</param>
+        /// <param name="message">Message to log</param>
         /// <param name="e">Exception to log</param>
         public void Fatal(string message, Exception e)
         {

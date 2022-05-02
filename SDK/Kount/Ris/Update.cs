@@ -95,7 +95,7 @@ namespace Kount.Ris
         }
 
         /// <summary>
-        /// Set if this transaction ended up being a refund or chargback.
+        /// Set if this transaction ended up being a refund or chargeback.
         /// </summary>
         /// <param name="rfcb">Set R or C.</param>
         public void SetRefundChargeback(char rfcb)

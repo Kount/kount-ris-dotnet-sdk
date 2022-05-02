@@ -57,7 +57,7 @@ namespace Kount.Ris
         private string certificate = null;
 
         /// <summary>
-        /// Password used to export the certificate. Depcrecated in favor of API key.
+        /// Password used to export the certificate. Deprecated in favor of API key.
         /// </summary>
         private string password = null;
 

@@ -29,7 +29,7 @@ namespace Kount.Ris
         private string decision;
 
         /// <summary>
-        /// A helper class to oraganize Kount Central threshold event data in the RIS response.
+        /// A helper class to organize Kount Central threshold event data in the RIS response.
         /// </summary>
         /// <param name="code">The threshold event's code</param>
         /// <param name="expression">The threshold event's expression</param>
