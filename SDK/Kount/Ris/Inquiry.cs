@@ -172,7 +172,7 @@ namespace Kount.Ris
         }
 
         /// <summary>
-        /// Set the uniqe (cookie identifier, etc.) of the client.
+        /// Set the unique (cookie identifier, etc.) of the client.
         /// </summary>
         /// <param name="unique">Unique client identifier</param>
         public void SetUnique(string unique)
@@ -375,7 +375,7 @@ namespace Kount.Ris
         }
 
         /// <summary>
-        /// Set a shoppinng cart
+        /// Set a shopping cart
         /// </summary>
         /// <param name="cart">ArrayList of Kount.Ris.CartItem objects</param>
         public void SetCart(System.Collections.ArrayList cart)

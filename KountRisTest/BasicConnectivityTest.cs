@@ -34,7 +34,7 @@ namespace KountRisTest
         //Fields
         private string _sid = "";
         private string _orderNum = "";
-        private int merchentID;
+        private int merchantID;
         private string apiKey;
         /// <summary>
         /// <b>TEST 1</b>
@@ -47,7 +47,7 @@ namespace KountRisTest
         {
             Kount.Ris.Configuration configuration = TestHelper.GetConfiguration();
 
-            this.merchentID = int.Parse(configuration.MerchantId);
+            this.merchantID = int.Parse(configuration.MerchantId);
             this.apiKey = configuration.ApiKey;
 
         }
@@ -347,7 +347,7 @@ namespace KountRisTest
 
         /// <summary>
         /// TEST 9
-        /// Mode U call submits updated values, but return values do not include the re-evalued transaction results.
+        /// Mode U call submits updated values, but return values do not include the re-evaluated transaction results.
         /// Default values mode Q transaction, capture TRAN, SESS, ORDR values, use those to submit a mode U
         /// </summary>
          [Fact]
@@ -379,7 +379,7 @@ namespace KountRisTest
             Update update = new Update(true, TestHelper.GetConfiguration());
             update.SetMode(UpdateTypes.ModeU);
             update.SetVersion("0695");
-            update.SetMerchantId(basicConnectivity.merchentID);
+            update.SetMerchantId(basicConnectivity.merchantID);
             update.SetApiKey(basicConnectivity.apiKey);
             update.SetSessionId(sessID);
             update.SetTransactionId(tranID);
@@ -449,7 +449,7 @@ namespace KountRisTest
             update.SetMode(UpdateTypes.ModeX);
             update.SetVersion("0695");
 
-            update.SetMerchantId(basicConnectivity.merchentID);
+            update.SetMerchantId(basicConnectivity.merchantID);
             update.SetApiKey(basicConnectivity.apiKey);
 
             update.SetSessionId(sessID);
@@ -634,7 +634,7 @@ namespace KountRisTest
 
         /// <summary>
         /// TEST 17
-        /// Test case to vrify weather RIS request sent successfully with 'LBIN' field
+        /// Test case to verify weather RIS request sent successfully with 'LBIN' field
         /// </summary>
         [Fact]
         public void TestLbinWithValue()
@@ -652,7 +652,7 @@ namespace KountRisTest
 
         /// <summary>
         /// TEST 18
-        /// Test case to vrify weather RIS request sent successfully without 'LBIN' field
+        /// Test case to verify weather RIS request sent successfully without 'LBIN' field
         /// </summary>
         [Fact]
         public void TestLbinWithOutValue()

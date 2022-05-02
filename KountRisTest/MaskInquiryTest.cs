@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="InquiryMaskTest.cs" company="Keynetics Inc">
 //     Copyright  Kount Inc. All rights reserved.
 // </copyright>
