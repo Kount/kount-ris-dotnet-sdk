@@ -1,5 +1,5 @@
 using Microsoft.Extensions.Configuration;
-using System.Configuration;
+using systemConfiguaration =System.Configuration;
 using System.IO;
 
 namespace Kount.Ris
@@ -16,20 +16,20 @@ namespace Kount.Ris
         public static Configuration FromAppSettings()
         {
             var config = new Configuration();
-            if (ConfigurationManager.AppSettings.AllKeys.Length != 0 && ConfigurationManager.AppSettings["Ris.MerchantId"] != null && ConfigurationManager.AppSettings["Ris.API.Key"] != null)
+            if (systemConfiguaration.ConfigurationManager.AppSettings.AllKeys.Length != 0 && systemConfiguaration.ConfigurationManager.AppSettings["Ris.MerchantId"] != null && systemConfiguaration.ConfigurationManager.AppSettings["Ris.API.Key"] != null)
             {           
 
                 config = new Configuration()
                 {
-                    MerchantId = ConfigurationManager.AppSettings["Ris.MerchantId"],
-                    URL = ConfigurationManager.AppSettings["Ris.Url"],
-                    ConfigKey = ConfigurationManager.AppSettings["Ris.Config.Key"],
-                    ConnectTimeout = ConfigurationManager.AppSettings["Ris.Connect.Timeout"],
-                    Version = ConfigurationManager.AppSettings["Ris.Version"],
-                    ApiKey = ConfigurationManager.AppSettings["Ris.API.Key"],
-                    CertificateFile = ConfigurationManager.AppSettings["Ris.CertificateFile"],
-                    PrivateKeyPassword = ConfigurationManager.AppSettings["Ris.PrivateKeyPassword"],
-                    LogSimpleElapsed = ConfigurationManager.AppSettings["LOG.SIMPLE.ELAPSED"]
+                    MerchantId = systemConfiguaration.ConfigurationManager.AppSettings["Ris.MerchantId"],
+                    URL = systemConfiguaration.ConfigurationManager.AppSettings["Ris.Url"],
+                    ConfigKey = systemConfiguaration.ConfigurationManager.AppSettings["Ris.Config.Key"],
+                    ConnectTimeout = systemConfiguaration.ConfigurationManager.AppSettings["Ris.Connect.Timeout"],
+                    Version = systemConfiguaration.ConfigurationManager.AppSettings["Ris.Version"],
+                    ApiKey = systemConfiguaration.ConfigurationManager.AppSettings["Ris.API.Key"],
+                    CertificateFile = systemConfiguaration.ConfigurationManager.AppSettings["Ris.CertificateFile"],
+                    PrivateKeyPassword = systemConfiguaration.ConfigurationManager.AppSettings["Ris.PrivateKeyPassword"],
+                    LogSimpleElapsed = systemConfiguaration.ConfigurationManager.AppSettings["LOG.SIMPLE.ELAPSED"]
                 };
             }
             else if (File.Exists("appsettings.json"))
