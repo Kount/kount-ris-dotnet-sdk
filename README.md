@@ -1,31 +1,11 @@
-# README #
+# Kount RIS .NET SDK #
 
-Kount .NET SDK
+The Kount RIS .NET SDK contains the .NET SDK, tests, and build/package routines. This enables integrating the Kount fraud fighting solution into your .NET app.
 
-### What is this repository for? ###
+## Documentation ##
 
-* Contains sources, tests, and resources for the Kount .NET SDK
-* SDK Version: `0.0.0` 
-   
-### How do I get set up? ###
+For official **integration documentation**, go to [How to Integrate the RIS .NET SDK](https://developer.kount.com/hc/en-us/articles/4424395233428) on the Kount Developer site.
 
-* [Configuration](https://github.com/Kount/kount-ris-dotnet-sdk/wiki/Adding-Configuration)
-* [Dependencies](https://github.com/Kount/kount-ris-dotnet-sdk/wiki/Installation#prerequisites)
-* [How to run tests](https://github.com/Kount/kount-ris-dotnet-sdk/wiki/Installation#steps)
+## Release Notes ##
 
-### Contribution guidelines ###
-
-* [Writing tests](https://msdn.microsoft.com/en-us/library/hh598960.aspx , 
-                 https://docs.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-dotnet-test)
-* New features development / bug fixes should be implemented in their own branch having a meaningful name. Create a pull request, assign a reviewer, and respond to comments.
-* Code review -- if you are the assigned reviewer, check for
-    * correct usage of programming language tools
-    * nice comments
-    * code cleanliness (no unused imports, variables, methods)
-    * code complexity
-    * tests
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+For the complete **release notes history**, go to [Kount RIS .NET SDK Release Notes History](https://developer.kount.com/hc/en-us/articles/10406505602068) on the Kount Developer site.
