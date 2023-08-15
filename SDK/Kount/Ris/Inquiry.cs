@@ -30,7 +30,7 @@ namespace Kount.Ris
             this.SetMode(Enums.InquiryTypes.ModeQ);
             this.SetCurrency("USD");
             this.Data["SDK"] = Config.SDK;
-            this.SetSdkVersion(Config.SDK_NAME);
+            this.Data["SDK_VERSION"] = Config.SDK_NAME;
         }
 
         /// <summary>
@@ -39,15 +39,14 @@ namespace Kount.Ris
         /// to change the RIS mode and currency respectively.
         /// </summary>
         /// <param name="checkConfiguration">If is true: will check config file if 
-        /// `Ris.Url`, 
-        /// `Ris.MerchantId`, 
-        /// `Ris.Config.Key` and `Ris.Connect.Timeout` are set.</param>
+        /// `Ris.Url`, `Ris.MerchantId`, `Ris.Config.Key` and 
+        /// `Ris.Connect.Timeout` are set.</param>
         public Inquiry(bool checkConfiguration, ILogger logger = null) : base(checkConfiguration, logger)
         {
             this.SetMode(Enums.InquiryTypes.ModeQ);
             this.SetCurrency("USD");
             this.Data["SDK"] = Config.SDK;
-            this.SetSdkVersion(Config.SDK_NAME);
+            this.Data["SDK_VERSION"] = Config.SDK_NAME;
         }
 
         /// <summary>
@@ -56,16 +55,15 @@ namespace Kount.Ris
         /// to change the RIS mode and currency respectively.
         /// </summary>
         /// <param name="checkConfiguration">If is true: will check config file if 
-        /// `Ris.Url`, 
-        /// `Ris.MerchantId`, 
-        /// `Ris.Config.Key` and `Ris.Connect.Timeout` are set.</param>
+        /// `Ris.Url`, `Ris.MerchantId`, `Ris.Config.Key` and 
+        /// `Ris.Connect.Timeout` are set.</param>
         /// <param name="configuration">Configuration class with raw values</param>
         public Inquiry(bool checkConfiguration, Configuration configuration, ILogger logger = null) : base(checkConfiguration, configuration, logger)
         {
             this.SetMode(Enums.InquiryTypes.ModeQ);
             this.SetCurrency("USD");
             this.Data["SDK"] = Config.SDK;
-            this.SetSdkVersion(Config.SDK_NAME);
+            this.Data["SDK_VERSION"] = Config.SDK_NAME;
         }
 
         /// <summary>
@@ -113,16 +111,6 @@ namespace Kount.Ris
         public void SetCurrency(string currency)
         {
             this.Data["CURR"] = this.SafeGet(currency);
-        }
-
-        /// <summary>
-        /// Set the current SDK version SDK_Type-RIS_VERSION-SDK_BUILD_DATETIMESTAMP.
-        /// e.g. Sdk-Ris-Dnet-0651-20170505T1458
-        /// </summary>
-        /// <param name="sdkVersion">Three character code e.g. USD.</param>
-        public void SetSdkVersion(string sdkVersion)
-        {
-            this.Data["SDK_VERSION"] = this.SafeGet(sdkVersion);
         }
 
         /// <summary>
