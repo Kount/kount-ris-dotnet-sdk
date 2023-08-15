@@ -76,9 +76,9 @@ namespace Kount.Ris
         /// web.config file.
         /// </summary>
         /// <param name="checkConfiguration">By default is true: will check config file if 
-        /// `Ris.Url`, 
-        /// `Ris.MerchantId`, 
-        /// `Ris.Config.Key` are set.</param>
+        /// `Ris.Url`, `Ris.MerchantId`, `Ris.Config.Key` and 
+        /// `Ris.Connect.Timeout` are set.</param>
+        /// are set.</param>
         /// <param name="configuration">Instance of configuration.</param>
         /// <param name="logger">ILogger object for logging output</param>
         /// <exception cref="Kount.Ris.RequestException">Thrown when there is
@@ -90,10 +90,9 @@ namespace Kount.Ris
                 this.CheckConfigurationParameter(configuration.MerchantId, nameof(configuration.MerchantId));
                 this.CheckConfigurationParameter(configuration.URL, nameof(configuration.URL));
                 this.CheckConfigurationParameter(configuration.ConfigKey, nameof(configuration.ConfigKey));
+                this.CheckConfigurationParameter(configuration.ConnectTimeout, nameof(configuration.ConnectTimeout));
             }
 
-
-            this.CheckConfigurationParameter(configuration.ConnectTimeout, nameof(configuration.ConnectTimeout));
             logTimeElapsed = (String.IsNullOrEmpty(configuration.LogSimpleElapsed)
                ? false
                : configuration.LogSimpleElapsed.Trim().ToLower().Equals("on"));
@@ -133,9 +132,8 @@ namespace Kount.Ris
         /// </summary>
         /// <param name="checkConfiguration">By default is true: will check config file if 
         /// <param name="logger">ILogger object for logging output</param>
-        /// `Ris.Url`, 
-        /// `Ris.MerchantId`, 
-        /// `Ris.Config.Key` are set.</param>
+        /// `Ris.Url`, `Ris.MerchantId`, `Ris.Config.Key` and 
+        /// `Ris.Connect.Timeout` are set.</param>
         /// <exception cref="Kount.Ris.RequestException">Thrown when there is
         /// static data missing for a RIS request.</exception>
         protected Request(bool checkConfiguration = true, ILogger logger = null) : this(checkConfiguration, Configuration.FromAppSettings(), logger)

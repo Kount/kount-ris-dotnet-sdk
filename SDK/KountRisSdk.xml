@@ -695,9 +695,8 @@
             to change the RIS mode and currency respectively.
             </summary>
             <param name="checkConfiguration">If is true: will check config file if 
-            `Ris.Url`, 
-            `Ris.MerchantId`, 
-            `Ris.Config.Key` and `Ris.Connect.Timeout` are set.</param>
+            `Ris.Url`, `Ris.MerchantId`, `Ris.Config.Key` and 
+            `Ris.Connect.Timeout` are set.</param>
         </member>
         <member name="M:Kount.Ris.Inquiry.#ctor(System.Boolean,Kount.Ris.Configuration)">
             <summary>
@@ -706,9 +705,8 @@
             to change the RIS mode and currency respectively.
             </summary>
             <param name="checkConfiguration">If is true: will check config file if 
-            `Ris.Url`, 
-            `Ris.MerchantId`, 
-            `Ris.Config.Key` and `Ris.Connect.Timeout` are set.</param>
+            `Ris.Url`, `Ris.MerchantId`, `Ris.Config.Key` and 
+            `Ris.Connect.Timeout` are set.</param>
             <param name="configuration">Configuration class with raw values</param>
         </member>
         <member name="M:Kount.Ris.Inquiry.SetMode(System.Char)">
@@ -741,13 +739,6 @@
             Set the three character ISO-4217 currency code.
             </summary>
             <param name="currency">Three character code e.g. USD.</param>
-        </member>
-        <member name="M:Kount.Ris.Inquiry.SetSdkVersion(System.String)">
-            <summary>
-            Set the current SDK version SDK_Type-RIS_VERSION-SDK_BUILD_DATETIMESTAMP.
-            e.g. Sdk-Ris-Dnet-0651-20170505T1458
-            </summary>
-            <param name="sdkVersion">Three character code e.g. USD.</param>
         </member>
         <member name="M:Kount.Ris.Inquiry.SetTotal(System.Int32)">
             <summary>
@@ -1002,9 +993,8 @@
             web.config file.
             </summary>
             <param name="checkConfiguration">By default is true: will check config file if 
-            `Ris.Url`, 
-            `Ris.MerchantId`, 
-            `Ris.Config.Key` are set.</param>
+            `Ris.Url`, `Ris.MerchantId`, `Ris.Config.Key` and 
+            `Ris.Connect.Timeout` are set.</param>
             <param name="configuration">Instance of configuration.</param>
             <exception cref="T:Kount.Ris.RequestException">Thrown when there is
             static data missing for a RIS request.</exception>
@@ -1014,9 +1004,8 @@
             Construct a request object. Set the static setting from the web.config file.
             </summary>
             <param name="checkConfiguration">By default is true: will check config file if 
-            `Ris.Url`, 
-            `Ris.MerchantId`, 
-            `Ris.Config.Key` are set.</param>
+            `Ris.Url`, `Ris.MerchantId`, `Ris.Config.Key` and 
+            `Ris.Connect.Timeout` are set.</param>
             <exception cref="T:Kount.Ris.RequestException">Thrown when there is
             static data missing for a RIS request.</exception>
         </member>
@@ -2047,9 +2036,8 @@
             Use setMode(char) to change it.
             </summary>
             <param name="checkConfiguration">If is true: will check config file if 
-            `Ris.Url`, 
-            `Ris.MerchantId`, 
-            `Ris.Config.Key` and `Ris.Connect.Timeout` are set.</param>
+            `Ris.Url`, `Ris.MerchantId`, `Ris.Config.Key` and 
+            `Ris.Connect.Timeout` are set.</param>
         </member>
         <member name="M:Kount.Ris.Update.#ctor(System.Boolean,Kount.Ris.Configuration)">
             <summary>
@@ -2057,9 +2045,8 @@
             Use setMode(char) to change it.
             </summary>
             <param name="checkConfiguration">If is true: will check config file if 
-            `Ris.Url`, 
-            `Ris.MerchantId`, 
-            `Ris.Config.Key` and `Ris.Connect.Timeout` are set.</param>
+            `Ris.Url`, `Ris.MerchantId`, `Ris.Config.Key` and 
+            `Ris.Connect.Timeout` are set.</param>
             <param name="configuration">Configuration class with raw values</param>
         </member>
         <member name="M:Kount.Ris.Update.SetMode(System.Char)">
