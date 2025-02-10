@@ -14,8 +14,8 @@ namespace Kount.Ris
     /// <summary>
     /// Response immutable data object containing data from the RIS server.<br/>
     /// <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-    /// <b>Version:</b> 7.0.0. <br/>
-    /// <b>Copyright:</b> 2020 Kount Inc <br/>
+    /// <b>Version:</b> 8.0.0. <br/>
+    /// <b>Copyright:</b> 2025 Equifax<br/>
     /// </summary>
     public class Response : LoggingComponent
     {

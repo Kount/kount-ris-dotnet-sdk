@@ -13,8 +13,8 @@ namespace Kount.Ris
     /// Inquiry class. A bunch of setters for sending initial transaction
     /// data to a Kount RIS server.<br/>
     /// <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-    /// <b>Version:</b> 7.0.0. <br/>
-    /// <b>Copyright:</b> 2020 Kount Inc <br/>
+    /// <b>Version:</b> 8.0.0. <br/>
+    /// <b>Copyright:</b> 2025 Equifax<br/>
     /// </summary>
     public class Inquiry : Kount.Ris.Request
     {
@@ -38,9 +38,10 @@ namespace Kount.Ris
         /// the SDK identifier value. Use SetMode(char) and SetCurrency(string)
         /// to change the RIS mode and currency respectively.
         /// </summary>
-        /// <param name="checkConfiguration">If is true: will check config file if 
+        /// <param name="checkConfiguration">If is true: will check config file if
         /// `Ris.Url`, `Ris.MerchantId`, `Ris.Config.Key` and 
         /// `Ris.Connect.Timeout` are set.</param>
+        /// <param name="logger">ILogger compatible logger</param>
         public Inquiry(bool checkConfiguration, ILogger logger = null) : base(checkConfiguration, logger)
         {
             this.SetMode(Enums.InquiryTypes.ModeQ);
@@ -58,6 +59,7 @@ namespace Kount.Ris
         /// `Ris.Url`, `Ris.MerchantId`, `Ris.Config.Key` and 
         /// `Ris.Connect.Timeout` are set.</param>
         /// <param name="configuration">Configuration class with raw values</param>
+        /// <param name="logger">ILogger compatible logger</param>
         public Inquiry(bool checkConfiguration, Configuration configuration, ILogger logger = null) : base(checkConfiguration, configuration, logger)
         {
             this.SetMode(Enums.InquiryTypes.ModeQ);

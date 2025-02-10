@@ -21,7 +21,7 @@ namespace KountRisConfigTest
     /// <b>MerchantId:</b> 999666
     /// <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
     /// <b>Version:</b> 0700 <br/>
-    /// <b>Copyright:</b> 2019 Kount Inc. All Rights Reserved<br/>
+    /// <b>Copyright:</b> 2025 Equifax<br/>
     /// </summary>
 
 
@@ -360,7 +360,7 @@ namespace KountRisConfigTest
             var errors = response.GetErrors();
             if (errors.Count > 0)
             {
-                Assert.True(false, String.Join(Environment.NewLine, errors));
+                Assert.Fail(String.Join(Environment.NewLine, errors));
                 return;
             }
 
@@ -428,7 +428,7 @@ namespace KountRisConfigTest
             var errors = response.GetErrors();
             if (errors.Count > 0)
             {
-                Assert.True(false, String.Join(Environment.NewLine, errors));
+                Assert.Fail(String.Join(Environment.NewLine, errors));
                 return;
             }
 

@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KountRisTest", "KountRisTes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KountRisConfigTest", "KountRisConfigTest\KountRisConfigTest.csproj", "{9884199E-2F26-47AC-9D1D-665AA765E811}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentsFraudTest", "PaymentsFraudTest\PaymentsFraudTest.csproj", "{787E937C-C323-41BB-9468-A4C47ED9BA79}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{9884199E-2F26-47AC-9D1D-665AA765E811}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9884199E-2F26-47AC-9D1D-665AA765E811}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9884199E-2F26-47AC-9D1D-665AA765E811}.Release|Any CPU.Build.0 = Release|Any CPU
+		{787E937C-C323-41BB-9468-A4C47ED9BA79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{787E937C-C323-41BB-9468-A4C47ED9BA79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{787E937C-C323-41BB-9468-A4C47ED9BA79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{787E937C-C323-41BB-9468-A4C47ED9BA79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -9,8 +9,8 @@ namespace Kount.Enums
     /// Update type should be used whenever there are changes to a given order and the merchant 
     /// wants them reflected into the Kount system.<br/>
     /// <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-    /// <b>Version:</b> 7.0.0. <br/>
-    /// <b>Copyright:</b> 2017 Kount Inc <br/>
+    /// <b>Version:</b> 8.0.0. <br/>
+    /// <b>Copyright:</b> 2025 Equifax<br/>
     /// </summary>
     public enum UpdateTypes
     {
