@@ -14,7 +14,7 @@ stages:
   - deploy
 
 .dotnet:
-  image: mcr.microsoft.com/dotnet/sdk:5.0
+  image: mcr.microsoft.com/dotnet/sdk:9.0
    
 build:
   stage: build
@@ -35,7 +35,13 @@ test config:
  script:
    - dotnet test "KountRisConfigTest"
 
-sonarqube scan:
+test payments fraud:
+  stage: test
+  extends: .dotnet
+  script:
+    - dotnet test "PaymentsFraudTest"
+
+.sonarqube scan:
   extends: 
     - .sq-scan
     - .dotnet
@@ -66,8 +72,8 @@ sonarqube scan:
         # install JRE
         apt-get update && apt-get install -y openjdk-11-jre jq
         # install dotnet sonarscanner and reportgenerator
-        dotnet tool install --global dotnet-sonarscanner --version 5.5.3
-        dotnet tool install --global dotnet-reportgenerator-globaltool --version 5.1.4
+        dotnet tool install --global dotnet-sonarscanner --version 5.5.0
+        dotnet tool install --global dotnet-reportgenerator-globaltool --version 5.4.4
         PATH="${PATH}:/root/.dotnet/tools"
       }
 

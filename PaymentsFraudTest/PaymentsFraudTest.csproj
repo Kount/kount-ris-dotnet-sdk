@@ -6,7 +6,7 @@
         <OutputType>Library</OutputType>
         <Company>Equifax</Company>
         <Product>Payments Fraud by Kount 360</Product>
-        <TargetFrameworks>netstandard2.1;net9.0</TargetFrameworks>
+        <TargetFramework>net9.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>

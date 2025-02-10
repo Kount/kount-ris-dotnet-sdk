@@ -4,9 +4,10 @@
 
     <IsPackable>false</IsPackable>
     <ImplicitUsings>disable</ImplicitUsings>
-    <TargetFrameworks>net9.0;netstandard2.1</TargetFrameworks>
 
     <OutputType>Library</OutputType>
+
+    <TargetFramework>net9.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
