@@ -5,8 +5,8 @@
     /// <summary>
     /// A NOP logger binding class.<br/>
     /// <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-    /// <b>Version:</b> 7.0.0. <br/>
-    /// <b>Copyright:</b> 2010 Keynetics Inc <br/>
+    /// <b>Version:</b> 8.0.0. <br/>
+    /// <b>Copyright:</b> 2025 Equifax<br/>
     /// </summary>
     public class NopLoggerFactory : ILoggerFactory
     {

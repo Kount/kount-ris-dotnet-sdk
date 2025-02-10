@@ -3,6 +3,12 @@
 //     Copyright Keynetics. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
+
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text.Json;
+using System.Threading;
+
 namespace Kount.Ris
 {
     using Kount.Enums;
@@ -23,13 +29,19 @@ namespace Kount.Ris
     /// <summary>
     /// Abstract parent class for request objects.<br/>
     /// <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-    /// <b>Version:</b> 7.0.0. <br/>
-    /// <b>Copyright:</b> 2020 Kount Inc <br/>
+    /// <b>Version:</b> 8.0.0. <br/>
+    /// <b>Copyright:</b> 2025 Equifax<br/>
     /// </summary>
     public abstract class Request : LoggingComponent
     {
         private const string CUSTOM_HEADER_MERCHANT_ID = "X-Kount-Merc-Id";
         private const string CUSTOM_HEADER_API_KEY = "X-Kount-Api-Key";
+        private const string PF_AUTH_HEADER = "Authorization";
+        
+        private static BearerAuthResponse _bearerAuthResponse = new BearerAuthResponse();
+        private static DateTimeOffset _bearerAuthResponseExpiration = DateTimeOffset.Now;
+        private static ReaderWriterLock _bearerRefreshLock = new ReaderWriterLock();
+        
 
         /// <summary>
         /// The RIS version
@@ -72,13 +84,17 @@ namespace Kount.Ris
         private bool logTimeElapsed;
 
         /// <summary>
+        /// Is Migration mode enabled
+        /// </summary>
+        private readonly bool _migrationModeEnabled;
+
+        /// <summary>
         /// Construct a request object. Set the static setting from the
         /// web.config file.
         /// </summary>
         /// <param name="checkConfiguration">By default is true: will check config file if 
         /// `Ris.Url`, `Ris.MerchantId`, `Ris.Config.Key` and 
         /// `Ris.Connect.Timeout` are set.</param>
-        /// are set.</param>
         /// <param name="configuration">Instance of configuration.</param>
         /// <param name="logger">ILogger object for logging output</param>
         /// <exception cref="Kount.Ris.RequestException">Thrown when there is
@@ -93,12 +109,31 @@ namespace Kount.Ris
                 this.CheckConfigurationParameter(configuration.ConnectTimeout, nameof(configuration.ConnectTimeout));
             }
 
-            logTimeElapsed = (String.IsNullOrEmpty(configuration.LogSimpleElapsed)
-               ? false
-               : configuration.LogSimpleElapsed.Trim().ToLower().Equals("on"));
+            logTimeElapsed = !String.IsNullOrEmpty(configuration.LogSimpleElapsed) && 
+                             configuration.LogSimpleElapsed.Trim().ToLower().Equals("on");
+
+            _migrationModeEnabled = configuration.GetEnableMigrationMode();
+            
+            logger?.LogDebug("migration mode enabled: " + _migrationModeEnabled);
 
             this.data = new System.Collections.Hashtable();
-            this.SetMerchantId(Int32.Parse(configuration.MerchantId));
+            
+            if (!_migrationModeEnabled)
+            {
+                this.SetMerchantId(Int32.Parse(configuration.MerchantId));
+            }
+            else
+            {
+                if (configuration.PaymentsFraudClientId != string.Empty)
+                {
+                    this.SetMerchantId(Int32.Parse(configuration.PaymentsFraudClientId));
+                }
+                else
+                {
+                    this.SetMerchantId(Int32.Parse(configuration.MerchantId));
+                    logger?.LogWarning("Client ID is not set. Falling back to merchant id, this may not work as expected.");
+                }
+            }
 
             Khash.ConfigKey = Khash.GetBase85ConfigKey(configuration.ConfigKey);
 
@@ -107,7 +142,19 @@ namespace Kount.Ris
                         : configuration.Version;
 
             this.SetVersion(risVersion);
-            this.SetUrl(configuration.URL);
+            if (!_migrationModeEnabled)
+            {
+                this.SetUrl(configuration.URL);
+            }
+            else
+            {
+                this.SetUrl(configuration.PaymentsFraudApiUrl);
+                if (_bearerAuthResponseExpiration >= DateTimeOffset.Now)
+                {
+                    RefreshAuthToken(configuration.PaymentsFraudAuthUrl, configuration.PaymentsFraudApiKey);
+                }
+            }
+
             this.connectTimeout = Int32.Parse(configuration.ConnectTimeout);
 
             if (!String.IsNullOrEmpty(configuration.ApiKey))
@@ -195,31 +242,40 @@ namespace Kount.Ris
             webReq.ContentType = "application/x-www-form-urlencoded";
             webReq.ContentLength = buffer.Length;
 
-            logger.LogDebug("Setting merchant ID header.");
-            webReq.Headers[CUSTOM_HEADER_MERCHANT_ID] = this.GetParam("MERC");
 
-            if (null != this.apiKey)
+            if (!_migrationModeEnabled)
             {
-                logger.LogDebug("Setting API key header.");
-                webReq.Headers[CUSTOM_HEADER_API_KEY] = this.apiKey;
+                logger.LogDebug("Setting merchant ID header.");
+                webReq.Headers[CUSTOM_HEADER_MERCHANT_ID] = this.GetParam("MERC");
+                if (null != this.apiKey)
+                {
+                    logger.LogDebug("Setting API key header.");
+                    webReq.Headers[CUSTOM_HEADER_API_KEY] = this.apiKey;
+                }
+                else
+                {
+                    logger.LogDebug("API key header not found, setting certificate");
+                    //// Add the RIS signed authentication certificate to the payload
+                    //// See Kount Technical Specifications Guide for details on
+                    //// requesting and exporting
+                    //// from your browser
+                    X509Certificate2 cert = new X509Certificate2();
+                    cert.Import(
+                        this.GetCertificateFile(),
+                        this.GetPrivateKeyPassword(),
+                        X509KeyStorageFlags.MachineKeySet);
+                    X509CertificateCollection certs = webReq.ClientCertificates;
+                    certs.Add(cert);
+                    webReq.ClientCertificates.Add(cert);
+                }
             }
             else
             {
-                logger.LogDebug("API key header not found, setting certificate");
-                //// Add the RIS signed authentication certificate to the payload
-                //// See Kount Technical Specifications Guide for details on
-                //// requesting and exporting
-                //// from your browser
-                X509Certificate2 cert = new X509Certificate2();
-                cert.Import(
-                    this.GetCertificateFile(),
-                    this.GetPrivateKeyPassword(),
-                    X509KeyStorageFlags.MachineKeySet);
-                X509CertificateCollection certs = webReq.ClientCertificates;
-                certs.Add(cert);
-                webReq.ClientCertificates.Add(cert);
+                logger.LogDebug("Setting Payments Fraud API key header.");
+                _bearerRefreshLock.AcquireReaderLock(TimeSpan.FromMilliseconds(10));
+                webReq.Headers[PF_AUTH_HEADER] = $"{_bearerAuthResponse.TokenType} {_bearerAuthResponse.AccessToken}";
+                _bearerRefreshLock.ReleaseReaderLock();
             }
-
 
             string risString = String.Empty;
             var stopwatch = new Stopwatch();
@@ -264,9 +320,16 @@ namespace Kount.Ris
                 // Read the RIS response string
                 using (Stream answer = webResp.GetResponseStream())
                 {
-                    using (StreamReader risResponse = new StreamReader(answer))
+                    if (answer != null)
                     {
-                        risString = risResponse.ReadToEnd();
+                        using (StreamReader risResponse = new StreamReader(answer))
+                        {
+                            risString = risResponse.ReadToEnd();
+                        }
+                    }
+                    else
+                    {
+                        throw new Kount.Ris.RequestException("No response from server.");
                     }
                 }
             }
@@ -744,6 +807,7 @@ namespace Kount.Ris
         /// Check configuration parameters for existence in application
         /// configuration.
         /// </summary>
+        /// <param name="value">value</param>
         /// <param name="parameter">Parameter name</param>
         /// <exception cref="Kount.Ris.RequestException">Thrown when parameter
         /// is missing</exception>
@@ -1078,6 +1142,79 @@ namespace Kount.Ris
             arrayParams.Add("PROD_PRICE", prod_price);
 
             return arrayParams;
+        }
+
+        /// <summary>
+        /// Refresh the bearer token
+        /// </summary>
+        /// <param name="authUrl"></param>
+        /// <param name="apiKey"></param>
+        /// <exception cref="RequestException"></exception>
+        private static void RefreshAuthToken(string authUrl, string apiKey)
+        {
+            _bearerRefreshLock.AcquireWriterLock(TimeSpan.FromSeconds(30));
+            
+            // short circuit if another thread as already refreshed the token
+            if (_bearerAuthResponseExpiration >= DateTimeOffset.Now)
+            {
+                _bearerRefreshLock.ReleaseWriterLock();
+                return;
+            }
+            
+            Dictionary<string, string> postParmDict = new Dictionary<string, string>
+            {
+                { "grant_type", "client_credentials" },
+                { "scope", "k1_integration_api" }
+            };
+            string postParams = new FormUrlEncodedContent(postParmDict).ToString();
+            string tokenUrl = authUrl + "?" + postParams;
+            
+            HttpWebRequest webReq = (HttpWebRequest)WebRequest.Create(tokenUrl);
+            webReq.Method = "POST";
+            webReq.ContentType = "application/x-www-form-urlencoded";
+            webReq.Headers[PF_AUTH_HEADER] = "Basic " + apiKey;
+
+
+            string responseString = string.Empty;
+            using (HttpWebResponse webResp = (HttpWebResponse)webReq.GetResponse())
+            {
+                // Read the token response string
+                using (Stream responseStream = webResp.GetResponseStream())
+                {
+                    if (responseStream != null)
+                    {
+                        using (StreamReader tokenResponse = new StreamReader(responseStream))
+                        {
+                            responseString = tokenResponse.ReadToEnd();
+                        }
+                    }
+                }
+            }
+            
+            BearerAuthResponse authResponse = JsonSerializer.Deserialize<BearerAuthResponse>(responseString);
+            if (authResponse != null)
+            {
+                _bearerRefreshLock.AcquireReaderLock(TimeSpan.FromSeconds(5));
+                _bearerAuthResponse = authResponse;
+                if (int.TryParse(_bearerAuthResponse.ExpiresIn, out int tokenExpirationSeconds))
+                {
+                    tokenExpirationSeconds -= 60; // subtract 60 seconds to account for latency
+                    _bearerAuthResponseExpiration = DateTime.Now.AddSeconds(tokenExpirationSeconds);
+                }
+                else
+                {
+                    _bearerRefreshLock.ReleaseWriterLock();
+                    throw new Kount.Ris.RequestException("Failed to parse the bearer token expiration");
+                }
+                _bearerRefreshLock.ReleaseReaderLock();
+            }
+            else
+            {
+                _bearerRefreshLock.ReleaseWriterLock();
+                throw new Kount.Ris.RequestException("Failed to update the bearer token invalid response");
+            }
+            
+            _bearerRefreshLock.ReleaseWriterLock();
         }
     }
 }

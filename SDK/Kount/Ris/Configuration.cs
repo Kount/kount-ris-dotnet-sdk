@@ -17,8 +17,8 @@ namespace Kount.Ris
         {
             var config = new Configuration();
             if (systemConfiguaration.ConfigurationManager.AppSettings.AllKeys.Length != 0 && systemConfiguaration.ConfigurationManager.AppSettings["Ris.MerchantId"] != null && systemConfiguaration.ConfigurationManager.AppSettings["Ris.API.Key"] != null)
-            {           
-
+            {
+                
                 config = new Configuration()
                 {
                     MerchantId = systemConfiguaration.ConfigurationManager.AppSettings["Ris.MerchantId"],
@@ -27,10 +27,20 @@ namespace Kount.Ris
                     ConnectTimeout = systemConfiguaration.ConfigurationManager.AppSettings["Ris.Connect.Timeout"],
                     Version = systemConfiguaration.ConfigurationManager.AppSettings["Ris.Version"],
                     ApiKey = systemConfiguaration.ConfigurationManager.AppSettings["Ris.API.Key"],
+                    EnableMigrationMode = systemConfiguaration.ConfigurationManager.AppSettings["Ris.EnableMigrationMode"],
                     CertificateFile = systemConfiguaration.ConfigurationManager.AppSettings["Ris.CertificateFile"],
                     PrivateKeyPassword = systemConfiguaration.ConfigurationManager.AppSettings["Ris.PrivateKeyPassword"],
-                    LogSimpleElapsed = systemConfiguaration.ConfigurationManager.AppSettings["LOG.SIMPLE.ELAPSED"]
+                    LogSimpleElapsed = systemConfiguaration.ConfigurationManager.AppSettings["LOG.SIMPLE.ELAPSED"],
+                    PaymentsFraudApiKey = systemConfiguaration.ConfigurationManager.AppSettings["PaymentsFraud.Api.Key"],
+                    PaymentsFraudApiUrl = systemConfiguaration.ConfigurationManager.AppSettings["PaymentsFraud.Api.Url"],
+                    PaymentsFraudClientId = systemConfiguaration.ConfigurationManager.AppSettings["PaymentsFraud.ClientId"],
+                    PaymentsFraudAuthUrl = systemConfiguaration.ConfigurationManager.AppSettings["PaymentsFraud.Auth.Url"]
                 };
+                
+                if (string.IsNullOrEmpty(config.EnableMigrationMode))
+                {
+                    config.EnableMigrationMode = "false";
+                }
             }
             else if (File.Exists("appsettings.json"))
             {
@@ -48,10 +58,20 @@ namespace Kount.Ris
                     ConnectTimeout = configuration.GetConnectionString("Ris.Connect.Timeout"),
                     Version = configuration.GetConnectionString("Ris.Version"),
                     ApiKey = configuration.GetConnectionString("Ris.API.Key"),
+                    EnableMigrationMode = configuration.GetConnectionString("Ris.EnableMigrationMode"),
                     CertificateFile = configuration.GetConnectionString("Ris.CertificateFile"),
                     PrivateKeyPassword = configuration.GetConnectionString("Ris.PrivateKeyPassword"),
+                    PaymentsFraudApiKey = configuration.GetConnectionString("PaymentsFraud.Api.Key"),
+                    PaymentsFraudApiUrl = configuration.GetConnectionString("PaymentsFraud.Api.Url"),
+                    PaymentsFraudClientId = configuration.GetConnectionString("PaymentsFraud.ClientId"),
+                    PaymentsFraudAuthUrl = configuration.GetConnectionString("PaymentsFraud.Auth.Url")
                 };
             }        
+            
+            if (string.IsNullOrEmpty(config.EnableMigrationMode))
+            {
+                config.EnableMigrationMode = "false";
+            }
 
             return config;
         }
@@ -100,5 +120,44 @@ namespace Kount.Ris
         /// Read LogElapsedTime from config
         /// </summary>
         public string LogSimpleElapsed { get; set; }
+
+        /// <summary>
+        ///  Boolean value to enable migration mode
+        /// </summary>
+        public string EnableMigrationMode { get; set; } = "false";
+        
+        /// <summary>
+        /// Api Key for Payments Fraud on Kount 360
+        /// </summary>
+        public string PaymentsFraudApiKey { get; set; } = string.Empty;
+        
+        /// <summary>
+        /// Url for Payments Fraud on Kount 360 RIS compatible endpoint
+        /// </summary>
+        public string PaymentsFraudApiUrl { get; set; } = string.Empty;
+        
+        /// <summary>
+        /// Auth Url for Payments Fraud on Kount 360 RIS compatible endpoint
+        /// </summary>
+        public string PaymentsFraudAuthUrl { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Client ID for Payments Fraud on Kount 360
+        /// </summary>
+        public string PaymentsFraudClientId { get; set; } = string.Empty;
+        
+        /// <summary>
+        /// Coerce EnableMigrationMode to a boolean and return it
+        /// </summary>
+        /// <returns></returns>
+        public bool GetEnableMigrationMode()
+        {
+            if(bool.TryParse(EnableMigrationMode, out bool result))
+            {
+                return result;
+            }
+            
+            return false;
+        }
     }
 }

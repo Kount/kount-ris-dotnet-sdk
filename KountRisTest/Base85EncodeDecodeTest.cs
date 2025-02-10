@@ -9,7 +9,7 @@ namespace KountRisTest
     /// Base85 Encode Decode Test samples
     /// <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
     /// <b>Version:</b> 0700 <br/>
-    /// <b>Copyright:</b> 2017 Kount Inc. All Rights Reserved<br/>
+    /// <b>Copyright:</b> 2025 Equifax<br/>
     /// </summary>
 
     public class Base85EncodeDecodeTest

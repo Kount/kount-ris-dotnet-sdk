@@ -8,8 +8,8 @@
             <summary>
             Extention Helper
             <b>Author:</b> Kount <a>custserv@kount.com</a>,<br/>
-            <b>Version:</b> 7.0.0. <br/>
-            <b>Copyright:</b> 2017 Kount Inc <br/>
+            <b>Version:</b> 8.0.0. <br/>
+            <b>Copyright:</b> 2025 Equifax<br/>
             </summary>
         </member>
         <member name="M:Kount.Enums.EnumHelper.GetValueAsString(Kount.Enums.PaymentTypes)">
@@ -23,8 +23,8 @@
             <summary>
             Inquiry type should be used for initial registration of the purchase in the Kount system.<br/>
             <b>Author:</b> Kount <a>custserv@kount.com</a>,<br/>
-            <b>Version:</b> 7.0.0. <br/>
-            <b>Copyright:</b> 2017 Kount Inc <br/>
+            <b>Version:</b> 8.0.0. <br/>
+            <b>Copyright:</b> 2025 Equifax<br/>
             </summary>
         </member>
         <member name="F:Kount.Enums.InquiryTypes.ModeQ">
@@ -51,8 +51,8 @@
             <summary>
             List of accepted payment types<br/>
             <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-            <b>Version:</b> 7.0.0. <br/>
-            <b>Copyright:</b> 2017 Kount Inc <br/>
+            <b>Version:</b> 8.0.0. <br/>
+            <b>Copyright:</b> 2025 Equifax<br/>
             </summary>
         </member>
         <member name="F:Kount.Enums.PaymentTypes.Apple">
@@ -165,8 +165,8 @@
             Update type should be used whenever there are changes to a given order and the merchant 
             wants them reflected into the Kount system.<br/>
             <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-            <b>Version:</b> 7.0.0. <br/>
-            <b>Copyright:</b> 2017 Kount Inc <br/>
+            <b>Version:</b> 8.0.0. <br/>
+            <b>Copyright:</b> 2025 Equifax<br/>
             </summary>
         </member>
         <member name="F:Kount.Enums.UpdateTypes.ModeU">
@@ -183,8 +183,8 @@
             <summary>
             Logger interface.<br/>
             <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-            <b>Version:</b> 7.0.0. <br/>
-            <b>Copyright:</b> 2020 Kount Inc <br/>
+            <b>Version:</b> 8.0.0. <br/>
+            <b>Copyright:</b> 2025 Equifax<br/>
             </summary>
         </member>
         <member name="M:Kount.Log.Binding.ILogger.Debug(System.String)">
@@ -265,8 +265,8 @@
             <summary>
             A logger that silently discards all logging.<br/>
             <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-            <b>Version:</b> 7.0.0. <br/>
-            <b>Copyright:</b> 2020 Kount Inc <br/>
+            <b>Version:</b> 8.0.0. <br/>
+            <b>Copyright:</b> 2025 Equifax<br/>
             </summary>
         </member>
         <member name="M:Kount.Log.Binding.NopLogger.#ctor(System.String)">
@@ -344,8 +344,8 @@
             <summary>
             Facade class to a simple file logger.<br/>
             <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-            <b>Version:</b> 7.0.0. <br/>
-            <b>Copyright:</b> 2020 Kount Inc <br/>
+            <b>Version:</b> 8.0.0. <br/>
+            <b>Copyright:</b> 2025 Equifax<br/>
             </summary>
         </member>
         <member name="F:Kount.Log.Binding.SimpleLogger.logger">
@@ -442,16 +442,16 @@
             <summary>
             The main entry point for the application.<br/>
             <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-            <b>Version:</b> 7.0.0. <br/>
-            <b>Copyright:</b> 2020 Kount Inc <br/>
+            <b>Version:</b> 8.0.0. <br/>
+            <b>Copyright:</b> 2025 Equifax<br/>
             </summary>
         </member>
         <member name="T:Kount.Log.Factory.LogFactory">
             <summary>
             A factory class for creating LoggerFactory objects.<br/>
             <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-            <b>Version:</b> 7.0.0. <br/>
-            <b>Copyright:</b> 2020 Kount Inc <br/>
+            <b>Version:</b> 8.0.0. <br/>
+            <b>Copyright:</b> 2025 Equifax<br/>
             </summary>
         </member>
         <member name="F:Kount.Log.Factory.LogFactory.NopLogger">
@@ -486,8 +486,8 @@
             <summary>
             Interface for a logger factory.<br/>
             <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-            <b>Version:</b> 7.0.0. <br/>
-            <b>Copyright:</b> 2020 Kount Inc <br/>
+            <b>Version:</b> 8.0.0. <br/>
+            <b>Copyright:</b> 2025 Equifax<br/>
             </summary>
         </member>
         <member name="M:Kount.Log.Factory.ILoggerFactory.GetLogger(System.String)">
@@ -501,8 +501,8 @@
             <summary>
             A NOP logger binding class.<br/>
             <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-            <b>Version:</b> 7.0.0. <br/>
-            <b>Copyright:</b> 2020 Kount Inc <br/>
+            <b>Version:</b> 8.0.0. <br/>
+            <b>Copyright:</b> 2025 Equifax<br/>
             </summary>
         </member>
         <member name="M:Kount.Log.Factory.NopLoggerFactory.GetLogger(System.String)">
@@ -516,8 +516,8 @@
             <summary>
             A simple logger binding class.<br/>
             <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-            <b>Version:</b> 7.0.0. <br/>
-            <b>Copyright:</b> 2020 Kount Inc <br/>
+            <b>Version:</b> 8.0.0. <br/>
+            <b>Copyright:</b> 2025 Equifax<br/>
             </summary>
         </member>
         <member name="M:Kount.Log.Factory.SimpleLoggerFactory.GetLogger(System.String)">
@@ -531,8 +531,8 @@
             <summary>
             Shopping cart item data object.<br/>
             <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-            <b>Version:</b> 7.0.0. <br/>
-            <b>Copyright:</b> 2020 Kount Inc <br/>
+            <b>Version:</b> 8.0.0. <br/>
+            <b>Copyright:</b> 2025 Equifax<br/>
             </summary>
         </member>
         <member name="F:Kount.Ris.CartItem.type">
@@ -650,8 +650,8 @@
             <summary>
             Kount Ris Illegal argument exception.<br/>
             <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-            <b>Version:</b> 7.0.0. <br/>
-            <b>Copyright:</b> 2020 Kount Inc <br/>
+            <b>Version:</b> 8.0.0. <br/>
+            <b>Copyright:</b> 2025 Equifax<br/>
             </summary>
         </member>
         <member name="M:Kount.Ris.IllegalArgumentException.#ctor(System.String)">
@@ -677,8 +677,8 @@
             Inquiry class. A bunch of setters for sending initial transaction
             data to a Kount RIS server.<br/>
             <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-            <b>Version:</b> 7.0.0. <br/>
-            <b>Copyright:</b> 2020 Kount Inc <br/>
+            <b>Version:</b> 8.0.0. <br/>
+            <b>Copyright:</b> 2025 Equifax<br/>
             </summary>
         </member>
         <member name="M:Kount.Ris.Inquiry.#ctor">
@@ -889,8 +889,8 @@
             <summary>
             Kount Central Event class description <br/>
             <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-            <b>Version:</b> 7.0.0. <br/>
-            <b>Copyright:</b> 2014 Keynetics Inc <br/>
+            <b>Version:</b> 8.0.0. <br/>
+            <b>Copyright:</b> 2025 Equifax<br/>
             </summary>
         </member>
         <member name="F:Kount.Ris.KcEvent.code">
@@ -943,8 +943,8 @@
             <summary>
             Abstract parent class for request objects.<br/>
             <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-            <b>Version:</b> 7.0.0. <br/>
-            <b>Copyright:</b> 2020 Kount Inc <br/>
+            <b>Version:</b> 8.0.0. <br/>
+            <b>Copyright:</b> 2025 Equifax<br/>
             </summary>
         </member>
         <member name="F:Kount.Ris.Request.RisVersion">
@@ -1387,8 +1387,8 @@
             <summary>
             Request Exception.<br/>
             <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-            <b>Version:</b> 7.0.0. <br/>
-            <b>Copyright:</b> 2020 Kount Inc <br/>
+            <b>Version:</b> 8.0.0. <br/>
+            <b>Copyright:</b> 2025 Equifax<br/>
             </summary>
         </member>
         <member name="M:Kount.Ris.RequestException.#ctor(System.String)">
@@ -1413,8 +1413,8 @@
             <summary>
             Response immutable data object containing data from the RIS server.<br/>
             <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-            <b>Version:</b> 7.0.0. <br/>
-            <b>Copyright:</b> 2020 Kount Inc <br/>
+            <b>Version:</b> 8.0.0. <br/>
+            <b>Copyright:</b> 2025 Equifax<br/>
             </summary>
         </member>
         <member name="F:Kount.Ris.Response.logger">
@@ -1981,8 +1981,8 @@
             <summary>
             RSA Utility class for encrypting PANs <br/>
             <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-            <b>Version:</b> 7.0.0. <br/>
-            <b>Copyright:</b> 2020 Kount Inc <br/>
+            <b>Version:</b> 8.0.0. <br/>
+            <b>Copyright:</b> 2025 Equifax<br/>
             </summary>
         </member>
         <member name="M:Kount.Ris.RSA.Encrypt(System.String)">
@@ -2005,8 +2005,8 @@
             Update class. A bunch of setters for sending transaction update <br/>
             data to a Kount RIS server.
             <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-            <b>Version:</b> 7.0.0. <br/>
-            <b>Copyright:</b> 2020 Kount Inc <br/>
+            <b>Version:</b> 8.0.0. <br/>
+            <b>Copyright:</b> 2025 Equifax<br/>
             </summary>
         </member>
         <member name="F:Kount.Ris.Update.RfcbR">
@@ -2079,8 +2079,8 @@
             <summary>
             A class representing a RIS SDK client side validation error.<br/>
             <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-            <b>Version:</b> 7.0.0. <br/>
-            <b>Copyright:</b> 2020 Kount Inc <br/>
+            <b>Version:</b> 8.0.0. <br/>
+            <b>Copyright:</b> 2025 Equifax<br/>
             </summary>
         </member>
         <member name="F:Kount.Ris.ValidationError.RequiredError">
@@ -2161,8 +2161,8 @@
             <summary>
             Validation Exception.<br/>
             <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-            <b>Version:</b> 7.0.0. <br/>
-            <b>Copyright:</b> 2020 Kount Inc <br/>
+            <b>Version:</b> 8.0.0. <br/>
+            <b>Copyright:</b> 2025 Equifax<br/>
             </summary>
         </member>
         <member name="M:Kount.Ris.ValidationException.#ctor(System.String)">
@@ -2187,8 +2187,8 @@
             <summary>
             A simple file logger.<br/>
             <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-            <b>Version:</b> 7.0.0. <br/>
-            <b>Copyright:</b> 2020 Kount Inc <br/>
+            <b>Version:</b> 8.0.0. <br/>
+            <b>Copyright:</b> 2025 Equifax<br/>
             </summary>
         </member>
         <member name="F:Kount.SimpleLogger.File.LogDebug">
@@ -2377,8 +2377,8 @@
             <summary>
             Class for creating Kount RIS KHASH encoding payment tokens.<br/>
             <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-            <b>Version:</b> 7.0.0. <br/>
-            <b>Copyright:</b> 2020 Kount Inc. All Rights Reserved.<br/>
+            <b>Version:</b> 8.0.0. <br/>
+            <b>Copyright:</b> 2025 Equifax<br/>
             </summary>
         </member>
         <member name="P:Kount.Util.Khash.ConfigKey">

@@ -10,11 +10,14 @@ namespace KountRisSdk.Kount.Log.Binding
     /// <summary>
     /// A logger that silently discards all logging.<br/>
     /// <b>Author:</b> Kount <a>custserv@kount.com</a>;<br/>
-    /// <b>Version:</b> 7.0.0. <br/>
-    /// <b>Copyright:</b> 2010 Keynetics Inc <br/>
+    /// <b>Version:</b> 8.0.0. <br/>
+    /// <b>Copyright:</b> 2025 Equifax<br/>
     /// </summary>
     public class NopLogger : ILoggerSdk
     {
+        /// <summary>
+        /// Get whether to measure elapsed time
+        /// </summary>
         public bool MeasureElapsed
         {
             get
