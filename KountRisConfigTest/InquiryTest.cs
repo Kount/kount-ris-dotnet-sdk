@@ -518,8 +518,8 @@ namespace KountRisConfigTest
             configuration.URL = "url_str";
             configuration.ConnectTimeout = "10000";
             Inquiry inquiry = new Inquiry(false, configuration);
-
-            Assert.True(inquiry.GetParam("MERC") == configuration.MerchantId, "MerchantId is not set correct.");
+            var merc = inquiry.GetParam("MERC");
+            Assert.True(merc == configuration.MerchantId, $"MerchantId is not set correct got {inquiry.GetParam("MERC")} and expected {configuration.MerchantId}");
             Assert.True(inquiry.GetUrl() == configuration.URL, "URL is not set correct.");
         }
     }

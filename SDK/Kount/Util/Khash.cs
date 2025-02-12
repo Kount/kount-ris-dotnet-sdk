@@ -43,7 +43,7 @@ namespace Kount.Util
         /// <param name="merchantId">Merchant ID number</param>
         /// <param name="cardNumber">Card number to be hashed</param>
         /// <returns>String Hashed</returns>
-        public static string HashGiftCard(int merchantId, string cardNumber)
+        public static string HashGiftCard(long merchantId, string cardNumber)
         {
             return merchantId + Hash(cardNumber);
         }

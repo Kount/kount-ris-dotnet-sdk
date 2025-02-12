@@ -36,11 +36,6 @@ namespace Kount.Ris
                     PaymentsFraudClientId = systemConfiguaration.ConfigurationManager.AppSettings["PaymentsFraud.ClientId"],
                     PaymentsFraudAuthUrl = systemConfiguaration.ConfigurationManager.AppSettings["PaymentsFraud.Auth.Url"]
                 };
-                
-                if (string.IsNullOrEmpty(config.EnableMigrationMode))
-                {
-                    config.EnableMigrationMode = "false";
-                }
             }
             else if (File.Exists("appsettings.json"))
             {
@@ -72,6 +67,10 @@ namespace Kount.Ris
             {
                 config.EnableMigrationMode = "false";
             }
+            if (string.IsNullOrEmpty(config.MerchantId))
+            {
+                config.MerchantId = "1234567";
+            }
 
             return config;
         }
@@ -79,7 +78,7 @@ namespace Kount.Ris
         /// <summary>
         /// Six digit identifier issued by Kount.
         /// </summary>
-        public string MerchantId { get; set; }
+        public string MerchantId { get; set; } = "1234567";
 
         /// <summary>
         /// HTTPS URL path to the company's servers provided in boarding documentation from Kount.

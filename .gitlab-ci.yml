@@ -35,9 +35,11 @@ test config:
  script:
    - dotnet test "KountRisConfigTest"
 
-test payments fraud:
+.test payments fraud:
   stage: test
   extends: .dotnet
+  variables:
+    RIS_ENABLE_MIGRATION_MODE: "true"
   script:
     - dotnet test "PaymentsFraudTest"
 
