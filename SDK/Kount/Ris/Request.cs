@@ -120,17 +120,17 @@ namespace Kount.Ris
             
             if (!_migrationModeEnabled)
             {
-                this.SetMerchantId(Int32.Parse(configuration.MerchantId));
+                this.SetMerchantId(Int64.Parse(configuration.MerchantId));
             }
             else
             {
                 if (configuration.PaymentsFraudClientId != string.Empty)
                 {
-                    this.SetMerchantId(Int32.Parse(configuration.PaymentsFraudClientId));
+                    this.SetMerchantId(Int64.Parse(configuration.PaymentsFraudClientId));
                 }
                 else
                 {
-                    this.SetMerchantId(Int32.Parse(configuration.MerchantId));
+                    this.SetMerchantId(Int64.Parse(configuration.MerchantId));
                     logger?.LogWarning("Client ID is not set. Falling back to merchant id, this may not work as expected.");
                 }
             }
@@ -149,7 +149,7 @@ namespace Kount.Ris
             else
             {
                 this.SetUrl(configuration.PaymentsFraudApiUrl);
-                if (_bearerAuthResponseExpiration >= DateTimeOffset.Now)
+                if (_bearerAuthResponseExpiration <= DateTimeOffset.Now)
                 {
                     RefreshAuthToken(configuration.PaymentsFraudAuthUrl, configuration.PaymentsFraudApiKey);
                 }
@@ -413,7 +413,7 @@ namespace Kount.Ris
         /// Set the merchant Id.
         /// </summary>
         /// <param name="merchantId">Merchant Id.</param>
-        public void SetMerchantId(int merchantId)
+        public void SetMerchantId(long merchantId)
         {
             this.Data["MERC"] = merchantId;
         }
@@ -637,6 +637,11 @@ namespace Kount.Ris
                 {
                     res = val.Value.ToString();
                 }
+                var val2 = this.Data[param] as long?;
+                if (val2.HasValue)
+                {
+                    res = val2.Value.ToString();
+                }
             }
             return res ?? String.Empty;
         }
@@ -796,7 +801,7 @@ namespace Kount.Ris
             if (this.IsSetKhashPaymentEncoding())
             {
                 token = ("GIFT".Equals(this.Data["PTYP"])) ?
-                    Khash.HashGiftCard((int)this.Data["MERC"], token) :
+                    Khash.HashGiftCard((long)this.Data["MERC"], token) :
                     Khash.HashPaymentToken(token);
             }
 
@@ -1161,13 +1166,7 @@ namespace Kount.Ris
                 return;
             }
             
-            Dictionary<string, string> postParmDict = new Dictionary<string, string>
-            {
-                { "grant_type", "client_credentials" },
-                { "scope", "k1_integration_api" }
-            };
-            string postParams = new FormUrlEncodedContent(postParmDict).ToString();
-            string tokenUrl = authUrl + "?" + postParams;
+            string tokenUrl = authUrl + "?grant_type=client_credentials&scope=k1_integration_api";
             
             HttpWebRequest webReq = (HttpWebRequest)WebRequest.Create(tokenUrl);
             webReq.Method = "POST";
@@ -1192,20 +1191,11 @@ namespace Kount.Ris
             }
             
             BearerAuthResponse authResponse = JsonSerializer.Deserialize<BearerAuthResponse>(responseString);
-            if (authResponse != null)
+            if (authResponse != null && authResponse.ExpiresIn != 0)
             {
                 _bearerRefreshLock.AcquireReaderLock(TimeSpan.FromSeconds(5));
+                _bearerAuthResponseExpiration = DateTime.Now.AddSeconds(authResponse.ExpiresIn);
                 _bearerAuthResponse = authResponse;
-                if (int.TryParse(_bearerAuthResponse.ExpiresIn, out int tokenExpirationSeconds))
-                {
-                    tokenExpirationSeconds -= 60; // subtract 60 seconds to account for latency
-                    _bearerAuthResponseExpiration = DateTime.Now.AddSeconds(tokenExpirationSeconds);
-                }
-                else
-                {
-                    _bearerRefreshLock.ReleaseWriterLock();
-                    throw new Kount.Ris.RequestException("Failed to parse the bearer token expiration");
-                }
                 _bearerRefreshLock.ReleaseReaderLock();
             }
             else

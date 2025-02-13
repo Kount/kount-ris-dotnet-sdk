@@ -220,7 +220,12 @@ namespace KountRisConfigTest
                 Version = configuration.GetConnectionString("Ris.Version"),
                 CertificateFile = configuration.GetConnectionString("Ris.CertificateFile"),
                 PrivateKeyPassword = configuration.GetConnectionString("Ris.PrivateKeyPassword"),
-                LogSimpleElapsed = configuration.GetConnectionString("LOG.SIMPLE.ELAPSED")
+                LogSimpleElapsed = configuration.GetConnectionString("LOG.SIMPLE.ELAPSED"),
+                PaymentsFraudClientId = String.IsNullOrEmpty(Environment.GetEnvironmentVariable("PAYMENTSFRAUD_CLIENTID")) ? configuration.GetConnectionString("PaymentsFraud.ClientId") : Environment.GetEnvironmentVariable("PAYMENTSFRAUD_CLIENTID"),
+                PaymentsFraudApiKey = String.IsNullOrEmpty(Environment.GetEnvironmentVariable("PAYMENTSFRAUD_API_KEY")) ? configuration.GetConnectionString("PaymentsFraud.Api.Key") : Environment.GetEnvironmentVariable("PAYMENTSFRAUD_API_KEY"),
+                EnableMigrationMode = String.IsNullOrEmpty(Environment.GetEnvironmentVariable("RIS_ENABLE_MIGRATION_MODE")) ? configuration.GetConnectionString("Ris.EnableMigrationMode") : Environment.GetEnvironmentVariable("RIS_ENABLE_MIGRATION_MODE"),
+                PaymentsFraudApiUrl = String.IsNullOrEmpty(Environment.GetEnvironmentVariable("PAYMENTSFRAUD_API_URL")) ? configuration.GetConnectionString("PaymentsFraud.Api.Url") : Environment.GetEnvironmentVariable("PAYMENTSFRAUD_API_URL"),
+                PaymentsFraudAuthUrl = String.IsNullOrEmpty(Environment.GetEnvironmentVariable("PAYMENTSFRAUD_AUTH_URL")) ? configuration.GetConnectionString("PaymentsFraud.Auth.Url") : Environment.GetEnvironmentVariable("PAYMENTSFRAUD_AUTH_URL"),
             };
 
             return config;
