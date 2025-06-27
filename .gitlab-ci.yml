@@ -217,6 +217,8 @@ nuget deploy:
         cat ${CI_PROJECT_DIR}/README.md
       fi
     - dotnet build
+    - mkdir -p /builds/kount/third_party/kount-ris-dotnet-sdk/SDK/bin/Debug
+    - dotnet pack --configuration Release --output /builds/kount/third_party/kount-ris-dotnet-sdk/SDK/bin/Debug /p:Version=$SDK_VERSION
     - PKGPATH=$(find /builds/kount/third_party/kount-ris-dotnet-sdk/SDK/bin/Debug/*.nupkg)
     - echo $PKGPATH
     - dotnet nuget push $PKGPATH --source https://www.nuget.org/ -k $NUGET_API_KEY
