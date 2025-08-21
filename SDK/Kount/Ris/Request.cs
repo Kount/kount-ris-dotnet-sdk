@@ -272,7 +272,7 @@ namespace Kount.Ris
             else
             {
                 logger.LogDebug("Setting Payments Fraud API key header.");
-                _bearerRefreshLock.AcquireReaderLock(TimeSpan.FromMilliseconds(10));
+                _bearerRefreshLock.AcquireReaderLock(TimeSpan.FromSeconds(10));
                 webReq.Headers[PF_AUTH_HEADER] = $"{_bearerAuthResponse.TokenType} {_bearerAuthResponse.AccessToken}";
                 _bearerRefreshLock.ReleaseReaderLock();
             }
