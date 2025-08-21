@@ -1160,7 +1160,7 @@ namespace Kount.Ris
             _bearerRefreshLock.AcquireWriterLock(TimeSpan.FromSeconds(30));
             
             // short circuit if another thread as already refreshed the token
-            if (_bearerAuthResponseExpiration >= DateTimeOffset.Now)
+            if (_bearerAuthResponseExpiration > DateTimeOffset.Now)
             {
                 _bearerRefreshLock.ReleaseWriterLock();
                 return;
