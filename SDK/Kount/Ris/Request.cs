@@ -1150,61 +1150,64 @@ namespace Kount.Ris
         }
 
         /// <summary>
-        /// Refresh the bearer token
+        /// Refresh the bearer token.
+        /// Uses try/finally to ensure the writer lock is always released, even if an exception
+        /// occurs during the HTTP request or JSON deserialization. This prevents deadlocks
+        /// when network errors occur (e.g., SSL failures, connection resets, timeouts).
+        /// See: https://github.com/Kount/kount-ris-dotnet-sdk/issues/24
         /// </summary>
-        /// <param name="authUrl"></param>
-        /// <param name="apiKey"></param>
-        /// <exception cref="RequestException"></exception>
+        /// <param name="authUrl">The authentication URL</param>
+        /// <param name="apiKey">The API key for authentication</param>
+        /// <exception cref="RequestException">Thrown when token refresh fails</exception>
         private static void RefreshAuthToken(string authUrl, string apiKey)
         {
             _bearerRefreshLock.AcquireWriterLock(TimeSpan.FromSeconds(30));
-            
-            // short circuit if another thread as already refreshed the token
-            if (_bearerAuthResponseExpiration > DateTimeOffset.Now)
+            try
             {
-                _bearerRefreshLock.ReleaseWriterLock();
-                return;
-            }
-            
-            string tokenUrl = authUrl + "?grant_type=client_credentials&scope=k1_integration_api";
-            
-            HttpWebRequest webReq = (HttpWebRequest)WebRequest.Create(tokenUrl);
-            webReq.Method = "POST";
-            webReq.ContentType = "application/x-www-form-urlencoded";
-            webReq.Headers[PF_AUTH_HEADER] = "Basic " + apiKey;
-
-
-            string responseString = string.Empty;
-            using (HttpWebResponse webResp = (HttpWebResponse)webReq.GetResponse())
-            {
-                // Read the token response string
-                using (Stream responseStream = webResp.GetResponseStream())
+                // Short circuit if another thread has already refreshed the token
+                if (_bearerAuthResponseExpiration > DateTimeOffset.Now)
                 {
-                    if (responseStream != null)
+                    return;
+                }
+
+                string tokenUrl = authUrl + "?grant_type=client_credentials&scope=k1_integration_api";
+
+                HttpWebRequest webReq = (HttpWebRequest)WebRequest.Create(tokenUrl);
+                webReq.Method = "POST";
+                webReq.ContentType = "application/x-www-form-urlencoded";
+                webReq.Headers[PF_AUTH_HEADER] = "Basic " + apiKey;
+
+                string responseString = string.Empty;
+                using (HttpWebResponse webResp = (HttpWebResponse)webReq.GetResponse())
+                {
+                    // Read the token response string
+                    using (Stream responseStream = webResp.GetResponseStream())
                     {
-                        using (StreamReader tokenResponse = new StreamReader(responseStream))
+                        if (responseStream != null)
                         {
-                            responseString = tokenResponse.ReadToEnd();
+                            using (StreamReader tokenResponse = new StreamReader(responseStream))
+                            {
+                                responseString = tokenResponse.ReadToEnd();
+                            }
                         }
                     }
                 }
+
+                BearerAuthResponse authResponse = JsonSerializer.Deserialize<BearerAuthResponse>(responseString);
+                if (authResponse != null && authResponse.ExpiresIn != 0)
+                {
+                    _bearerAuthResponseExpiration = DateTime.Now.AddSeconds(authResponse.ExpiresIn);
+                    _bearerAuthResponse = authResponse;
+                }
+                else
+                {
+                    throw new Kount.Ris.RequestException("Failed to update the bearer token invalid response");
+                }
             }
-            
-            BearerAuthResponse authResponse = JsonSerializer.Deserialize<BearerAuthResponse>(responseString);
-            if (authResponse != null && authResponse.ExpiresIn != 0)
-            {
-                _bearerRefreshLock.AcquireReaderLock(TimeSpan.FromSeconds(5));
-                _bearerAuthResponseExpiration = DateTime.Now.AddSeconds(authResponse.ExpiresIn);
-                _bearerAuthResponse = authResponse;
-                _bearerRefreshLock.ReleaseReaderLock();
-            }
-            else
+            finally
             {
                 _bearerRefreshLock.ReleaseWriterLock();
-                throw new Kount.Ris.RequestException("Failed to update the bearer token invalid response");
             }
-            
-            _bearerRefreshLock.ReleaseWriterLock();
         }
     }
 }
