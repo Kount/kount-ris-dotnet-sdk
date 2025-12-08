@@ -4,7 +4,7 @@ include:
         - base/sq-scan.yml
         - core/rules.yml
         - version.yml
-    ref: 2.6.1
+    ref: 2.7.1
 
 stages:
   - version
@@ -14,6 +14,7 @@ stages:
   - deploy
 
 .dotnet:
+  tags: [aws-kount-shared-infra]
   image: mcr.microsoft.com/dotnet/sdk:9.0
    
 build:
